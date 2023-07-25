@@ -1,5 +1,6 @@
 package com.example.smstodiscord
 
+import kotlinx.coroutines.*
 import android.Manifest
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -27,6 +28,7 @@ import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.gson.GsonFactory
 import com.google.api.services.gmail.Gmail
 import com.google.api.services.gmail.GmailScopes
+import kotlinx.coroutines.CoroutineScope
 import java.util.*
 import javax.mail.*
 import javax.mail.internet.InternetAddress
@@ -35,7 +37,10 @@ import javax.mail.internet.MimeMessage
 import javax.mail.internet.MimeMultipart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import javax.mail.Message.RecipientType
 
@@ -87,6 +92,7 @@ class MainActivity : AppCompatActivity(), SMSReceiver.SmsListener {
         registerReceiver(smsReceiver, filter)
 
 
+
     }
 
     override fun onSmsReceived(sender: String?, messageBody: String?) {
@@ -95,59 +101,68 @@ class MainActivity : AppCompatActivity(), SMSReceiver.SmsListener {
             addSmsToRecyclerView(sender, messageBody)
 
             // Send email with the message content
-            val emailSender = "your_email@gmail.com" // Replace with your email address
+            val emailSender = "khalid.smssender@mailsac.com" // Replace with your email address
             val recipient = "khalamoudi91@gmail.com"
-            val subject = "New SMS from $sender"
-            val body = "SMS Body: $messageBody"
+            val subject = "SMS from $sender"
+            val body = "$messageBody"
 
             // Call the sendEmail function with all required arguments
-            sendEmail(emailSender, recipient, subject, body)
+            sendEmail("khalamoudi91@gmail.com", subject, body)
         } else {
             // Handle the case when sender or messageBody is null (e.g., show an error message)
         }
     }
 
-    private fun sendEmail(from: String, to: String, subject: String, body: String) {
-        GlobalScope.launch(Dispatchers.IO) {
+    private fun sendEmail(recipientEmail: String, mailSubject: String, mailBody: String) {
+        //val host = "smtp.mail.yahoo.com" // Yahoo SMTP server
+        val host = "smtp.gmail.com"
+        val port = 587 // Yahoo SMTP port
+        //val username = "khalid.smssender@yahoo.com" // Replace with your Yahoo email address
+        //val password = "Alamoudi1234!" // Replace with your Yahoo email password
+
+        val username = "khalid.smssender@gmail.com" // Replace with your Yahoo email address
+        val password = "bkvtmglaxjuslbxe" // Replace with your Yahoo email password
+        val props = Properties()
+        props["mail.smtp.auth"] = "true"
+        props["mail.smtp.starttls.enable"] = "true"
+        props["mail.smtp.host"] = host
+        props["mail.smtp.port"] = port
+
+        val session = Session.getInstance(props, object : Authenticator() {
+            override fun getPasswordAuthentication(): PasswordAuthentication {
+                return PasswordAuthentication(username, password)
+            }
+        })
+
+        // Use the MainScope to launch the coroutine on the main thread
+        val mainScope = MainScope()
+
+        mainScope.launch {
             try {
-                // Set properties for the mail server
-                val props = Properties()
-                props["mail.smtp.auth"] = "true"
-                props["mail.smtp.starttls.enable"] = "true"
-                props["mail.smtp.host"] = "smtp.gmail.com" // Use your SMTP server here, e.g., smtp.example.com
-                props["mail.smtp.port"] = "587" // Use the appropriate port for your SMTP server
-
-                // Provide your email account credentials here
-                val username = "khalid.smssender@gmail.com"
-                val password = "Khalid1234!"
-
-                // Create a mail session with the properties
-                val session = Session.getInstance(props, object : Authenticator() {
-                    override fun getPasswordAuthentication(): PasswordAuthentication {
-                        return PasswordAuthentication(username, password)
-                    }
-                })
-
-                // Create the email message
                 val message = MimeMessage(session)
-                message.setFrom(InternetAddress(from))
-                message.setRecipient(Message.RecipientType.TO, InternetAddress(to))
-                message.subject = subject
-                message.setText(body)
+                message.setFrom(InternetAddress(username))
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail)) // Set the recipient's email address
+                message.subject = mailSubject
+                message.setText(mailBody)
 
-                // Send the email
-                Transport.send(message)
-                runOnUiThread {
-                    showToast("Email sent successfully!")
+                withContext(Dispatchers.IO) {
+                    // Perform the network operation (sending the email)
+                    Transport.send(message)
                 }
-            } catch (e: MessagingException) {
+                showToast("Email sent successfully!")
+            } catch (e: Exception) {
                 e.printStackTrace()
-                runOnUiThread {
-                    showToast("Error sending email: ${e.message}")
-                }
+                showToast("Error sending email: ${e.message}")
+            } finally {
+                // Cancel the MainScope to avoid leaks
+                mainScope.cancel()
             }
         }
     }
+
+
+
+
 
 
 
@@ -183,7 +198,9 @@ class MainActivity : AppCompatActivity(), SMSReceiver.SmsListener {
     }
 
     private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        runOnUiThread {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun addSmsToRecyclerView(sender: String, message: String) {
