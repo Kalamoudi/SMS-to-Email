@@ -18,9 +18,20 @@
         android:theme="@style/Theme.SMSToDiscord"
         tools:targetApi="31">
 
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
+            android:label=""
             android:exported="true"
-            android:theme="@style/AppTheme"> <!-- Update the theme here -->
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+            <!--
+            android:theme="@style/AppTheme"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            -->
+
+
+            <!-- Update the theme here -->
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

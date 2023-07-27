@@ -1,24 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- TextView to display instructions or headings -->
-    <TextView
-        android:id="@+id/instructionsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Received SMS Messages:"
-        android:textSize="18sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    <!-- Your Custom Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        android:background="?attr/colorButtonNormal"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <!-- android:background="?attr/colorPrimary" -->
+
+        <!-- Include the custom layout for the Toolbar -->
+        <include layout="@layout/header_layout" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <!-- RecyclerView to display SMS messages -->
+
+    <TextView
+        android:id="@+id/smsTextHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="24dp"
+        android:text="Sms messages received:"
+        android:textSize="18sp"
+        tools:visibility="visible" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/smsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/instructionsTextView"
-        android:layout_marginTop="16dp" />
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="60dp" />
+
+    <!-- Rest of your UI components -->
+    <!-- ... -->
+
 </RelativeLayout>

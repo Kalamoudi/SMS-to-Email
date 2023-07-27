@@ -3,41 +3,32 @@ package com.example.smstodiscord
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import android.os.Bundle
 import android.telephony.SmsMessage
 import android.util.Log
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
-import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException
-import com.google.api.client.http.HttpTransport
-import com.google.api.client.http.javanet.NetHttpTransport
-import com.google.api.client.json.gson.GsonFactory
-import com.google.api.services.gmail.Gmail
-import com.google.api.services.gmail.GmailScopes
-import com.google.api.services.gmail.model.Message
-import java.io.ByteArrayOutputStream
-import java.util.Collections
-import javax.mail.internet.InternetAddress
-import javax.mail.internet.MimeMessage
-import javax.mail.Session
-import javax.mail.Message.RecipientType
-import android.util.Base64
-import com.google.android.gms.common.api.Scope
+import kotlin.math.log
+
 
 class SMSReceiver : BroadcastReceiver() {
 
-    private var smsListener: SmsListener? = null
+    //private var smsListener: SmsListener? = null
+    private lateinit var handleEmail : HandleEmail
 
-    interface SmsListener {
-        fun onSmsReceived(sender: String?, messageBody: String?)
+    companion object {
+        private var smsAdapter: SMSAdapter? = null
+
+        fun setSMSAdapter(adapter: SMSAdapter) {
+            smsAdapter = adapter
+        }
     }
 
-    fun setSmsListener(listener: SmsListener) {
-        smsListener = listener
-    }
+
+//    interface SmsListener {
+//        fun onSmsReceived(sender: String?, messageBody: String?)
+//    }
+//
+//    fun setSmsListener(listener: SmsListener) {
+//        smsListener = listener
+//    }
 
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == "android.provider.Telephony.SMS_RECEIVED") {
@@ -52,7 +43,7 @@ class SMSReceiver : BroadcastReceiver() {
                         val messageBody = smsMessage.messageBody
 
                         // Notify the listener that an SMS has been received
-                        smsListener?.onSmsReceived(sender, messageBody)
+                        onSmsReceived(context, sender, messageBody)
                     }
                 }
             }
@@ -63,8 +54,32 @@ class SMSReceiver : BroadcastReceiver() {
             val messageBody = intent.getStringExtra("message_body")
 
             // Notify the listener that an RCS message has been received
-            smsListener?.onSmsReceived(sender, messageBody)
+            onSmsReceived(context, sender, messageBody)
         }
     }
+
+    fun onSmsReceived(context: Context, sender: String?, messageBody: String?) {
+        if (sender != null && messageBody != null) {
+            // Add the received SMS or RCS message to the RecyclerView
+            addSmsToRecyclerView(sender, messageBody)
+
+            // Send email with the message content
+            val emailSender = "khalid.smssender@mailsac.com" // Replace with your email address
+            val recipient = "khalamoudi91@gmail.com"
+            val subject = "SMS from $sender"
+            val body = "$messageBody"
+
+            // Call the sendEmail function with all required arguments
+            handleEmail = HandleEmail()
+            handleEmail.sendEmail(context, "khalamoudi91@gmail.com", subject, body)
+        } else {
+            // Handle the case when sender or messageBody is null (e.g., show an error message)
+        }
+    }
+
+    private fun addSmsToRecyclerView(sender: String, message: String) {
+        smsAdapter?.addSms(SmsData(sender, message))
+    }
+
 }
 
