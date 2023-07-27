@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "SMS to Discord"
+rootProject.name = "Forward SMS to Email"
 include ':app'
