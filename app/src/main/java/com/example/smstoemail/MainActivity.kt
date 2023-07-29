@@ -8,7 +8,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
+import androidx.slidingpanelayout.widget.SlidingPaneLayout
 import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Permissions.CheckPermissions
 import com.example.smstoemail.Services.BackgroundService
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity(){
     private lateinit var checkPermissions: CheckPermissions
     private lateinit var handleSMS: HandleSMS
     private lateinit var handleMainPageView: HandleMainPageViews
+    private lateinit var drawerLayout : DrawerLayout
 
 
 
@@ -48,6 +51,18 @@ class MainActivity : AppCompatActivity(){
 
         var serviceIntent = Intent(this, BackgroundService::class.java)
         startService(serviceIntent)
+
+
+        // Handles drawer functionality
+        drawerLayout = findViewById(R.id.drawerLayout)
+        val openSlidingButton = findViewById<Button>(R.id.openSlidingButton)
+
+        openSlidingButton.setOnClickListener {
+            // Open the sliding window
+            drawerLayout.openDrawer(findViewById(R.id.slidingWindowLayout))
+        }
+
+
 
 
         // HandlesSMS Receive and sending of Email

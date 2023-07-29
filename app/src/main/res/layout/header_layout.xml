@@ -3,17 +3,9 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     >
 
-    <!-- android:id="@+id/customToolbarLayout"
-        android:gravity="center_vertical"
-
-    -->
-
-    <!-- TextView to display instructions or headings -->
-
-    <!-- ImageButton for Google Sign-In -->
     <TextView
         android:id="@+id/instructionsTextView"
         android:layout_width="wrap_content"
@@ -25,15 +17,5 @@
         android:text="SMS to Email"
         android:textSize="18sp" />
 
-
-<!--    <com.google.android.gms.common.SignInButton-->
-<!--        android:id="@+id/SignInButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_marginEnd="4dp"-->
-<!--        android:background="?attr/colorButtonNormal"-->
-<!--        android:text="Sign In" />-->
-    <!-- Replace with the Google Sign-In icon you prefer -->
 
 </RelativeLayout>

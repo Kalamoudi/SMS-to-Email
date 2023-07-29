@@ -35,8 +35,9 @@ class SMSAdapter : RecyclerView.Adapter<SMSAdapter.SMSViewHolder>() {
     class SMSViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Bind SMS data to the item view
         fun bind(smsData: SmsData) {
-            itemView.findViewById<TextView>(R.id.senderTextView).text = smsData.sender
-            itemView.findViewById<TextView>(R.id.receiverTextView).text = smsData.receiver
+         //   itemView.findViewById<TextView>(R.id.senderTextView).text = smsData.sender
+         //   itemView.findViewById<TextView>(R.id.recipientTextView).text = smsData.receiver
+            itemView.findViewById<TextView>(R.id.messageHeader).text = "From " + smsData.sender + " to " + smsData.recipient
             itemView.findViewById<TextView>(R.id.messageTextView).text = smsData.message
         }
     }

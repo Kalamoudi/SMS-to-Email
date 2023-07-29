@@ -53,6 +53,7 @@ android {
             keyPassword 'Khalid1234!'
         }
     }
+
 }
 
 dependencies {
@@ -96,5 +97,8 @@ dependencies {
 
     // Mailsac dependencies
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
+
+    // Sliding Panel
+    implementation 'androidx.slidingpanelayout:slidingpanelayout:1.1.0'
 
 }
