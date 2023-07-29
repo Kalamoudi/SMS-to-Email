@@ -3,9 +3,22 @@ package com.example.smstoemail.Sms
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.database.Cursor
+import android.net.Credentials
+import android.net.Uri
+import android.os.Build
+import android.provider.ContactsContract
+import android.telephony.PhoneStateListener
 import android.telephony.SmsMessage
+import android.telephony.SubscriptionInfo
+import android.telephony.SubscriptionManager
+import android.telephony.TelephonyCallback
+import android.telephony.TelephonyManager
+import androidx.core.app.ActivityCompat.startIntentSenderForResult
 import com.example.smstoemail.Email.HandleEmail
+import com.example.smstoemail.Utils
 import com.example.smstoemail.userEmail
+import com.google.android.gms.auth.api.credentials.HintRequest
 
 
 class SMSReceiver : BroadcastReceiver() {
@@ -24,9 +37,11 @@ class SMSReceiver : BroadcastReceiver() {
 
 
     override fun onReceive(context: Context, intent: Intent) {
+        val receiver = getPhoneNumber(context)
         if (intent.action == "android.provider.Telephony.SMS_RECEIVED") {
             // Handle SMS messages
             val bundle = intent.extras
+
             if (bundle != null) {
                 val pdus = bundle.get("pdus") as Array<Any>?
                 if (pdus != null) {
@@ -36,7 +51,7 @@ class SMSReceiver : BroadcastReceiver() {
                         val messageBody = smsMessage.messageBody
 
                         // Notify the listener that an SMS has been received
-                        onSmsReceived(context, sender, messageBody)
+                        onSmsReceived(context, sender, receiver, messageBody)
                     }
                 }
             }
@@ -47,25 +62,25 @@ class SMSReceiver : BroadcastReceiver() {
             val messageBody = intent.getStringExtra("message_body")
 
             // Notify the listener that an RCS message has been received
-            onSmsReceived(context, sender, messageBody)
+            onSmsReceived(context, sender, receiver, messageBody)
         }
     }
 
-    fun onSmsReceived(context: Context, sender: String?, messageBody: String?) {
+    fun onSmsReceived(context: Context, sender: String?, receiver: String, messageBody: String?) {
         if (sender != null && messageBody != null) {
             // Add the received SMS or RCS message to the RecyclerView
-            if(isValidEmail(userEmail)) {
-                addSmsToRecyclerView(sender, messageBody)
+            if(Utils.isValidEmail(userEmail)) {
+                addSmsToRecyclerView(sender, receiver, messageBody)
             }
 
             // Send email with the message content
             val emailSender = "khalid.smssender@mailsac.com" // Replace with your email address
             val recipient = "khalamoudi91@gmail.com"
-            val subject = "SMS from $sender"
+            val subject = "SMS from $sender to $receiver"
             val body = "$messageBody"
 
             // Call the sendEmail function with all required arguments
-            if(isValidEmail(userEmail)) {
+            if(Utils.isValidEmail(userEmail)) {
                 handleEmail = HandleEmail()
                 handleEmail.sendEmail(context, userEmail, subject, body)
             }
@@ -74,15 +89,32 @@ class SMSReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun addSmsToRecyclerView(sender: String, message: String) {
-        smsAdapter?.addSms(SmsData(sender, message))
+    private fun addSmsToRecyclerView(sender: String, receiver: String, message: String) {
+        smsAdapter?.addSms(SmsData(sender, receiver, message))
     }
 
-    fun isValidEmail(email: String): Boolean {
-        // Regular expression pattern for a valid email address
-        val emailPattern = Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\$")
 
-        return emailPattern.matches(email)
+    // Function to get the phone number
+    fun getPhoneNumber(context: Context): String {
+
+        //val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        val subscriptionManager = context.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE) as SubscriptionManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            // Get a list of active SIM cards (subscriptions)
+            val activeSubscriptions: List<SubscriptionInfo> = subscriptionManager.activeSubscriptionInfoList ?: emptyList()
+
+            for (subscriptionInfo in activeSubscriptions) {
+                // Check if the phone number is available for each subscription
+                val phoneNumber = subscriptionInfo.number
+                if (!phoneNumber.isNullOrBlank()) {
+                    return phoneNumber
+                }
+            }
+        }
+
+        // If no phone number is available, return null or handle the case accordingly
+        return ""
     }
 
 }

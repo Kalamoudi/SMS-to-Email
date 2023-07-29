@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.example.smstodiscord",
+  "applicationId": "com.example.smstoemail",
   "variantName": "release",
   "elements": [
     {

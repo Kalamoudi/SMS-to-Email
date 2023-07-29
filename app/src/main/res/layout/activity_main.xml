@@ -7,14 +7,18 @@
     android:padding="16dp">
 
     <!-- Your Custom Toolbar -->
+
+    <!-- RecyclerView to display SMS messages -->
+
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp"
         android:background="?attr/colorButtonNormal"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        android:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        android:elevation="4dp"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
         <!-- android:background="?attr/colorPrimary" -->
 
@@ -22,9 +26,6 @@
         <include layout="@layout/header_layout" />
 
     </androidx.appcompat.widget.Toolbar>
-
-    <!-- RecyclerView to display SMS messages -->
-
 
     <TextView
         android:id="@+id/smsTextHeader"
@@ -37,7 +38,7 @@
         android:text="Sms messages received:"
         android:textSize="18sp"
         android:visibility="invisible"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <EditText
         android:id="@+id/addEmailText"
@@ -48,19 +49,24 @@
         android:layout_marginTop="26dp"
         android:hint=" Enter your email"
         android:inputType="textEmailAddress"
-        android:visibility="visible" />
+        android:visibility="visible"
+
+
+        tools:visibility="gone" />
+
 
     <Button
         android:id="@+id/addEmailSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@+id/addEmailText"
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="7dp"
 
         android:text="Submit"
-        android:visibility="visible" />
+        android:visibility="visible"
+        tools:visibility="gone" />
 
     <TextView
         android:id="@+id/selectedEmail"
@@ -73,19 +79,21 @@
         android:layout_marginTop="45dp"
         android:textColor="@android:color/black"
         android:textSize="18sp"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/editEmailButton"
-        android:layout_width="73dp"
+        android:layout_width="81dp"
         android:layout_height="60dp"
-        android:layout_below="@id/toolbar"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="296dp"
-        android:layout_marginTop="25dp"
+        android:layout_below="@+id/selectedEmail"
+        android:layout_marginStart="-89dp"
 
+        android:layout_marginTop="-83dp"
+        android:layout_toEndOf="@+id/selectedEmail"
         android:text="Edit"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/smsRecyclerView"
@@ -93,7 +101,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
         android:layout_marginTop="134dp"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        tools:visibility="gone" />
 
     <!-- Rest of your UI components -->
     <!-- ... -->

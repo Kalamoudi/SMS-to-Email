@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.smstoemail.R
 
 
+
+
 class HandleSMS {
+
 
     private lateinit var smsRecyclerView: RecyclerView
     private lateinit var smsAdapter: SMSAdapter

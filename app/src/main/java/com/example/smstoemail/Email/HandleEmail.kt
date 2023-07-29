@@ -26,8 +26,16 @@ class HandleEmail {
         //val username = "khalid.smssender@yahoo.com" // Replace with your Yahoo email address
         //val password = "Alamoudi1234!" // Replace with your Yahoo email password
 
+        //val host = "mail.smtp2go.com"
+        //val port = 2525
+
+
         val username = "khalid.smssender@gmail.com" // Replace with your Yahoo email address
         val password = "bkvtmglaxjuslbxe" // Replace with your Yahoo email password
+
+        //val username = "khalid.alamoudi@amoudi.us"
+        //val password = "mustadim"
+
         val props = Properties()
         props["mail.smtp.auth"] = "true"
         props["mail.smtp.starttls.enable"] = "true"
