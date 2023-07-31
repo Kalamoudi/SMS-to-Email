@@ -38,7 +38,7 @@
         android:layout_marginStart="150dp"
         android:layout_marginTop="120dp"
         android:text="Edit"
-        android:visibility="visible"
+        android:visibility="invisible"
         tools:visibility="visible" />
 
     <TextView
@@ -53,7 +53,7 @@
         android:gravity="center"
         android:textColor="@android:color/black"
         android:textSize="18sp"
-        android:visibility="visible"
+        android:visibility="invisible"
         tools:visibility="visible" />
 
     <EditText
@@ -81,7 +81,7 @@
         android:layout_marginTop="82dp"
         android:text="Sms messages received:"
         android:textSize="18sp"
-        android:visibility="visible"
+        android:visibility="invisible"
         tools:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -92,7 +92,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="244dp"
         android:gravity="center"
-        android:visibility="visible"
+        android:visibility="invisible"
         tools:visibility="visible" />
 
 </RelativeLayout>
