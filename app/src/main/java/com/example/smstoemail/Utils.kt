@@ -57,8 +57,10 @@ object Utils {
     }
 
     fun closeAppCompletely(context: Context){
+        // Closes the background service
         val serviceIntent = Intent(context, BackgroundService::class.java)
         context.stopService(serviceIntent)
+        // Closes the app
         (context as Activity).finish()
 
     }

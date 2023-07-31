@@ -93,7 +93,7 @@ class CheckPermissions {
     private fun showPermissionRationale(context: Context) {
         // Show a dialog explaining the need for the permission
         val dialogBuilder = AlertDialog.Builder(context)
-        dialogBuilder.setTitle("Permission Required")
+        dialogBuilder.setTitle("Permissions Required")
         dialogBuilder.setMessage("Permissions required:\n -"
                 + permissionsMap[Utils.permissionsList[0]]?.get(0) +"\n -"
                 + permissionsMap[Utils.permissionsList[1]]?.get(0) + "\n\n" +
@@ -111,20 +111,5 @@ class CheckPermissions {
         dialog.show()
     }
 
-
-
-//    override fun onRequestPermissionsResult(requestCode: Int, permissionsList: Array<out String>, grantResults: IntArray) {
-//        super.onRequestPermissionsResult(requestCode, permissionsList, grantResults)
-//        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-//            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                // Permission granted, perform your task that required this permission
-//            } else {
-//
-//                Utils.showToast(this, "Permissions not granted")
-//                Log.d("Permission", "Permission Denied")
-//                // Permission denied, handle it accordingly (e.g., show an explanation or disable the feature)
-//            }
-//        }
-//    }
 
 }
