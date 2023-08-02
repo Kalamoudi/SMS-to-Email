@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.smstoemail.Entity.RecyclerMessages
+import com.example.smstoemail.Entity.RecyclerMessage
 import com.example.smstoemail.Interfaces.ItemDao
 
-@Database(entities = [RecyclerMessages::class], version = 1)
+@Database(entities = [RecyclerMessage::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun itemDao(): ItemDao
 
@@ -16,7 +16,7 @@ abstract class AppDatabase : RoomDatabase() {
         private var instance: AppDatabase? = null
 
         fun getInstance(context: Context): AppDatabase {
-            return instance ?: synchronized(this) {
+            return instance ?: synchronized(context) {
                 instance ?: Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java, "app_database"

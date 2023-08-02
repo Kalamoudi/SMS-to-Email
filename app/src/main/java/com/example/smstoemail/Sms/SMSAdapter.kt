@@ -6,7 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.smstoemail.Entity.RecyclerMessage
 import com.example.smstoemail.R
+import com.example.smstoemail.Utils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SMSAdapter : RecyclerView.Adapter<SMSAdapter.SMSViewHolder>() {
 
@@ -15,7 +20,25 @@ class SMSAdapter : RecyclerView.Adapter<SMSAdapter.SMSViewHolder>() {
     fun addSms(smsData: SmsData) {
         smsList.add(smsData)
         notifyItemInserted(smsList.size - 1)
+        val smsDataInRecyclerMessage = RecyclerMessage(0, smsData.sender, smsData.recipient, smsData.message)
+
+        // saveNewItem needs to be called from a suspend function or courotine since it's Async task
+        CoroutineScope(Dispatchers.IO).launch {
+            Utils.saveNewItem(smsDataInRecyclerMessage)
+        }
         Log.d("SMSAdapter", "SMS added to the list")
+    }
+
+    fun updateSmsList(RecyclerMessages: List<RecyclerMessage>) {
+        val fetchedSmsList = mutableListOf<SmsData>()
+
+        for(RecyclerMessage in RecyclerMessages){
+            val smsData = SmsData(RecyclerMessage.sender, RecyclerMessage.recipient, RecyclerMessage.messageBody)
+            fetchedSmsList.add(smsData)
+        }
+        smsList.clear()
+        smsList.addAll(fetchedSmsList)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SMSViewHolder {

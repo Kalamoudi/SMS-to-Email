@@ -16,18 +16,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import com.example.smstoemail.Entity.RecyclerMessage
+import com.example.smstoemail.Interfaces.ItemDao
 import com.example.smstoemail.Pages.HandleMainPageViews
+import com.example.smstoemail.Repository.AppDatabase
 import com.example.smstoemail.Services.BackgroundService
 import com.google.android.material.navigation.NavigationView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.mail.internet.AddressException
 import javax.mail.internet.InternetAddress
 
 
 public var userEmail = ""
 public var isNightMode = false
+public lateinit var itemDao: ItemDao
 
 object TableNames {
-    const val RECYCLER_MESSAGES_TABLE = "recycler_messages_table"
+    const val RECYCLER_MESSAGE_TABLE = "RecyclerMessage"
 }
 
 
@@ -116,4 +122,20 @@ object Utils {
         }
 
     }
+
+//    fun saveNewItem(recyclerMessage: RecyclerMessage) {
+//        itemDao.insert(recyclerMessage)
+//    }
+
+    suspend fun saveNewItem(recyclerMessage: RecyclerMessage) {
+        // Perform the database operation using a coroutine on a background thread
+        withContext(Dispatchers.IO) {
+            val itemDao = itemDao
+            itemDao.insert(recyclerMessage)
+        }
+    }
+//    fun getItemDao(context: Context): ItemDao {
+//        val database = AppDatabase.getInstance(context)
+//        return database.itemDao()
+//    }
 }

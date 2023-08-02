@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smstoemail.R
-
-
+import com.example.smstoemail.Repository.AppDatabase
+import com.example.smstoemail.itemDao
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class HandleSMS {
@@ -20,6 +24,18 @@ class HandleSMS {
         smsAdapter = SMSAdapter()
         smsReceiver = SMSReceiver()
         SMSReceiver.setSMSAdapter(smsAdapter)
+
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val database = AppDatabase.getInstance(context)
+            itemDao = database.itemDao()
+            val recyclerMessages = itemDao.getAllItems()
+            smsAdapter.updateSmsList(recyclerMessages)
+            // Use the 'items' in the UI if needed (e.g., update the UI with the data)
+        }
+//
+//        val smsDataList = recyclerMessages.map { SmsData(it.sender, it.recipient, it.messageBody) }
+//        smsAdapter.updateSmsList(smsDataList)
 
 
         smsRecyclerView = (context as AppCompatActivity).findViewById(R.id.smsRecyclerView)

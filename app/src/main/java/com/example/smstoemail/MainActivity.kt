@@ -17,15 +17,17 @@ import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.slidingpanelayout.widget.SlidingPaneLayout
-import com.example.smstoemail.Entity.RecyclerMessages
+import com.example.smstoemail.Entity.RecyclerMessage
 import com.example.smstoemail.Interfaces.ItemDao
 import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Permissions.CheckPermissions
 import com.example.smstoemail.Repository.AppDatabase
 import com.example.smstoemail.Services.BackgroundService
 import com.example.smstoemail.Sms.HandleSMS
+import com.example.smstoemail.Sms.SmsData
 import com.example.smstoemail.Utils
 import com.google.android.material.navigation.NavigationView
+import kotlinx.coroutines.MainScope
 
 
 // Kotlin imports
@@ -40,7 +42,6 @@ open class MainActivity : AppCompatActivity(){
     lateinit var serviceIntent: Intent
     private lateinit var menuButton: Button
     private lateinit var toggleThemeButton: Button
-    private lateinit var itemDao: ItemDao
 
 
 
@@ -58,9 +59,6 @@ open class MainActivity : AppCompatActivity(){
         // Log.d("MainActivity", "onCreate called")
         setContentView(R.layout.activity_main)
 
-        val db = AppDatabase.getInstance(this)
-        itemDao = db.itemDao()
-        val items = itemDao.getAllItems()
 
 
         // Applied logic to isNightTime and recreates the app for the visual appearance
@@ -71,11 +69,6 @@ open class MainActivity : AppCompatActivity(){
 
             recreate()
         }
-
-
-
-
-
 
         serviceIntent = Intent(this, BackgroundService::class.java)
         startService(serviceIntent)
@@ -164,10 +157,6 @@ open class MainActivity : AppCompatActivity(){
 
     }
 
-
-    private fun saveNewItem(recyclerMessage: RecyclerMessages) {
-        itemDao.insert(recyclerMessage)
-    }
 
 }
 

@@ -5,19 +5,19 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.smstoemail.Entity.RecyclerMessages
+import com.example.smstoemail.Entity.RecyclerMessage
 import com.example.smstoemail.TableNames
 import com.example.smstoemail.Utils
 
-private const val tableName = TableNames.RECYCLER_MESSAGES_TABLE
+private const val tableName = TableNames.RECYCLER_MESSAGE_TABLE
 @Dao
 interface ItemDao {
     @Query("SELECT * FROM " + tableName)
-    fun getAllItems(): List<RecyclerMessages>
+    fun getAllItems(): List<RecyclerMessage>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(item: RecyclerMessages)
+    fun insert(RecyclerMessage: RecyclerMessage)
 
     @Delete
-    fun delete(item: RecyclerMessages)
+    fun delete(RecyclerMessage: RecyclerMessage)
 }

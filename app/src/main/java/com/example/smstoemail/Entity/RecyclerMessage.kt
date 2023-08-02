@@ -4,11 +4,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.smstoemail.Sms.SmsData
 
-@Entity(tableName = "RecyclerMessages")
-data class RecyclerMessages(
+@Entity(tableName = "RecyclerMessage")
+data class RecyclerMessage(
 
     @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
-    var smsData: SmsData
+    var id: Long = 0,
+    var sender: String = "",
+    var recipient: String = "",
+    var messageBody: String = "",
 
 )
