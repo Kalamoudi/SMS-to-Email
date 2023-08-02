@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- light colors-->
+    <color name="navStartColorLight">#FFBB86FC</color>
+    <color name="navEndColorLight">#FF6200EE</color>
+    <color name="navCenterColorLight">#FF3700B3</color>
+    <!-- dark colors-->
+<!--    <color name="navStartColorDark">#8D370195</color>-->
+<!--    <color name="navEndColorDark">#8828016C</color>-->
+<!--    <color name="navCenterColorDark">#8A63449C</color>-->
+
+    <color name="navStartColorDark">#8D451697</color>
+    <color name="navEndColorDark">#8833126C</color>
+    <color name="navCenterColorDark">#8A755CA1</color>
+
+
+
+</resources>

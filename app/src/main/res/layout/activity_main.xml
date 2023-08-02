@@ -5,10 +5,12 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
+    android:textColor="?android:textColorPrimary"
 
     android:visibility="visible"
     tools:visibility="visible">
@@ -36,26 +38,22 @@
     </RelativeLayout>
 
         <!-- Navigation drawer layout -->
-        <LinearLayout
-            android:id="@+id/navigationDrawer"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@android:color/white"
-            android:orientation="vertical">
+<!--    <include-->
+<!--        android:id="@id/navigationDrawer"-->
+<!--        layout="@layout/navigation_drawer_layout"-->
 
-            <!-- Add your navigation menu items here -->
-            <!-- Example: TextView, ListView, etc. -->
-            <!-- For example, you can use a ListView to display a list of items -->
-            <ListView
-                android:id="@+id/navigationListView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@android:color/darker_gray"
-                android:dividerHeight="1dp"
-                android:padding="8dp"
-                android:entries="@array/navigation_items" />
-        </LinearLayout>
+<!--        />-->
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationDrawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer"
+
+        />
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

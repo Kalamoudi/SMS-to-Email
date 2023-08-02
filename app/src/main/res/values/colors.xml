@@ -6,5 +6,22 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#D8FFFFFF</color>
+    <color name="errorRed">#CA0000</color>
+
+
+    <!-- Light Themes Colors-->
+    <!-- Primary Colors -->
+    <color name="colorPrimaryLight">#6C7EE3</color>
+    <color name="colorPrimaryDarkLight">#3F51B5</color>
+<!--    <color name="colorPrimaryDarkLight">#303F9F</color>-->
+    <color name="colorAccentLight">#FF4081</color>
+    <color name="darkGrey">#303030</color>
+
+    <color name="backgroundColorLight">#D8FFFFFF</color>
+    <color name="textColorPrimaryLight">#000000</color>
+    <color name="textHeaderColorPrimaryLight">#D8FFFFFF</color>
+
+
+
 </resources>

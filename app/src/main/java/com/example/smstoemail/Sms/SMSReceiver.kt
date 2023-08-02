@@ -26,35 +26,6 @@ class SMSReceiver : BroadcastReceiver() {
     }
 
 
-
-//    override fun onReceive(context: Context, intent: Intent) {
-//        val recipient = getPhoneNumber(context)
-//        if (intent.action == "android.provider.Telephony.SMS_RECEIVED") {
-//            // Handle SMS messages
-//            val bundle = intent.extras
-//            if (bundle != null) {
-//                val pdus = bundle.get("pdus") as Array<Any>?
-//                if (pdus != null) {
-//                    for (pdu in pdus) {
-//                        val smsMessage = SmsMessage.createFromPdu(pdu as ByteArray)
-//                        val sender = smsMessage.displayOriginatingAddress
-//                        val messageBody = smsMessage.messageBody
-//
-//                        // Notify the listener that an SMS has been received
-//                        onSmsReceived(context, sender, recipient, messageBody)
-//                    }
-//                }
-//            }
-//        } else if (intent.action == "android.provider.Telephony.RCS_MESSAGE_RECEIVED") {
-//            // Handle RCS messages
-//            // Retrieve the RCS message data (sender and message body) from the intent extras
-//            val sender = intent.getStringExtra("sender")
-//            val messageBody = intent.getStringExtra("message_body")
-//
-//            // Notify the listener that an RCS message has been received
-//            onSmsReceived(context, sender, recipient, messageBody)
-//        }
-//    }
     override fun onReceive(context: Context, intent: Intent) {
         val recipient = getPhoneNumber(context)
 
@@ -132,32 +103,6 @@ class SMSReceiver : BroadcastReceiver() {
         return ""
     }
 
-    private fun checkIfLongSms(pdus: Array<Any>): Boolean {
-        for (pdu in pdus) {
-            val smsMessage = SmsMessage.createFromPdu(pdu as ByteArray)
-            val userData = smsMessage.userData
-            if (userData != null) {
-                // Check if the message is part of a long SMS
-                if (userData.size > 1) {
-                    return true
-                }
-            }
-        }
-        return false
-    }
-
-    // Function to reassemble the long SMS
-    private fun reassembleLongSms(pdus: Array<Any>): String {
-        val completeMessage = StringBuilder()
-
-        for (pdu in pdus) {
-            val smsMessage = SmsMessage.createFromPdu(pdu as ByteArray)
-            val messageBody = smsMessage.messageBody
-            completeMessage.append(messageBody)
-        }
-
-        return completeMessage.toString()
-    }
 
     private fun reassembleLongCheckedSms(context: Context, recipient: String, pdus: Array<Any>){
         var completeMessage = ""

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Dark Themes Colors-->
+
+    <!-- Primary colors -->
+    <!--    <color name="colorPrimaryDark">#121D65</color>-->
+    <color name="colorPrimaryDark">#302F2F</color>
+    <color name="colorPrimaryDarkDark">#10154E</color>
+    <color name="colorAccentDark">#8E1940</color>
+
+    <!-- Other colors -->
+<!--    <color name="backgroundColorDark">#D5222222</color>-->
+    <color name="backgroundColorDark">#797955B8</color>
+    <color name="textColorPrimaryDark">#DAFFFFFF</color>
+    <color name="textHeaderColorPrimaryDark">#D8FFFFFF</color>
+
+
+
+
+</resources>

@@ -1,5 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<!--    <style name="Theme.SMSToDiscord" parent="android:Theme.Material.Light.NoActionBar" />-->
 
-    <style name="Theme.SMSToDiscord" parent="android:Theme.Material.Light.NoActionBar" />
-</resources>
+
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">@color/colorPrimaryLight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkLight</item>
+        <item name="colorAccent">@color/colorAccentLight</item>
+
+        <!-- Other attributes for the light theme -->
+        <item name="android:windowBackground">@color/backgroundColorLight</item>
+        <item name="android:textColorPrimary">@color/textColorPrimaryLight</item>
+        <item name="textHeaderColorPrimary">@color/textHeaderColorPrimaryLight</item>
+
+        <!-- Navigation Drawer Light Colors -->
+        <item name="navStartColor">@color/navStartColorLight</item>
+        <item name="navEndColor">@color/navEndColorLight</item>
+        <item name="navCenterColor">@color/navCenterColorLight</item>
+    </style>
+
+    <!-- Dark theme inherits from the light theme -->
+    <style name="AppTheme.Dark" parent="AppTheme">
+        <!-- Customize your dark theme here -->
+        <item name="colorPrimary">@color/backgroundColorDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkDark</item>
+        <item name="colorAccent">@color/colorAccentDark</item>
+
+        <!-- Other attributes for the dark theme -->
+        <item name="android:windowBackground">@color/colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@color/textColorPrimaryDark</item>
+        <item name="textHeaderColorPrimary">@color/textHeaderColorPrimaryDark</item>
+
+        <!-- Navigation Drawer Dark Colors -->
+        <item name="navStartColor">@color/navStartColorDark</item>
+        <item name="navEndColor">@color/navEndColorDark</item>
+        <item name="navCenterColor">@color/navCenterColorDark</item>
+
+
+    </style>
+    </resources>

@@ -5,26 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:textColor="?android:textColorPrimary"
+
+    >
 
     <TextView
         android:id="@+id/senderTextView"
         android:layout_width="162dp"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
+        android:textColor="?android:textColorPrimary"
         android:textSize="16sp"
+
         android:visibility="visible"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+
+
+        />
 
     <TextView
         android:id="@+id/recipientTextView"
         android:layout_width="162dp"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
+        android:textColor="?android:textColorPrimary"
         android:layout_below="@id/senderTextView"
         android:textSize="16sp"
         android:visibility="visible"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+
+        />
 
     <TextView
         android:id="@+id/messageHeader"
@@ -33,10 +42,12 @@
         android:layout_below="@id/senderTextView"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@android:color/black"
+        android:textColor="?android:textColorPrimary"
         android:textSize="16sp"
         android:visibility="visible"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+
+        />
 
     <TextView
         android:id="@+id/messageTextView"
@@ -46,9 +57,11 @@
         android:layout_gravity="center"
         android:layout_marginTop="0dp"
         android:gravity="center"
-        android:textColor="@android:color/black"
+        android:textColor="?android:textColorPrimary"
         android:textSize="14sp"
         android:visibility="visible"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+
+        />
 
 </RelativeLayout>

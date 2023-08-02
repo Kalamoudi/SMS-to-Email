@@ -5,14 +5,30 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.text.TextUtils
+import android.util.Log
+import android.util.TypedValue
+import android.view.ContextThemeWrapper
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
+import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Services.BackgroundService
+import com.google.android.material.navigation.NavigationView
 import javax.mail.internet.AddressException
 import javax.mail.internet.InternetAddress
 
 
-public var userEmail = "";
+public var userEmail = ""
+public var isNightMode = false
+
+object TableNames {
+    const val RECYCLER_MESSAGES_TABLE = "recycler_messages_table"
+}
 
 
 object Utils {
@@ -65,4 +81,39 @@ object Utils {
 
     }
 
+    fun setAppTheme(nightMode: Boolean) {
+        isNightMode = nightMode
+    }
+
+    fun isNightMode(): Boolean {
+        return isNightMode
+    }
+
+    fun setBackgroundTint(context: Context, myEditText: EditText?, attribute: Int) {
+        // Get the color from the theme attribute
+        val typedValue = TypedValue()
+        context.theme.resolveAttribute(attribute, typedValue, true)
+
+        // Set the underline color programmatically using the resolved color
+        myEditText?.backgroundTintList = AppCompatResources.getColorStateList(context, typedValue.resourceId)
+    }
+
+    fun setTheme(context: Context, xmlId: Int, attribute: Int){
+
+        val navigationView: NavigationView = (context as AppCompatActivity).findViewById(xmlId)
+        navigationView.context.theme.applyStyle(attribute, true)
+
+        Log.d("Theme", "    e successfully: $attribute")
+    }
+
+    fun checkSharedPreference(context: Context, reason: String){
+        val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        if (sharedPreferences.getBoolean(reason, true)) {
+            HandleMainPageViews.setForcedStopped(false)
+            val editor = sharedPreferences.edit()
+            editor.remove(reason)
+            editor.apply()
+        }
+
+    }
 }
