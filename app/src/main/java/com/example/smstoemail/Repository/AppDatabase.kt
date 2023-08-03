@@ -5,11 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.smstoemail.Entity.RecyclerMessage
-import com.example.smstoemail.Interfaces.ItemDao
+import com.example.smstoemail.Interfaces.RecyclerMessageDao
 
 @Database(entities = [RecyclerMessage::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun itemDao(): ItemDao
+    abstract fun recyclerMessageDao(): RecyclerMessageDao
 
     companion object {
         @Volatile

@@ -17,7 +17,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.example.smstoemail.Entity.RecyclerMessage
-import com.example.smstoemail.Interfaces.ItemDao
+import com.example.smstoemail.Interfaces.BaseDao
+import com.example.smstoemail.Interfaces.RecyclerMessageDao
 import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Repository.AppDatabase
 import com.example.smstoemail.Services.BackgroundService
@@ -30,7 +31,7 @@ import javax.mail.internet.InternetAddress
 
 public var userEmail = ""
 public var isNightMode = false
-public lateinit var itemDao: ItemDao
+public lateinit var RecyclerMessageDao: RecyclerMessageDao
 
 object TableNames {
     const val RECYCLER_MESSAGE_TABLE = "RecyclerMessage"
@@ -123,19 +124,21 @@ object Utils {
 
     }
 
-//    fun saveNewItem(recyclerMessage: RecyclerMessage) {
-//        itemDao.insert(recyclerMessage)
-//    }
-
+    // saves recyclerMessage to Database
     suspend fun saveNewItem(recyclerMessage: RecyclerMessage) {
         // Perform the database operation using a coroutine on a background thread
         withContext(Dispatchers.IO) {
-            val itemDao = itemDao
+            val itemDao = RecyclerMessageDao
             itemDao.insert(recyclerMessage)
         }
     }
-//    fun getItemDao(context: Context): ItemDao {
-//        val database = AppDatabase.getInstance(context)
-//        return database.itemDao()
-//    }
+
+    suspend fun <T> saveNewItem(item: T, itemDao: BaseDao<T>) {
+        // Perform the database operation using a coroutine on a background thread
+        withContext(Dispatchers.IO) {
+            val itemDao = itemDao
+            itemDao.insert(item)
+        }
+    }
+
 }

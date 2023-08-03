@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smstoemail.Entity.RecyclerMessage
+import com.example.smstoemail.Interfaces.RecyclerMessageDao
+import com.example.smstoemail.Interfaces.recyclerMessageDao
 import com.example.smstoemail.R
 import com.example.smstoemail.Utils
 import kotlinx.coroutines.CoroutineScope
@@ -24,11 +26,13 @@ class SMSAdapter : RecyclerView.Adapter<SMSAdapter.SMSViewHolder>() {
 
         // saveNewItem needs to be called from a suspend function or courotine since it's Async task
         CoroutineScope(Dispatchers.IO).launch {
-            Utils.saveNewItem(smsDataInRecyclerMessage)
+            //Utils.saveNewItem(smsDataInRecyclerMessage)
+            Utils.saveNewItem(smsDataInRecyclerMessage, recyclerMessageDao)
         }
         Log.d("SMSAdapter", "SMS added to the list")
     }
 
+    // Function to update/load the messages that were already saved on the AppDatabase (tablename=RecyclerMessage)
     fun updateSmsList(RecyclerMessages: List<RecyclerMessage>) {
         val fetchedSmsList = mutableListOf<SmsData>()
 

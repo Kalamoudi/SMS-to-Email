@@ -18,7 +18,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.slidingpanelayout.widget.SlidingPaneLayout
 import com.example.smstoemail.Entity.RecyclerMessage
-import com.example.smstoemail.Interfaces.ItemDao
 import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Permissions.CheckPermissions
 import com.example.smstoemail.Repository.AppDatabase

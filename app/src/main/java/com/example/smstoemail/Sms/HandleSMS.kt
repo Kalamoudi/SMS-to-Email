@@ -4,9 +4,10 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.smstoemail.Interfaces.RecyclerMessageDao
+import com.example.smstoemail.Interfaces.recyclerMessageDao
 import com.example.smstoemail.R
 import com.example.smstoemail.Repository.AppDatabase
-import com.example.smstoemail.itemDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -28,8 +29,8 @@ class HandleSMS {
 
         GlobalScope.launch(Dispatchers.IO) {
             val database = AppDatabase.getInstance(context)
-            itemDao = database.itemDao()
-            val recyclerMessages = itemDao.getAllItems()
+            recyclerMessageDao = database.recyclerMessageDao()
+            val recyclerMessages = recyclerMessageDao.getAllItems()
             smsAdapter.updateSmsList(recyclerMessages)
             // Use the 'items' in the UI if needed (e.g., update the UI with the data)
         }

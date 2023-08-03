@@ -58,9 +58,8 @@ android {
     sourceSets {
         main {
             res {
-                srcDirs 'src\\main\\res',
-                        'src\\main\\res\\layouts\\navigation_drawer',
-                        'src\\main\\res\\navigation_drawer'
+                srcDirs 'src\\main\\res\\navigation_drawer',
+                        'src\\main\\res'
             }
         }
     }
