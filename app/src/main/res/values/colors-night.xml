@@ -11,7 +11,9 @@
 
     <!-- Other colors -->
 <!--    <color name="backgroundColorDark">#D5222222</color>-->
-    <color name="backgroundColorDark">#797955B8</color>
+<!--    <color name="backgroundColorDark">#303030</color>-->
+    <color name="backgroundColorDark">#232323</color>
+    <color name="backgroundSecondaryColorDark">#59000000</color>
     <color name="textColorPrimaryDark">#DAFFFFFF</color>
     <color name="textHeaderColorPrimaryDark">#D8FFFFFF</color>
 

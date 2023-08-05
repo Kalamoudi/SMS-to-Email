@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Light Theme Colors -->
+    <!-- Switch Color Light-->
+    <color name="settingsSwitchButtonColorLight">@color/colorPrimaryLight</color>
+    <color name="summaryColorLight">#CD4C4C4C</color>
+
+
+    <!-- Dark Theme Colors -->
+    <!-- Switch Color Dark-->
+    <color name="settingsSwitchButtonColorDark">@color/yellowDark</color>
+    <color name="summaryColorDark">@color/grey</color>
+
+</resources>

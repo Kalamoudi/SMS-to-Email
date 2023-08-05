@@ -1,96 +1,135 @@
 package com.example.smstoemail
 
-import android.Manifest
-import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.content.IntentSender
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.RecyclerView
-import androidx.slidingpanelayout.widget.SlidingPaneLayout
-import com.example.smstoemail.Entity.RecyclerMessage
+import com.example.smstoemail.NavigationDrawer.HandleNavDrawer
 import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Permissions.CheckPermissions
-import com.example.smstoemail.Repository.AppDatabase
 import com.example.smstoemail.Services.BackgroundService
 import com.example.smstoemail.Sms.HandleSMS
-import com.example.smstoemail.Sms.SmsData
-import com.example.smstoemail.Utils
-import com.google.android.material.navigation.NavigationView
-import kotlinx.coroutines.MainScope
+import com.google.android.gms.auth.api.identity.BeginSignInRequest
+import com.google.android.gms.auth.api.identity.Identity
+import com.google.android.gms.auth.api.identity.SignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.CommonStatusCodes
+import com.google.android.gms.tasks.Tasks
 
 
 // Kotlin imports
 
-open class MainActivity : AppCompatActivity(){
+open class MainActivity : AppCompatActivity() {
 
 
     private lateinit var checkPermissions: CheckPermissions
     private lateinit var handleSMS: HandleSMS
     private lateinit var handleMainPageView: HandleMainPageViews
-    private lateinit var drawerLayout : DrawerLayout
+    private lateinit var handleNavDrawer : HandleNavDrawer
     lateinit var serviceIntent: Intent
     private lateinit var menuButton: Button
-    private lateinit var toggleThemeButton: Button
+
+    private lateinit var oneTapClient: SignInClient
+    private lateinit var signInRequest: BeginSignInRequest
+
+    // Google Sign In varaibles and constants
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private val RC_SIGN_IN = 9001
+    private val REQ_ONE_TAP = 9002
+    private var showOneTapUI = true
+
 
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+
+        utilsContext = this
+
+        Utils.setIsNightMode(this)
+
         // Set the theme of the app based on isNightMode trigger
-        if (Utils.isNightMode()) {
-            setTheme(R.style.AppTheme_Dark)
-        } else {
-            setTheme(R.style.AppTheme)
-        }
+        MainActivityUtils.processAppTheme(this)
 
         super.onCreate(savedInstanceState)
         // Log.d("MainActivity", "onCreate called")
         setContentView(R.layout.activity_main)
 
 
+        // Handles logic to set theme
+       // MainActivityUtils.processSettingTheme(this)
 
-        // Applied logic to isNightTime and recreates the app for the visual appearance
-        toggleThemeButton = findViewById(R.id.toggleThemeButton)
-        toggleThemeButton.setOnClickListener {
-            // Toggle the theme when the button is clicked
-            Utils.setAppTheme(!Utils.isNightMode())
+        MainActivityUtils.processNavigationDrawer(this)
 
-            recreate()
-        }
+
+        //========================================================================
+        //===========================================================================
+     //   val webClientId = "615818751861-81s1lke2k29qvqimtci9o23heqgfm23f.apps.googleusercontent.com"
+        
+        oneTapClient = Identity.getSignInClient(this)
+        signInRequest = BeginSignInRequest.builder()
+            .setGoogleIdTokenRequestOptions(
+                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                    .setSupported(true)
+                    // Your server's client ID, not your Android client ID.
+                    .setServerClientId(getString(R.string.my_client_id))
+                    // Only show accounts previously used to sign in.
+                    .setFilterByAuthorizedAccounts(true)
+                    .build())
+            // Automatically sign in when exactly one credential is retrieved.
+            .setAutoSelectEnabled(true)
+            .build()
+
+        oneTapClient.beginSignIn(signInRequest)
+            .addOnSuccessListener(this) { result ->
+                try {
+                    startIntentSenderForResult(
+                        result.pendingIntent.intentSender, REQ_ONE_TAP,
+                        null, 0, 0, 0, null)
+                } catch (e: IntentSender.SendIntentException) {
+                    Log.e(TAG, "Couldn't start One Tap UI: ${e.localizedMessage}")
+                }
+            }
+            .addOnFailureListener(this) { e ->
+                // No saved credentials found. Launch the One Tap sign-up flow, or
+                // do nothing and continue presenting the signed-out UI.
+                Log.d(TAG, e.localizedMessage)
+            }
+
+
+        //========================================================================
+        //===========================================================================
+
+        handleNavDrawer = HandleNavDrawer(this)
+        handleNavDrawer.handleNavDrawer()
+        // openSettingsPage()
+        //===========================================================================
+        //===========================================================================
+
+        //=======================CODE FOR SETTINGS============================
+        //===========================================================================
+
+
+        //===========================================================================
+        //===========================================================================
+
+
 
         serviceIntent = Intent(this, BackgroundService::class.java)
         startService(serviceIntent)
 
 
-        // Handles drawer functionality
-        drawerLayout = findViewById(R.id.drawerLayout)
-        val openSlidingButton = findViewById<Button>(R.id.openSlidingButton)
-        val navigationDrawerLayout = findViewById<View>(R.id.navigationDrawer)
-        menuButton = findViewById(R.id.menuButton)
-
-        openSlidingButton.setOnClickListener {
-            // Open the sliding window if the view is not null
-            drawerLayout.openDrawer(navigationDrawerLayout)
-        }
-
-        menuButton.setOnClickListener {
-            // Open the sliding window if the view is not null
-            Log.d("MenuButton", "Menu button clicked!")
-            drawerLayout.openDrawer(navigationDrawerLayout)
-        }
-
-
+        // Handles Navigation Drawer functionality
+      //  MainActivityUtils.processNavigationDrawer(this)
 
 
         // HandlesSMS Receive and sending of Email
@@ -140,7 +179,64 @@ open class MainActivity : AppCompatActivity(){
                 finish() // Close the app when the user presses cancel in the Settings screen
             }
         }
+        if (requestCode == RC_SIGN_IN) {
+            try {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                Tasks.await(task)
+                MainActivityUtils.handleSignInResult(task)
+                Utils.showToast(this, "Signed In Successfully")
+            } catch (e: ApiException) {
+                // Handle sign-in failure here
+                Log.e("GoogleSignIn", "signInResult:failed code=${e.statusCode}")
+            }
+        }
+        when (requestCode) {
+            REQ_ONE_TAP -> {
+                try {
+                    val credential = oneTapClient.getSignInCredentialFromIntent(data)
+                    val idToken = credential.googleIdToken
+                    val username = credential.id
+                    val password = credential.password
+                    when {
+                        idToken != null -> {
+                            // Got an ID token from Google. Use it to authenticate
+                            // with your backend.
+                            Log.d(TAG, "Got ID token.")
+                        }
+                        password != null -> {
+                            // Got a saved username and password. Use them to authenticate
+                            // with your backend.
+                            Log.d(TAG, "Got password.")
+                        }
+                        else -> {
+                            // Shouldn't happen.
+                            Log.d(TAG, "No ID token or password!")
+                        }
+                    }
+                } catch (e: ApiException) {
+                    when (e.statusCode) {
+                        CommonStatusCodes.CANCELED -> {
+                            Log.d(TAG, "One-tap dialog was closed.")
+                            // Don't re-prompt the user.
+                            showOneTapUI = false
+                        }
+                        CommonStatusCodes.NETWORK_ERROR -> {
+                            Log.d(TAG, "One-tap encountered a network error.")
+                            // Try again or just ignore.
+                        }
+                        else -> {
+                            Log.d(TAG, "Couldn't get credential from result." +
+                                    " (${e.localizedMessage})")
+                        }
+                    }
+                }
+            }
+        }
     }
+
+
+
+
 
     override fun onDestroy() {
         super.onDestroy()
@@ -156,6 +252,14 @@ open class MainActivity : AppCompatActivity(){
 
     }
 
+    private fun openSettingsPage() {
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
+    }
+
+
 
 }
+
+
 

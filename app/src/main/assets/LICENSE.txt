@@ -1,0 +1,43 @@
+END-USER LICENSE AGREEMENT (EULA)
+
+IMPORTANT: PLEASE READ THIS END-USER LICENSE AGREEMENT CAREFULLY BEFORE USING THE SOFTWARE. BY INSTALLING, COPYING, OR OTHERWISE USING THE SOFTWARE, YOU ACKNOWLEDGE THAT YOU HAVE READ THIS AGREEMENT, UNDERSTAND IT, AND AGREE TO BE BOUND BY ITS TERMS. IF YOU DO NOT AGREE TO THE TERMS OF THIS AGREEMENT, DO NOT INSTALL OR USE THE SOFTWARE.
+
+1. DEFINITIONS
+   a. "Software" means the computer program, including any updates, enhancements, and documentation, provided by Khalid Alamoudi ("Licensor").
+   b. "You" means the individual or entity installing or using the Software under this EULA.
+
+2. LICENSE GRANT
+   Subject to the terms and conditions of this EULA, Licensor hereby grants You a non-exclusive, non-transferable, and revocable license to use the Software for personal, non-commercial use only.
+
+3. RESTRICTIONS ON USE
+   a. You may not, and may not permit others to:
+      i. Copy, modify, reverse engineer, decompile, disassemble, or create derivative works of the Software.
+      ii. Distribute, sublicense, rent, lease, or lend the Software.
+      iii. Remove or alter any copyright, trademark, or proprietary notices from the Software or its documentation.
+      iv. Use the Software for any commercial or business purposes, including but not limited to selling, renting, or providing services using the Software.
+
+4. INTELLECTUAL PROPERTY
+   a. The Software is protected by copyright and other intellectual property laws. All rights, title, and interest in and to the Software, including any copies made by You, belong to Licensor.
+   b. You acknowledge that this EULA does not transfer any ownership rights in the Software.
+
+5. DISCLAIMER OF WARRANTY
+   THE SOFTWARE IS PROVIDED "AS IS" WITHOUT ANY WARRANTY OF ANY KIND. LICENSOR DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
+
+6. LIMITATION OF LIABILITY
+   TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL LICENSOR BE LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THE SOFTWARE, EVEN IF LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+7. TERMINATION
+   This EULA is effective until terminated. Your rights under this EULA will terminate automatically without notice if You fail to comply with any of its terms. Upon termination, You must cease all use of the Software and destroy all copies in your possession or control.
+
+8. GOVERNING LAW
+   This EULA shall be governed by and construed in accordance with the laws of [Your Country/State], without regard to its conflicts of law principles.
+
+9. ENTIRE AGREEMENT
+   This EULA constitutes the entire agreement between You and Licensor concerning the subject matter hereof and supersedes all prior or contemporaneous oral or written communications, proposals, and representations.
+
+By installing or using the Software, You agree to be bound by the terms and conditions of this EULA.
+
+Khalid Alamoudi
+300 92nd Street
+Surfside, Florida, 33154
+Email: khalid@amoudi.us

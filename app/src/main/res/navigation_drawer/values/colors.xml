@@ -10,9 +10,12 @@
 <!--    <color name="navEndColorDark">#8828016C</color>-->
 <!--    <color name="navCenterColorDark">#8A63449C</color>-->
 
-    <color name="navStartColorDark">#8D451697</color>
-    <color name="navEndColorDark">#8833126C</color>
-    <color name="navCenterColorDark">#8A755CA1</color>
+<!--    <color name="navStartColorDark">#8D451697</color>-->
+<!--    <color name="navEndColorDark">#8833126C</color>-->
+<!--    <color name="navCenterColorDark">#8A755CA1</color>-->
+    <color name="navStartColorDark">#876911</color>
+    <color name="navEndColorDark">#705813</color>
+    <color name="navCenterColorDark">#9F8E5A</color>
 
 
 

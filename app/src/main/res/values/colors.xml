@@ -8,6 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#D8FFFFFF</color>
     <color name="errorRed">#CA0000</color>
+    <color name="grey">#CD9A9A9A</color>
+    <color name="yellowDark">#D3A92D</color>
+    <color name="darkWhite">#C6C6C6</color>
 
 
     <!-- Light Themes Colors-->
@@ -18,7 +21,7 @@
     <color name="colorAccentLight">#FF4081</color>
     <color name="darkGrey">#303030</color>
 
-    <color name="backgroundColorLight">#D8FFFFFF</color>
+    <color name="backgroundColorLight">#FFFFFF</color>
     <color name="textColorPrimaryLight">#000000</color>
     <color name="textHeaderColorPrimaryLight">#D8FFFFFF</color>
 

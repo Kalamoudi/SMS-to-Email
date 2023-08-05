@@ -2,10 +2,17 @@
     <string name="app_name">SMS to Email</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">John Doe</string>
+    <string name="nav_header_title">SMS To Email</string>
     <string name="nav_header_subtitle">johnDoe@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Strings for header in toolbar -->
+    <string name="menu_button">Opens the navigation drawer from the left</string>
+    <string name="toggle_theme_button">To change theme from Light to Dark modes</string>
+    <string name="toolbar_header_text">SMS to Email</string>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="homeFragment">Home</string>
@@ -15,4 +22,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="favoritesFragment">Favorites</string>
+    <string name="your_web_client_id">615818751861-81s1lke2k29qvqimtci9o23heqgfm23f.apps.googleusercontent.com</string>
+    <string name="my_client_id">615818751861-6rlvc6tm5libfni0khc2qqkpsorb0qlo.apps.googleusercontent.com</string>
 </resources>

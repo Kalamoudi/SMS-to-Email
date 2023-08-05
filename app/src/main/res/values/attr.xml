@@ -4,4 +4,14 @@
 <resources>
     <attr name="textHeaderColorPrimary" format="color" />
     <attr name="textColorPrimary" format="color"/>
+    <attr name="iconColor" format="color"/>
+    <attr name="navListViewColor" format="color"/>
+    <attr name="settingsSummaryColor" format="color"/>
+    <attr name="settingsTitleColor" format="color"/>
+    <attr name="settingsSelectorColor" format="color"/>
+    <attr name="settingsSwitchButtonColor" format="color"/>
+    <attr name="summaryColor" format="color"/>
+
+
+
 </resources>

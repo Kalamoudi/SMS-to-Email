@@ -28,9 +28,11 @@ import kotlinx.coroutines.withContext
 import javax.mail.internet.AddressException
 import javax.mail.internet.InternetAddress
 
-
+public lateinit var utilsContext: Context
 public var userEmail = ""
-public var isNightMode = false
+public var isNightMode: Boolean = false
+public var currentAppTheme = R.style.AppTheme_Dark
+
 public lateinit var RecyclerMessageDao: RecyclerMessageDao
 
 object TableNames {
@@ -96,6 +98,7 @@ object Utils {
         return isNightMode
     }
 
+
     fun setBackgroundTint(context: Context, myEditText: EditText?, attribute: Int) {
         // Get the color from the theme attribute
         val typedValue = TypedValue()
@@ -139,6 +142,21 @@ object Utils {
             val itemDao = itemDao
             itemDao.insert(item)
         }
+    }
+
+    fun setIsNightMode(context: Context){
+        val nightMode: Boolean = context.getSharedPreferences("preferences", Context.MODE_PRIVATE)
+            .getBoolean("settingsThemeSwitch", true)
+
+        isNightMode = nightMode
+
+    }
+
+    fun getCurrentThemeAsInt(): Int{
+        if(isNightMode){
+            return R.style.AppTheme_Dark
+        }
+        return R.style.AppTheme
     }
 
 }

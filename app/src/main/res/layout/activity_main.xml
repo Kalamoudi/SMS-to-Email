@@ -9,22 +9,28 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
+
     android:textColor="?android:textColorPrimary"
 
     android:visibility="visible"
-    tools:visibility="visible">
+    tools:visibility="visible"
+
+
+    >
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         >
 
         <!-- toolbar layout -->
         <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar" />
+
+            layout="@layout/toolbar"
+
+            />
 
         <!-- main content layout-->
         <include
@@ -37,21 +43,11 @@
             />
     </RelativeLayout>
 
-        <!-- Navigation drawer layout -->
-<!--    <include-->
-<!--        android:id="@id/navigationDrawer"-->
-<!--        layout="@layout/navigation_drawer_layout"-->
 
-<!--        />-->
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationDrawer"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer"
+    <include
+        android:id="@+id/navDrawer"
+        layout="@layout/nav_drawer"
 
         />
 

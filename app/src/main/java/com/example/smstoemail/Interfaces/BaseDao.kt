@@ -16,4 +16,5 @@ interface BaseDao<T> {
 
     @Delete
     fun delete(item: T)
+
 }

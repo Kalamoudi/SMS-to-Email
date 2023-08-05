@@ -8,35 +8,70 @@
         <!-- Customize your theme here -->
         <item name="colorPrimary">@color/colorPrimaryLight</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkLight</item>
-        <item name="colorAccent">@color/colorAccentLight</item>
+        <item name="colorAccent">?attr/iconColor</item>
 
         <!-- Other attributes for the light theme -->
         <item name="android:windowBackground">@color/backgroundColorLight</item>
         <item name="android:textColorPrimary">@color/textColorPrimaryLight</item>
         <item name="textHeaderColorPrimary">@color/textHeaderColorPrimaryLight</item>
 
+        <!-- Icon Color Light-->
+        <item name="iconColor">#C4000000</item>
+
         <!-- Navigation Drawer Light Colors -->
+            <!-- Navigation Drawer Header -->
         <item name="navStartColor">@color/navStartColorLight</item>
         <item name="navEndColor">@color/navEndColorLight</item>
         <item name="navCenterColor">@color/navCenterColorLight</item>
+            <!-- Navigation ListView Color -->
+<!--        <item name="navListViewColor">#E1E1E1</item>-->
+        <item name="navListViewColor">@color/backgroundColorLight</item>
+
+        <!-- Settings Light Colors -->
+        <item name="settingsTitleColor">@color/textColorPrimaryLight</item>
+        <item name="settingsSummaryColor">@color/darkGrey</item>
+        <item name="settingsSelectorColor">@color/colorPrimaryLight</item>
+        <item name="settingsSwitchButtonColor">@color/settingsSwitchButtonColorLight</item>
+        <item name="summaryColor">@color/summaryColorLight</item>
+
+
+
+
     </style>
 
     <!-- Dark theme inherits from the light theme -->
     <style name="AppTheme.Dark" parent="AppTheme">
         <!-- Customize your dark theme here -->
-        <item name="colorPrimary">@color/backgroundColorDark</item>
+<!--        <item name="colorPrimary">@color/backgroundColorDark</item>-->
+        <item name="colorPrimary">#8C701E</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkDark</item>
-        <item name="colorAccent">@color/colorAccentDark</item>
+        <item name="colorAccent">#7E7E7E</item>
 
         <!-- Other attributes for the dark theme -->
-        <item name="android:windowBackground">@color/colorPrimaryDark</item>
-        <item name="android:textColorPrimary">@color/textColorPrimaryDark</item>
+        <item name="android:windowBackground">@color/backgroundColorDark</item>
+        <item name="android:textColorPrimary">@color/darkWhite</item>
         <item name="textHeaderColorPrimary">@color/textHeaderColorPrimaryDark</item>
 
+        <!-- Drawable Icons Color Dark-->
+        <item name="iconColor">@color/textColorPrimaryDark</item>
+
         <!-- Navigation Drawer Dark Colors -->
+            <!-- Navigation Drawer Header -->
         <item name="navStartColor">@color/navStartColorDark</item>
         <item name="navEndColor">@color/navEndColorDark</item>
         <item name="navCenterColor">@color/navCenterColorDark</item>
+            <!-- Navigation ListView Color -->
+<!--        <item name="navListViewColor">#59000000</item>-->
+        <item name="navListViewColor">#59202020</item>
+
+
+        <!-- Settings Dark Colors -->
+        <item name="settingsTitleColor">@color/textColorPrimaryDark</item>
+        <item name="settingsSummaryColor">#A8A8A8</item>
+        <item name="settingsSelectorColor">@color/yellowDark</item>
+        <item name="settingsSwitchButtonColor">@color/settingsSwitchButtonColorDark</item>
+        <item name="summaryColor">@color/summaryColorDark</item>
+
 
 
     </style>

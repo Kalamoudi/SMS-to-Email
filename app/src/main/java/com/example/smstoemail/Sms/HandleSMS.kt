@@ -26,14 +26,8 @@ class HandleSMS {
         smsReceiver = SMSReceiver()
         SMSReceiver.setSMSAdapter(smsAdapter)
 
-
-        GlobalScope.launch(Dispatchers.IO) {
-            val database = AppDatabase.getInstance(context)
-            recyclerMessageDao = database.recyclerMessageDao()
-            val recyclerMessages = recyclerMessageDao.getAllItems()
-            smsAdapter.updateSmsList(recyclerMessages)
-            // Use the 'items' in the UI if needed (e.g., update the UI with the data)
-        }
+        // Gather recycler messages from database and calls smsAdapter's update method
+        processRecyclerMessagesDao(context)
 //
 //        val smsDataList = recyclerMessages.map { SmsData(it.sender, it.recipient, it.messageBody) }
 //        smsAdapter.updateSmsList(smsDataList)
@@ -47,5 +41,15 @@ class HandleSMS {
         //context.registerReceiver(smsReceiver, filter)
     }
 
+
+    private fun processRecyclerMessagesDao(context: Context){
+        GlobalScope.launch(Dispatchers.IO) {
+            val database = AppDatabase.getInstance(context)
+            recyclerMessageDao = database.recyclerMessageDao()
+            val recyclerMessages = recyclerMessageDao.getAllItems()
+            smsAdapter.updateSmsList(recyclerMessages)
+            // Use the 'items' in the UI if needed (e.g., update the UI with the data)
+        }
+    }
 
 }
