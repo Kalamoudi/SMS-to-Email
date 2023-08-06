@@ -14,6 +14,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.smstoemail.MainActivity
 import com.example.smstoemail.R
+import com.example.smstoemail.sharedPrefs
 
 
 class BackgroundService : Service() {
@@ -94,10 +95,14 @@ class BackgroundService : Service() {
         Log.d(TAG, "Service onTaskRemoved - App was force-stopped from the settings")
 
         // Save a flag to SharedPreferences indicating the app was force-stopped
-        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("app_force_stopped", true)
-        editor.apply()
+        //val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+//        val editor = sharedPreferences.edit()
+//        editor.putBoolean("app_force_stopped", true)
+//        editor.apply()
+
+        sharedPrefs.edit().putBoolean("app_force_stopped", true).apply()
+
+
     }
 
 }

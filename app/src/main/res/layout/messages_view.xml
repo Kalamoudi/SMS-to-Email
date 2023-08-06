@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.recyclerview.widget.RecyclerView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/smsRecyclerView"
+    android:layout_width="380dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="244dp"
+    android:gravity="center"
+    android:textColor="?android:textColorPrimary"
+    android:visibility="visible"
+    tools:visibility="visible"
+
+    >
+
+
+</androidx.recyclerview.widget.RecyclerView>

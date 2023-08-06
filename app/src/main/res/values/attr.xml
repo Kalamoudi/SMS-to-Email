@@ -12,6 +12,8 @@
     <attr name="settingsSwitchButtonColor" format="color"/>
     <attr name="summaryColor" format="color"/>
 
+    <attr name="settingsThemeSwitchIndicator" format="boolean"/>
+
 
 
 </resources>

@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingStart="16dp"
     android:gravity="center_vertical"
+    android:id="@+id/checkBox1Layout"
 
     >
 
@@ -17,7 +18,7 @@
         android:layout_marginStart="8dp"
         android:textSize="16dp"
         android:textColor="?android:textColorPrimary"
-
+        android:text="Background Service"
 
 
         />
@@ -29,6 +30,7 @@
         android:layout_below="@android:id/title"
         android:layout_marginStart="8dp"
         android:textColor="?attr/summaryColor"
+        android:text="If left unchcecked the app will only\nwork while it's open"
 
         />
 
@@ -45,9 +47,10 @@
         />
 
     <CheckBox
-        android:id="@android:id/checkbox"
+        android:id="@+id/checkBox1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:checked="true"
 
         android:layout_alignEnd="@id/headerLayoutEmptyView"
 

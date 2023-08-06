@@ -5,6 +5,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.text.TextUtils
 import android.util.Log
@@ -25,13 +26,14 @@ import com.example.smstoemail.Services.BackgroundService
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.Calendar
 import javax.mail.internet.AddressException
 import javax.mail.internet.InternetAddress
 
 public lateinit var utilsContext: Context
 public var userEmail = ""
 public var isNightMode: Boolean = false
-public var currentAppTheme = R.style.AppTheme_Dark
+public lateinit var sharedPrefs: SharedPreferences
 
 public lateinit var RecyclerMessageDao: RecyclerMessageDao
 
@@ -54,15 +56,20 @@ object Utils {
     }
 
     fun saveEmailToSharedPreferences(context: Context, email: String) {
-        val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("user_email", email)
-        editor.apply()
+//        val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+//        val editor = sharedPreferences.edit()
+//        editor.putString("user_email", email)
+//        editor.apply()
+        sharedPrefs.edit().putString("user_email", email).apply()
+
+
     }
 
     fun retrieveEmailFromSharedPreferences(context: Context): String {
-        val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        return sharedPreferences.getString("user_email", "") ?: ""
+//        val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+//        return sharedPreferences.getString("user_email", "") ?: ""
+
+        return sharedPrefs.getString("user_email", "") ?: ""
     }
 
     fun getPermissionsMap(): Map<String, MutableList<String>>{
@@ -90,13 +97,6 @@ object Utils {
 
     }
 
-    fun setAppTheme(nightMode: Boolean) {
-        isNightMode = nightMode
-    }
-
-    fun isNightMode(): Boolean {
-        return isNightMode
-    }
 
 
     fun setBackgroundTint(context: Context, myEditText: EditText?, attribute: Int) {
@@ -117,13 +117,20 @@ object Utils {
     }
 
     fun checkSharedPreference(context: Context, reason: String){
-        val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        if (sharedPreferences.getBoolean(reason, true)) {
+//        val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+//        if (sharedPreferences.getBoolean(reason, true)) {
+//            HandleMainPageViews.setForcedStopped(false)
+//            val editor = sharedPreferences.edit()
+//            editor.remove(reason)
+//            editor.apply()
+//        }
+
+        if (sharedPrefs.getBoolean(reason, true)){
             HandleMainPageViews.setForcedStopped(false)
-            val editor = sharedPreferences.edit()
-            editor.remove(reason)
-            editor.apply()
+            sharedPrefs.edit().remove(reason).apply()
         }
+
+
 
     }
 
@@ -144,19 +151,42 @@ object Utils {
         }
     }
 
-    fun setIsNightMode(context: Context){
-        val nightMode: Boolean = context.getSharedPreferences("preferences", Context.MODE_PRIVATE)
-            .getBoolean("settingsThemeSwitch", true)
 
-        isNightMode = nightMode
-
-    }
 
     fun getCurrentThemeAsInt(): Int{
         if(isNightMode){
             return R.style.AppTheme_Dark
         }
         return R.style.AppTheme
+    }
+
+    fun getMonthAbbreviation(month: String): String{
+        val monthAbbreviation = when(month) {
+            "1" -> "Jan"
+            "2" -> "Feb"
+            "3" -> "Mar"
+            "4" -> "Apr"
+            "5" -> "May"
+            "6" -> "Jun"
+            "7" -> "Jul"
+            "8" -> "Aug"
+            "9" -> "Sep"
+            "10" -> "Oct"
+            "11" -> "Nov"
+            "12" -> "Dev"
+            else -> "Unk"
+        }
+        return monthAbbreviation
+    }
+
+    fun getMeridiem(meridiemInt: String): String{
+
+        val meridiem = when(meridiemInt){
+            "0" -> "AM"
+            "1" -> "PM"
+            else -> "Unknown Meridiem"
+        }
+        return meridiem
     }
 
 }

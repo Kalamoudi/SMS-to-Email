@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.smstoemail.Entity.RecyclerMessage
 import com.example.smstoemail.Interfaces.RecyclerMessageDao
 
-@Database(entities = [RecyclerMessage::class], version = 2)
+@Database(entities = [RecyclerMessage::class], version = 5)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun recyclerMessageDao(): RecyclerMessageDao
 
@@ -20,8 +22,11 @@ abstract class AppDatabase : RoomDatabase() {
                 instance ?: Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java, "app_database"
-                ).build().also { instance = it }
+                ).fallbackToDestructiveMigration() // Add the missing migration strategy here
+                    .build().also { instance = it }
             }
         }
+
+
     }
 }

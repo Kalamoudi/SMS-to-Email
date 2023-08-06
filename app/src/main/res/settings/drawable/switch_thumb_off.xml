@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shape xmlns:android="http://schemas.android.com/apk/res/android">
+        <!-- Replace the color value below with the desired color for the thumb when it's in the OFF state -->
+        <solid android:color="#FF0000" />
+        <size android:width="48dp" android:height="48dp" />
+        <corners android:radius="24dp" />
+
+    </shape>
+</selector>

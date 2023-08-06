@@ -4,15 +4,22 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.smstoemail.NavigationDrawer.HandleNavDrawer
 import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Permissions.CheckPermissions
 import com.example.smstoemail.Services.BackgroundService
 import com.example.smstoemail.Sms.HandleSMS
+import com.example.smstoemail.databinding.ActivitySettingsBinding
+import com.example.smstoemail.databinding.CheckboxPreferenceBinding
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
@@ -28,6 +35,7 @@ import com.google.android.gms.tasks.Tasks
 // Kotlin imports
 
 open class MainActivity : AppCompatActivity() {
+
 
 
     private lateinit var checkPermissions: CheckPermissions
@@ -52,15 +60,15 @@ open class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-
+        super.onCreate(savedInstanceState)
         utilsContext = this
 
-        Utils.setIsNightMode(this)
+        // Instantiate the getSharedPreferences with tableName = "preferences
+        sharedPrefs = getSharedPreferences("preferences", MODE_PRIVATE)
 
         // Set the theme of the app based on isNightMode trigger
         MainActivityUtils.processAppTheme(this)
 
-        super.onCreate(savedInstanceState)
         // Log.d("MainActivity", "onCreate called")
         setContentView(R.layout.activity_main)
 
@@ -74,36 +82,36 @@ open class MainActivity : AppCompatActivity() {
         //========================================================================
         //===========================================================================
      //   val webClientId = "615818751861-81s1lke2k29qvqimtci9o23heqgfm23f.apps.googleusercontent.com"
-        
-        oneTapClient = Identity.getSignInClient(this)
-        signInRequest = BeginSignInRequest.builder()
-            .setGoogleIdTokenRequestOptions(
-                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                    .setSupported(true)
-                    // Your server's client ID, not your Android client ID.
-                    .setServerClientId(getString(R.string.my_client_id))
-                    // Only show accounts previously used to sign in.
-                    .setFilterByAuthorizedAccounts(true)
-                    .build())
-            // Automatically sign in when exactly one credential is retrieved.
-            .setAutoSelectEnabled(true)
-            .build()
 
-        oneTapClient.beginSignIn(signInRequest)
-            .addOnSuccessListener(this) { result ->
-                try {
-                    startIntentSenderForResult(
-                        result.pendingIntent.intentSender, REQ_ONE_TAP,
-                        null, 0, 0, 0, null)
-                } catch (e: IntentSender.SendIntentException) {
-                    Log.e(TAG, "Couldn't start One Tap UI: ${e.localizedMessage}")
-                }
-            }
-            .addOnFailureListener(this) { e ->
-                // No saved credentials found. Launch the One Tap sign-up flow, or
-                // do nothing and continue presenting the signed-out UI.
-                Log.d(TAG, e.localizedMessage)
-            }
+//        oneTapClient = Identity.getSignInClient(this)
+//        signInRequest = BeginSignInRequest.builder()
+//            .setGoogleIdTokenRequestOptions(
+//                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+//                    .setSupported(true)
+//                    // Your server's client ID, not your Android client ID.
+//                    .setServerClientId(getString(R.string.my_client_id))
+//                    // Only show accounts previously used to sign in.
+//                    .setFilterByAuthorizedAccounts(true)
+//                    .build())
+//            // Automatically sign in when exactly one credential is retrieved.
+//            .setAutoSelectEnabled(true)
+//            .build()
+//
+//        oneTapClient.beginSignIn(signInRequest)
+//            .addOnSuccessListener(this) { result ->
+//                try {
+//                    startIntentSenderForResult(
+//                        result.pendingIntent.intentSender, REQ_ONE_TAP,
+//                        null, 0, 0, 0, null)
+//                } catch (e: IntentSender.SendIntentException) {
+//                    Log.e(TAG, "Couldn't start One Tap UI: ${e.localizedMessage}")
+//                }
+//            }
+//            .addOnFailureListener(this) { e ->
+//                // No saved credentials found. Launch the One Tap sign-up flow, or
+//                // do nothing and continue presenting the signed-out UI.
+//                Log.d(TAG, e.localizedMessage)
+//            }
 
 
         //========================================================================
@@ -111,21 +119,14 @@ open class MainActivity : AppCompatActivity() {
 
         handleNavDrawer = HandleNavDrawer(this)
         handleNavDrawer.handleNavDrawer()
-        // openSettingsPage()
-        //===========================================================================
-        //===========================================================================
-
-        //=======================CODE FOR SETTINGS============================
-        //===========================================================================
-
-
-        //===========================================================================
-        //===========================================================================
 
 
 
-        serviceIntent = Intent(this, BackgroundService::class.java)
-        startService(serviceIntent)
+
+        // Starts the BackgroundService
+
+
+        MainActivityUtils.startBackgroundService(this)
 
 
         // Handles Navigation Drawer functionality
@@ -252,11 +253,28 @@ open class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun openSettingsPage() {
-        val intent = Intent(this, SettingsActivity::class.java)
-        startActivity(intent)
-    }
+    override fun onResume() {
+        super.onResume()
 
+        // Re-register onBackPressed callback to ensure it works after coming back to the app
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+                val navigationDrawerLayout = findViewById<View>(R.id.navDrawer)
+
+                if (drawerLayout.isDrawerOpen(navigationDrawerLayout)) {
+                    // Close the navigation drawer if it's open
+                    drawerLayout.closeDrawer(navigationDrawerLayout)
+                } else {
+                    // If the navigation drawer is not open, proceed with the default back button behavior
+                    isEnabled = false
+                    onBackPressed()
+                }
+            }
+        }
+
+        onBackPressedDispatcher.addCallback(this, callback)
+    }
 
 
 }

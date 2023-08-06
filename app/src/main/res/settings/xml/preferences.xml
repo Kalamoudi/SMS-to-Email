@@ -29,6 +29,7 @@
             android:title="Dark Theme"
             android:summary="Changes the theme from light to dark"
             android:layout="@layout/switch_preference"
+            android:defaultValue="?attr/settingsThemeSwitchIndicator"
 
             />
 

@@ -33,6 +33,7 @@
         <item name="settingsSelectorColor">@color/colorPrimaryLight</item>
         <item name="settingsSwitchButtonColor">@color/settingsSwitchButtonColorLight</item>
         <item name="summaryColor">@color/summaryColorLight</item>
+        <item name="settingsThemeSwitchIndicator">false</item>
 
 
 
@@ -71,6 +72,7 @@
         <item name="settingsSelectorColor">@color/yellowDark</item>
         <item name="settingsSwitchButtonColor">@color/settingsSwitchButtonColorDark</item>
         <item name="summaryColor">@color/summaryColorDark</item>
+        <item name="settingsThemeSwitchIndicator">true</item>
 
 
 

@@ -1,11 +1,18 @@
 package com.example.smstoemail
 
 import android.content.Context
+import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.smstoemail.Pages.HandleMainPageViews
+import com.example.smstoemail.Services.BackgroundService
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
@@ -14,13 +21,49 @@ import com.google.android.material.navigation.NavigationView
 
 object MainActivityUtils {
 
+
+
+
     fun processAppTheme(context: Context){
-        if (Utils.isNightMode()) {
-            context.setTheme(R.style.AppTheme_Dark)
-        } else {
-            context.setTheme(R.style.AppTheme)
+
+        if(!sharedPrefs.contains("isNightMode")) {
+            val systemThemeSetting =
+                context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+            sharedPrefs.edit().putBoolean("isNightMode", systemThemeSetting == Configuration.UI_MODE_NIGHT_YES).apply()
         }
+
+        if(sharedPrefs.getBoolean("isNightMode", true)){
+            context.setTheme(R.style.AppTheme_Dark)
+          //  AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        else{
+            context.setTheme(R.style.AppTheme)
+          //  AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
+
     }
+
+    fun startBackgroundService(context: Context){
+
+        val serviceIntent = Intent(context, BackgroundService::class.java)
+        if(!sharedPrefs.contains("backgroundService")){
+            context.startService(serviceIntent)
+            sharedPrefs.edit().putBoolean("backgroundService", true).apply()
+            sharedPrefs.edit().putBoolean("backgroundServiceOn", true).apply()
+        }
+        else{
+            if(sharedPrefs.getBoolean("backgroundServiceOn", true) == false){
+                if (sharedPrefs.getBoolean("backgroundService", true)){
+                    context.startService(serviceIntent)
+                }
+            }
+        }
+
+    }
+
+
 
 
 //    fun processSettingTheme(context: Context) {
@@ -49,6 +92,7 @@ object MainActivityUtils {
             Log.d("MenuButton", "Menu button clicked!")
             drawerLayout.openDrawer(navigationDrawerLayout)
         }
+
 
     }
 
