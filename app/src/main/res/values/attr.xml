@@ -2,6 +2,9 @@
 
 <!-- res/values/attrs.xml -->
 <resources>
+
+    <attr name="clickBackgroundNormal" format="color"/>
+    <attr name="clickBackgroundClicked" format="color"/>
     <attr name="textHeaderColorPrimary" format="color" />
     <attr name="textColorPrimary" format="color"/>
     <attr name="iconColor" format="color"/>
@@ -11,6 +14,7 @@
     <attr name="settingsSelectorColor" format="color"/>
     <attr name="settingsSwitchButtonColor" format="color"/>
     <attr name="summaryColor" format="color"/>
+
 
     <attr name="settingsThemeSwitchIndicator" format="boolean"/>
 

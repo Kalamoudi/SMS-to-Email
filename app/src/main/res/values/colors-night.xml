@@ -16,6 +16,7 @@
     <color name="backgroundSecondaryColorDark">#59000000</color>
     <color name="textColorPrimaryDark">#DAFFFFFF</color>
     <color name="textHeaderColorPrimaryDark">#D8FFFFFF</color>
+    <color name="settingsOptionClickedDark">#D8515151</color>
 
 
 

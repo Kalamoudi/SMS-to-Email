@@ -34,6 +34,8 @@
         <item name="settingsSwitchButtonColor">@color/settingsSwitchButtonColorLight</item>
         <item name="summaryColor">@color/summaryColorLight</item>
         <item name="settingsThemeSwitchIndicator">false</item>
+        <item name="clickBackgroundNormal">@color/backgroundColorLight</item>
+        <item name="clickBackgroundClicked">@color/settingsOptionClickedLight</item>
 
 
 
@@ -73,6 +75,8 @@
         <item name="settingsSwitchButtonColor">@color/settingsSwitchButtonColorDark</item>
         <item name="summaryColor">@color/summaryColorDark</item>
         <item name="settingsThemeSwitchIndicator">true</item>
+        <item name="clickBackgroundNormal">@color/backgroundColorDark</item>
+        <item name="clickBackgroundClicked">@color/settingsOptionClickedDark</item>
 
 
 

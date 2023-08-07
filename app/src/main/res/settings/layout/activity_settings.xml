@@ -1,24 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/settings_container"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/settingsLayout"
+
     >
 
     <include
-        layout="@layout/checkbox_preference"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="10dp"
-        />
-    <include
-        layout="@layout/switch_preference_test"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="180dp"
+
+        layout="@layout/settings_toolbar"
+
         />
 
-</FrameLayout>
+
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/settings_container"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/settingsLayout"
+        >
+
+        <include
+            layout="@layout/checkbox1"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            />
+        <include
+            layout="@layout/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="180dp"
+            />
+
+        <include
+            layout="@layout/checkbox2"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+
+            />
+
+    </FrameLayout>
+
+</RelativeLayout>

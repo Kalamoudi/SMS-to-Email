@@ -17,7 +17,7 @@
             android:key="example_checkbox"
             android:title="Example Checkbox"
             android:summary="This is an example checkbox preference"
-            android:layout="@layout/checkbox_preference"
+            android:layout="@layout/checkbox1"
             android:defaultValue="false"
 
 
@@ -28,7 +28,7 @@
             android:key="settingsThemeSwitch"
             android:title="Dark Theme"
             android:summary="Changes the theme from light to dark"
-            android:layout="@layout/switch_preference"
+            android:layout="@layout/switch1"
             android:defaultValue="?attr/settingsThemeSwitchIndicator"
 
             />

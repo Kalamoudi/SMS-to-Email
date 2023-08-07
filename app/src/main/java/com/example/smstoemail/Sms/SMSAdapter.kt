@@ -26,10 +26,6 @@ class SMSAdapter(showAmount: Int = 100) : RecyclerView.Adapter<SMSAdapter.SMSVie
         smsList.addFirst(smsData)
 
         notifyItemInserted(0)
-//        val smsDataInRecyclerMessage = RecyclerMessage(0, smsData.smsStrings.sender, smsData.smsStrings.recipient,
-//            smsData.smsStrings.messageBody, smsData.smsStrings.dayOfWeek, smsData.smsStrings.day, smsData.smsStrings.month,
-//            smsData.smsStrings.year, smsData.smsStrings.seconds, smsData.smsStrings.minutes, smsData.smsStrings.hour,
-//            smsData.smsStrings.meridiem)
 
         val smsDataInRecyclerMessage = RecyclerMessage(0, smsData.smsStrings.sender, smsData.smsStrings.recipient,
             smsData.smsStrings.messageBody, smsData.smsStrings.calendar)

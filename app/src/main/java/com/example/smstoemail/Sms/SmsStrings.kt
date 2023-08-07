@@ -41,7 +41,7 @@ class SmsStrings (sender: String, recipient: String, messageBody: String, calend
                      Utils.getMeridiem(this@SmsStrings.meridiem)
 
         val sender = "From:  " + this@SmsStrings.sender
-        val recipient = "To:       +" + this@SmsStrings.recipient
+        val recipient = "To:       " + this@SmsStrings.recipient
         val messageBody = this@SmsStrings.messageBody
     }
 

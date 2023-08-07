@@ -6,6 +6,7 @@ import android.content.res.AssetManager
 import com.example.smstoemail.R
 import com.example.smstoemail.Utils
 import com.example.smstoemail.isNightMode
+import com.example.smstoemail.sharedPrefs
 import java.io.IOException
 
 object NavDrawerUtils {
@@ -29,7 +30,7 @@ object NavDrawerUtils {
             val dialog = dialogBuilder.create()
 
             // Set the window background color to fully opaque black
-            if(!isNightMode) {
+            if(!sharedPrefs.getBoolean("isNightMode", true)) {
                 dialog.window?.setBackgroundDrawableResource(android.R.color.white)
             }
             dialog.window?.setDimAmount(0f)

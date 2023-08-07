@@ -156,7 +156,7 @@ object Utils {
 
 
     fun getCurrentThemeAsInt(): Int{
-        if(isNightMode){
+        if(sharedPrefs.getBoolean("isNightMode", true)){
             return R.style.AppTheme_Dark
         }
         return R.style.AppTheme

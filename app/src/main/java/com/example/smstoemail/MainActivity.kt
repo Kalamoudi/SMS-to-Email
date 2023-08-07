@@ -19,7 +19,6 @@ import com.example.smstoemail.Permissions.CheckPermissions
 import com.example.smstoemail.Services.BackgroundService
 import com.example.smstoemail.Sms.HandleSMS
 import com.example.smstoemail.databinding.ActivitySettingsBinding
-import com.example.smstoemail.databinding.CheckboxPreferenceBinding
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
@@ -79,43 +78,43 @@ open class MainActivity : AppCompatActivity() {
         MainActivityUtils.processNavigationDrawer(this)
 
 
-        //========================================================================
-        //===========================================================================
-     //   val webClientId = "615818751861-81s1lke2k29qvqimtci9o23heqgfm23f.apps.googleusercontent.com"
-
-//        oneTapClient = Identity.getSignInClient(this)
-//        signInRequest = BeginSignInRequest.builder()
-//            .setGoogleIdTokenRequestOptions(
-//                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-//                    .setSupported(true)
-//                    // Your server's client ID, not your Android client ID.
-//                    .setServerClientId(getString(R.string.my_client_id))
-//                    // Only show accounts previously used to sign in.
-//                    .setFilterByAuthorizedAccounts(true)
-//                    .build())
-//            // Automatically sign in when exactly one credential is retrieved.
-//            .setAutoSelectEnabled(true)
-//            .build()
-//
-//        oneTapClient.beginSignIn(signInRequest)
-//            .addOnSuccessListener(this) { result ->
-//                try {
-//                    startIntentSenderForResult(
-//                        result.pendingIntent.intentSender, REQ_ONE_TAP,
-//                        null, 0, 0, 0, null)
-//                } catch (e: IntentSender.SendIntentException) {
-//                    Log.e(TAG, "Couldn't start One Tap UI: ${e.localizedMessage}")
-//                }
-//            }
-//            .addOnFailureListener(this) { e ->
-//                // No saved credentials found. Launch the One Tap sign-up flow, or
-//                // do nothing and continue presenting the signed-out UI.
-//                Log.d(TAG, e.localizedMessage)
-//            }
+//        ========================================================================
+//        ===========================================================================
 
 
-        //========================================================================
-        //===========================================================================
+        oneTapClient = Identity.getSignInClient(this)
+        signInRequest = BeginSignInRequest.builder()
+            .setGoogleIdTokenRequestOptions(
+                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                    .setSupported(true)
+                    // Your server's client ID, not your Android client ID.
+                    .setServerClientId(getString(R.string.my_client_id))
+                    // Only show accounts previously used to sign in.
+                    .setFilterByAuthorizedAccounts(true)
+                    .build())
+            // Automatically sign in when exactly one credential is retrieved.
+            .setAutoSelectEnabled(true)
+            .build()
+
+        oneTapClient.beginSignIn(signInRequest)
+            .addOnSuccessListener(this) { result ->
+                try {
+                    startIntentSenderForResult(
+                        result.pendingIntent.intentSender, REQ_ONE_TAP,
+                        null, 0, 0, 0, null)
+                } catch (e: IntentSender.SendIntentException) {
+                    Log.e(TAG, "Couldn't start One Tap UI: ${e.localizedMessage}")
+                }
+            }
+            .addOnFailureListener(this) { e ->
+                // No saved credentials found. Launch the One Tap sign-up flow, or
+                // do nothing and continue presenting the signed-out UI.
+                Log.d(TAG, e.localizedMessage)
+            }
+
+
+//        ========================================================================
+//        ===========================================================================
 
         handleNavDrawer = HandleNavDrawer(this)
         handleNavDrawer.handleNavDrawer()

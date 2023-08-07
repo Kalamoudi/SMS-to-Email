@@ -25,6 +25,8 @@
     <color name="textColorPrimaryLight">#000000</color>
     <color name="textHeaderColorPrimaryLight">#D8FFFFFF</color>
 
+    <color name="settingsOptionClickedLight">#D8CECECE</color>
+
 
 
 </resources>

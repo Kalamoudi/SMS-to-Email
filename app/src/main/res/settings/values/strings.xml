@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="settingsSwitch1">Dark Theme</string>
+    <string name="settingsSwitch1Summary">Changes the theme from light to dark</string>
+
+    <string name="settingsCheckbox1">Background Service</string>
+    <string name="settingsCheckbox1Summary"><![CDATA[
+    If left unchecked the app will only\nwork while it\'s open
+                                                    ]]></string>
+
+
+
+    <string name="settingsCheckbox2">Click me</string>
+    <string name="settingsCheckbox2Summary">Placeholder summary for now</string>
+
+    <string name="settingsToolbarHeaderText">Settings</string>
+    <string name="closeSettings">Go back</string>
+
+
+
+</resources>

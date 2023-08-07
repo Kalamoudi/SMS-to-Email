@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingStart="16dp"
+    android:gravity="center_vertical"
+    android:focusable="true"
+    android:clickable="true"
+    android:id="@+id/themeSwitchLayout"
+    android:onClick="onThemeSwitchLayoutClick"
+    android:background="@drawable/background_normal"
+
+    >
+
+
+    <TextView
+        android:id="@android:id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textSize="16dp"
+        android:text="@string/settingsSwitch1"
+        android:textColor="?android:textColorPrimary"
+
+
+
+        />
+
+    <TextView
+        android:id="@android:id/summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@android:id/title"
+        android:layout_marginStart="8dp"
+        android:text="@string/settingsSwitch1Summary"
+        android:textColor="?attr/summaryColor"
+
+        />
+
+
+    <View
+
+        android:id="@+id/headerLayoutEmptyView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+
+        />
+<!--android:id="@android:id/switch_widget" -->
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchWidgetTest"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/headerLayoutEmptyView"
+        android:layout_marginEnd="-1dp"
+        android:checked="?attr/settingsThemeSwitchIndicator"
+
+
+        android:focusable="false"
+        android:clickable="false"
+
+        app:thumbTint="?attr/settingsSwitchButtonColor"
+
+
+        app:trackTint="@color/switch_track_selector"
+
+        />
+
+</RelativeLayout>

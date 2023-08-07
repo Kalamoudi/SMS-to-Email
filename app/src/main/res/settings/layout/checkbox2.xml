@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingStart="16dp"
+    android:gravity="center_vertical"
+    android:id="@+id/checkbox2Layout"
+
+    >
+
+
+    <TextView
+        android:id="@android:id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textSize="16dp"
+        android:textColor="?android:textColorPrimary"
+        android:text="@string/settingsCheckbox2"
+
+
+        />
+
+    <TextView
+        android:id="@android:id/summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@android:id/title"
+        android:layout_marginStart="8dp"
+        android:textColor="?attr/summaryColor"
+        android:text="@string/settingsCheckbox2Summary"
+
+        />
+
+
+    <View
+
+        android:id="@+id/headerLayoutEmptyView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+
+        />
+
+    <CheckBox
+        android:id="@+id/checkbox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+
+        android:layout_alignEnd="@id/headerLayoutEmptyView"
+
+        android:focusable="false"
+        android:clickable="false"
+
+        app:buttonTint="@color/switch_track_selector"
+        app:trackTint="@color/switch_track_selector"
+
+        />
+
+</RelativeLayout>
