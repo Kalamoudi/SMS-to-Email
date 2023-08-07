@@ -34,7 +34,7 @@ class SMSReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         val recipient = getPhoneNumber(context)
-        var smsMap: Map<String, String>
+        var smsStrings: SmsStrings
 
         if (intent.action == "android.provider.Telephony.SMS_RECEIVED") {
             // Handle SMS messages
@@ -44,8 +44,8 @@ class SMSReceiver : BroadcastReceiver() {
                 val pdus = bundle.get("pdus") as Array<Any>?
                 if (pdus != null) {
                     // Check if the message is part of a long SMS
-                    smsMap = reassembleLongCheckedSms(context, recipient, pdus)
-                    onSmsReceived(context, smsMap)
+                    smsStrings = reassembleLongCheckedSms(context, recipient, pdus)
+                    onSmsReceived(context, smsStrings)
                 }
             }
         } else if (intent.action == "android.provider.Telephony.RCS_MESSAGE_RECEIVED") {
@@ -56,24 +56,24 @@ class SMSReceiver : BroadcastReceiver() {
 
 
             // Notify the listener that an RCS message has been received
-            smsMap = dataToMap(sender!!, recipient, messageBody!!)
-            onSmsReceived(context, smsMap)
+            smsStrings = SmsStrings(sender!!, recipient, messageBody!!, Calendar.getInstance())
+            onSmsReceived(context, smsStrings)
         }
     }
 
 
-    fun onSmsReceived(context: Context, smsMap: Map<String, String>) {
-        if (smsMap["sender"] != null && smsMap["messageBody"] != null) {
+    fun onSmsReceived(context: Context, smsStrings: SmsStrings) {
+        if (smsStrings.sender != null && smsStrings.messageBody != null) {
             // Add the received SMS or RCS message to the RecyclerView
             if(Utils.isValidEmail(userEmail)) {
-                addSmsToRecyclerView(smsMap)
+                addSmsToRecyclerView(smsStrings)
             }
 
             // Send email with the message content
             val emailSender = "khalid.smssender@mailsac.com" // Replace with your email address
             val recipient = "khalamoudi91@gmail.com"
-            val subject = "SMS from $smsMap[\"sender\"] to $recipient"
-            val body = smsMap["messageBody"]
+            val subject = "SMS from " + smsStrings.sender + " to " + smsStrings.recipient
+            val body = smsStrings.messageBody
 
             // Call the sendEmail function with all required arguments
             if(Utils.isValidEmail(userEmail)) {
@@ -85,8 +85,8 @@ class SMSReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun addSmsToRecyclerView(smsMap: Map<String, String>) {
-        smsAdapter?.addSms(SmsData(smsMap))
+    private fun addSmsToRecyclerView(smsStrings: SmsStrings) {
+        smsAdapter?.addSms(SmsData(smsStrings))
     }
 
 
@@ -114,7 +114,7 @@ class SMSReceiver : BroadcastReceiver() {
     }
 
 
-    private fun reassembleLongCheckedSms(context: Context, recipient: String, pdus: Array<Any>): Map<String, String>{
+    private fun reassembleLongCheckedSms(context: Context, recipient: String, pdus: Array<Any>): SmsStrings{
         var completeMessage = ""
         var sender: String = ""
         var timeInSeconds: Long = 0
@@ -132,46 +132,13 @@ class SMSReceiver : BroadcastReceiver() {
             }
         }
 
-        val smsMap = dataToMap(sender, recipient, completeMessage)
+        val smsStrings = SmsStrings(sender, recipient, completeMessage, Calendar.getInstance())
 
 
-        return smsMap
+        return smsStrings
     }
 
 
-    private fun dataToMap(sender: String, recipient: String, completeMessage: String):
-            Map<String, String> {
-
-
-        val calendar = Calendar.getInstance()
-
-        val dayOfWeek = when (calendar.get(Calendar.DAY_OF_WEEK)) {
-            Calendar.SUNDAY -> "Sunday"
-            Calendar.MONDAY -> "Monday"
-            Calendar.TUESDAY -> "Tuesday"
-            Calendar.WEDNESDAY -> "Wednesday"
-            Calendar.THURSDAY -> "Thursday"
-            Calendar.FRIDAY -> "Friday"
-            Calendar.SATURDAY -> "Saturday"
-            else -> "Unknown"
-        }
-
-        val smsMap = mapOf(
-            "sender" to sender,
-            "recipient" to recipient,
-            "messageBody" to completeMessage,
-            "dayOfWeek" to dayOfWeek,
-            "day" to (calendar.get(Calendar.DAY_OF_MONTH)).toString(),
-            "month" to (calendar.get(Calendar.MONTH) + 1).toString(),
-            "year" to calendar.get(Calendar.YEAR).toString(),
-            "seconds" to calendar.get(Calendar.SECOND).toString(),
-            "minutes" to calendar.get(Calendar.MINUTE).toString(),
-            "hour" to calendar.get(Calendar.HOUR).toString(),
-            "meridiem" to calendar.get(Calendar.AM_PM).toString()
-        )
-
-        return smsMap
-    }
 
 }
 

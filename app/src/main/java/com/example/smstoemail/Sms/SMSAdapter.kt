@@ -1,6 +1,5 @@
 package com.example.smstoemail.Sms
 
-import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,14 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smstoemail.Entity.RecyclerMessage
-import com.example.smstoemail.Interfaces.RecyclerMessageDao
 import com.example.smstoemail.Interfaces.recyclerMessageDao
 import com.example.smstoemail.R
 import com.example.smstoemail.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.Calendar
 import java.util.LinkedList
 
 class SMSAdapter(showAmount: Int = 100) : RecyclerView.Adapter<SMSAdapter.SMSViewHolder>() {
@@ -29,9 +26,13 @@ class SMSAdapter(showAmount: Int = 100) : RecyclerView.Adapter<SMSAdapter.SMSVie
         smsList.addFirst(smsData)
 
         notifyItemInserted(0)
-        val smsDataInRecyclerMessage = RecyclerMessage(0, smsData.smsMap["sender"]!!, smsData.smsMap["recipient"]!!,
-            smsData.smsMap["messageBody"]!!, smsData.smsMap["dayOfWeek"]!!, smsData.smsMap["day"]!!, smsData.smsMap["month"]!!, smsData.smsMap["year"]!!,
-            smsData.smsMap["seconds"]!!, smsData.smsMap["minutes"]!!, smsData.smsMap["hour"]!!, smsData.smsMap["meridiem"]!!)
+//        val smsDataInRecyclerMessage = RecyclerMessage(0, smsData.smsStrings.sender, smsData.smsStrings.recipient,
+//            smsData.smsStrings.messageBody, smsData.smsStrings.dayOfWeek, smsData.smsStrings.day, smsData.smsStrings.month,
+//            smsData.smsStrings.year, smsData.smsStrings.seconds, smsData.smsStrings.minutes, smsData.smsStrings.hour,
+//            smsData.smsStrings.meridiem)
+
+        val smsDataInRecyclerMessage = RecyclerMessage(0, smsData.smsStrings.sender, smsData.smsStrings.recipient,
+            smsData.smsStrings.messageBody, smsData.smsStrings.calendar)
 
         // saveNewItem needs to be called from a suspend function or courotine since it's Async task
         CoroutineScope(Dispatchers.IO).launch {
@@ -47,20 +48,11 @@ class SMSAdapter(showAmount: Int = 100) : RecyclerView.Adapter<SMSAdapter.SMSVie
         val fetchedSmsList = mutableListOf<SmsData>()
 
         for(RecyclerMessage in RecyclerMessages){
+            Log.d("dataFound", "Found some data yo")
            // val smsData = SmsData(RecyclerMessage.sender, RecyclerMessage.recipient, RecyclerMessage.messageBody)
-            val smsData = SmsData(mapOf(
-                "sender" to RecyclerMessage.sender,
-                "recipient" to RecyclerMessage.recipient,
-                "messageBody" to RecyclerMessage.messageBody,
-                "seconds" to RecyclerMessage.seconds,
-                "minutes" to RecyclerMessage.minutes,
-                "hour" to RecyclerMessage.hour,
-                "day" to RecyclerMessage.day,
-                "month" to RecyclerMessage.month,
-                "year" to RecyclerMessage.year,
-                "dayOfWeek" to RecyclerMessage.dayOfWeek,
-                "meridiem" to RecyclerMessage.meridiem
-            ))
+            val smsData = SmsData(SmsStrings(RecyclerMessage.sender, RecyclerMessage.recipient,
+                                            RecyclerMessage.messageBody, RecyclerMessage.calendar)
+            )
             fetchedSmsList.add(smsData)
         }
         smsList.clear()
@@ -94,18 +86,11 @@ class SMSAdapter(showAmount: Int = 100) : RecyclerView.Adapter<SMSAdapter.SMSVie
 
         fun bind(smsData: SmsData) {
            // val timeExtension = if (smsData.smsMap["hour"]?.toInt() ?: 0 > 12) "PM" else "AM"
-            itemView.findViewById<TextView>(R.id.messageDateAndTime).text =
-                smsData.smsMap["dayOfWeek"] + ", " +
-                Utils.getMonthAbbreviation(smsData.smsMap["month"]!!) + " " +
-                smsData.smsMap["day"] + ", " +
-                smsData.smsMap["year"] + " • " +
-                smsData.smsMap["hour"] + ":" +
-                smsData.smsMap["minutes"] + " " +
-                Utils.getMeridiem(smsData.smsMap["meridiem"]!!)
-            itemView.findViewById<TextView>(R.id.senderTextView).text = "From:  " + smsData.smsMap["sender"]
-            itemView.findViewById<TextView>(R.id.recipientTextView).text = "To:       +" + smsData.smsMap["recipient"]
+            itemView.findViewById<TextView>(R.id.messageDateAndTime).text = smsData.smsStrings.binder().header
+            itemView.findViewById<TextView>(R.id.senderTextView).text = smsData.smsStrings.binder().sender
+            itemView.findViewById<TextView>(R.id.recipientTextView).text = smsData.smsStrings.binder().recipient
           //  itemView.findViewById<TextView>(R.id.messageHeader).text = "From " + smsData.smsMap["sender"] + " to " + smsData.smsMap["recipient"]
-            itemView.findViewById<TextView>(R.id.messageTextView).text = smsData.smsMap["messageBody"]
+            itemView.findViewById<TextView>(R.id.messageTextView).text = smsData.smsStrings.binder().messageBody
         }
 
     }

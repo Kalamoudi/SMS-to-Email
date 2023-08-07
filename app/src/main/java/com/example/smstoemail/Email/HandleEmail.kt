@@ -74,6 +74,7 @@ class HandleEmail {
         }
     }
 
+
     private fun showToast(context: Context, message: String) {
         (context as? Activity)?.runOnUiThread {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()

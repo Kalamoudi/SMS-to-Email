@@ -1,3 +1,3 @@
 package com.example.smstoemail.Sms
 
-data class SmsData(val smsMap: Map<String, String>)
+data class SmsData(val smsStrings: SmsStrings)

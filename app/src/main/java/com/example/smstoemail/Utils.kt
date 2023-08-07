@@ -12,6 +12,7 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.ContextThemeWrapper
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -23,6 +24,7 @@ import com.example.smstoemail.Interfaces.RecyclerMessageDao
 import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Repository.AppDatabase
 import com.example.smstoemail.Services.BackgroundService
+import com.example.smstoemail.Sms.SmsData
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
