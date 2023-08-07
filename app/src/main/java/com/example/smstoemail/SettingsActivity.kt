@@ -5,6 +5,8 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -42,9 +44,7 @@ class SettingsActivity : AppCompatActivity() {
         val backButton = findViewById<Button>(R.id.settingsBackButton)
 
         backButton.setOnClickListener{
-
-            onBackPressed();
-
+            finish()
         }
 
 
@@ -82,16 +82,15 @@ class SettingsActivity : AppCompatActivity() {
 
     }
 
+
     private fun processBackgroundCheckbox(){
 
         val checkbox1Layout = findViewById<RelativeLayout>(R.id.checkbox1Layout)
         val checkbox1 = findViewById<CheckBox>(R.id.checkbox1)
 
-        checkbox1.isChecked = sharedPrefs.getBoolean("backgroundService", true)
 
-        // Not redundant, kotlin trolling
         // Sets the checkbox on or off depending on whether the background service is on or off
-
+        checkbox1.isChecked = sharedPrefs.getBoolean("backgroundService", true)
 
      //   checkbox1.isChecked = sharedPrefs.getBoolean("backgroundService", true)
 
@@ -166,9 +165,6 @@ class SettingsActivity : AppCompatActivity() {
 
 
         }
-
-
-
 
 
     }

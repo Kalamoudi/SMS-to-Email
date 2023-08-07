@@ -8,6 +8,8 @@ import android.util.Log
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.smstoemail.MainActivity
@@ -75,6 +77,7 @@ class HandleNavDrawer (private val context: Context) {
     private fun openSettingsPage(context: Context) {
         val intent = Intent(context, SettingsActivity::class.java)
         context.startActivity(intent)
+        (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
 }
