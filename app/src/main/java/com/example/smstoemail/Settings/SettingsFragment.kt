@@ -1,20 +1,15 @@
-package com.example.smstoemail
+package com.example.smstoemail.Settings
 
 
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat.recreate
-import androidx.preference.PreferenceFragment
 import androidx.preference.PreferenceFragmentCompat // Correct import statement
-import androidx.preference.PreferenceManager
 import androidx.preference.SwitchPreference
-import androidx.preference.SwitchPreferenceCompat
+import com.example.smstoemail.R
+import com.example.smstoemail.sharedPrefs
 
 class SettingsFragment() : PreferenceFragmentCompat(){
 

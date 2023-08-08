@@ -5,8 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.smstoemail.MainActivity
+import com.example.smstoemail.MainActivityUtils
 import com.example.smstoemail.R
+import com.example.smstoemail.SMTP.SMPTActivity
 import com.example.smstoemail.Settings.SettingsActivity
 import com.example.smstoemail.Utils
 
@@ -15,7 +18,7 @@ class HandleNavDrawer (private val context: Context) {
 
     private val appCompatActivity: AppCompatActivity = context as AppCompatActivity
 
-    private val mainListData = listOf("Home", "Item 2", "Settings")
+    private val mainListData = listOf("Home", "Configure SMTP", "Settings")
     private val secondaryListData = listOf("Contact us", "Privacy policy")
 
     private val mainListImages = listOf(
@@ -36,11 +39,11 @@ class HandleNavDrawer (private val context: Context) {
 
         mainListView.setOnItemClickListener { parent, view, position, id ->
             val selectedItem = parent.getItemAtPosition(position) as String
-            if (selectedItem.equals("Settings")) {
-                openSettingsPage(context)
-            }
-            else if(selectedItem.equals("Home")){
-                goBackToMainPage(context)
+
+            when(selectedItem){
+                "Home" -> goBackToMainPage(context)
+                "Configure SMTP" -> openSmtpPage(context)
+                "Settings" -> openSettingsPage(context)
             }
         }
 
@@ -49,12 +52,10 @@ class HandleNavDrawer (private val context: Context) {
 
         secondaryListView.setOnItemClickListener { parent, view, position, id ->
             val selectedItem = parent.getItemAtPosition(position) as String
-            if (selectedItem.equals("Contact us")) {
-                Utils.showToast(context, "email: khalidsmssender@gmail.com")
-            }
-            else if(selectedItem.equals("Privacy policy")){
-                //NavDrawerUtils.readLicenseFile(context)
-                NavDrawerUtils.showLicenseDialog(context)
+
+            when(selectedItem){
+                "Contact us" -> Utils.showToast(context, "email: khalidsmssender@gmail.com")
+                "Privacy policy" -> NavDrawerUtils.showLicenseDialog(context)
             }
         }
 
@@ -62,15 +63,32 @@ class HandleNavDrawer (private val context: Context) {
     }
 
     private fun goBackToMainPage(context: Context){
+        if (context::class.java == MainActivity::class.java) {
+            return
+        }
+        (context as AppCompatActivity).finish()
         val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-        context.startActivity(intent)
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+//        context.startActivity(intent)
+        (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 
     private fun openSettingsPage(context: Context) {
         val intent = Intent(context, SettingsActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        context.startActivity(intent)
+        (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
+
+    private fun openSmtpPage(context: Context){
+        val intent = Intent(context, SMPTActivity::class.java)
+        if (context::class.java == SMPTActivity::class.java) {
+            return
+        }
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        MainActivityUtils.closeNavigationDrawer(context)
         context.startActivity(intent)
         (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }

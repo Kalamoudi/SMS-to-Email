@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="smtp_toolbar_header_text">SMTP Configuration</string>
+
+</resources>

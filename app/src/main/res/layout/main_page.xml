@@ -14,14 +14,14 @@
     <!-- Rest of your UI components -->
     <!-- RecyclerView to display SMS messages -->
 
-    <Button
-        android:id="@+id/openSlidingButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/smsRecyclerView"
-        android:text="Open Sliding Window"
-        android:visibility="gone"
-        tools:visibility="gone" />
+<!--    <Button-->
+<!--        android:id="@+id/openSlidingButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/smsRecyclerView"-->
+<!--        android:text="Open Sliding Window"-->
+<!--        android:visibility="gone"-->
+<!--        tools:visibility="gone" />-->
 
     <Button
         android:id="@+id/addEmailSubmit"

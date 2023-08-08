@@ -45,6 +45,7 @@ open class MainActivity : AppCompatActivity() {
     private lateinit var handleNavDrawer : HandleNavDrawer
     lateinit var serviceIntent: Intent
     private lateinit var menuButton: Button
+    lateinit var drawerLayout: DrawerLayout
 
     private lateinit var oneTapClient: SignInClient
     private lateinit var signInRequest: BeginSignInRequest
@@ -260,7 +261,7 @@ open class MainActivity : AppCompatActivity() {
         // Re-register onBackPressed callback to ensure it works after coming back to the app
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
+                drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
                 val navigationDrawerLayout = findViewById<View>(R.id.navDrawer)
 
                 if (drawerLayout.isDrawerOpen(navigationDrawerLayout)) {

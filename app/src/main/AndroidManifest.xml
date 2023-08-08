@@ -60,6 +60,15 @@
             <!-- Add activity attributes here if needed -->
         </activity>
 
+        <activity
+            android:name=".SMTP.SMPTActivity"
+            android:label="Smtp"
+            android:parentActivityName=".MainActivity"
+
+            >
+            <!-- Add activity attributes here if needed -->
+        </activity>
+
         <service
             android:name=".Services.BackgroundService"
             android:enabled="true"

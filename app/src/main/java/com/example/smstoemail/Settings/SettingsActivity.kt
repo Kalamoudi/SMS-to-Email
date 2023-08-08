@@ -1,6 +1,7 @@
 package com.example.smstoemail.Settings
 
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
@@ -15,14 +16,13 @@ import androidx.core.view.iterator
 import com.example.smstoemail.MainActivityUtils
 import com.example.smstoemail.R
 import com.example.smstoemail.Services.BackgroundService
-import com.example.smstoemail.SettingsFragment
 import com.example.smstoemail.sharedPrefs
+import com.example.smstoemail.utilsContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import androidx.core.app.ActivityCompat.recreate
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -44,6 +44,7 @@ class SettingsActivity : AppCompatActivity() {
 
         backButtonLayout.setOnClickListener{
             finish()
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
 
@@ -119,37 +120,38 @@ class SettingsActivity : AppCompatActivity() {
 
         val switchLayout = findViewById<RelativeLayout>(R.id.themeSwitchLayout)
         val switchCompat = findViewById<SwitchCompat>(R.id.switchWidgetTest)
-        val settingsContext = this
 
 
-            SettingsUtils.processClickWithHighlight(settingsContext, switchLayout) {
+        SettingsUtils.processClickWithHighlight(this, switchLayout) {
 
-                if (isAnimating) {
-                    return@processClickWithHighlight // Do nothing if animation is ongoing
-                }
-
-
-                CoroutineScope(Dispatchers.Main).launch {
-                    if (isAnimating) {
-                        return@launch // Do nothing if animation is ongoing
-                    }
-
-                    isAnimating = true
-                    val currentTheme = sharedPrefs.getBoolean("isNightMode", true)
-                    sharedPrefs.edit().putBoolean("isNightMode", !currentTheme).apply()
-                    switchCompat.isChecked = !switchCompat.isChecked
-                    //    isAnimating = true
-                    switchCompat.animate()
-                        .alpha(1f)
-                        .setDuration(200L)
-                        .start()
-                       delay(300)
-                    SettingsUtils.updateSettingsTheme(switchCompat)
-
-                    isAnimating = false
-                }
-
+            if (isAnimating) {
+                return@processClickWithHighlight // Do nothing if animation is ongoing
             }
+
+
+            CoroutineScope(Dispatchers.Main).launch {
+                if (isAnimating) {
+                    return@launch // Do nothing if animation is ongoing
+                }
+
+                isAnimating = true
+                val currentTheme = sharedPrefs.getBoolean("isNightMode", true)
+               // sharedPrefs.edit().putBoolean("isNightMode", !currentTheme).apply()
+                switchCompat.isChecked = !switchCompat.isChecked
+                //    isAnimating = true
+                switchCompat.animate()
+                    .alpha(1f)
+                    .setDuration(200L)
+                    .start()
+                   delay(300)
+                SettingsUtils.updateSettingsTheme(switchCompat)
+              //  recreate(utilsContext as Activity)
+             //   recreate()
+
+                isAnimating = false
+            }
+
+        }
 
     }
 
@@ -182,6 +184,12 @@ class SettingsActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
+    }
 
 
 }

@@ -9,18 +9,17 @@
     >
 
     <include
-        android:id="@+id/menuButtonLayout"
         layout="@layout/menu_button_layout"
         />
 
     <TextView
-        android:id="@+id/toolbarHeaderText"
+        android:id="@+id/smtpToolbarHeaderText"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:text="@string/toolbar_header_text"
+        android:text="@string/smtp_toolbar_header_text"
         android:textSize="18sp"
         android:textColor="?attr/textHeaderColorPrimary"
 
@@ -29,9 +28,9 @@
 
 
 
-<!--    <include layout="@layout/settings_button"-->
-<!--        android:id="@+id/settingsButton"-->
-<!--        />-->
+    <!--    <include layout="@layout/settings_button"-->
+    <!--        android:id="@+id/settingsButton"-->
+    <!--        />-->
 
 
 
@@ -41,7 +40,7 @@
 
     <View
 
-        android:id="@+id/headerLayoutEmptyView"
+        android:id="@+id/smtpHeaderLayoutEmptyView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_alignParentEnd="true"
@@ -53,14 +52,14 @@
 
 
     <include
-        android:id="@+id/googleSignInButton"
+        android:id="@+id/smtpGoogleSignInButton"
         layout="@layout/sign_in_button"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
 
-        android:layout_alignEnd="@id/headerLayoutEmptyView"
+        android:layout_alignEnd="@id/smtpHeaderLayoutEmptyView"
 
         />
 

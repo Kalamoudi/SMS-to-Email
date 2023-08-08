@@ -79,23 +79,24 @@ object MainActivityUtils {
 
     fun processNavigationDrawer(context: Context){
         val drawerLayout: DrawerLayout = (context as AppCompatActivity).findViewById(R.id.drawerLayout)
-        val openSlidingButton = context.findViewById<Button>(R.id.openSlidingButton)
         val navigationDrawerLayout = context.findViewById<View>(R.id.navDrawer)
         val menuButton: Button = context.findViewById(R.id.menuButton)
         val menuButtonLayout: RelativeLayout = context.findViewById(R.id.menuButtonLayout)
 
-        openSlidingButton.setOnClickListener {
-            // Open the sliding window if the view is not null
-            drawerLayout.openDrawer(navigationDrawerLayout)
-        }
+
 
         menuButtonLayout.setOnClickListener {
             // Open the sliding window if the view is not null
             Log.d("MenuButton", "Menu button clicked!")
             drawerLayout.openDrawer(navigationDrawerLayout)
         }
+    }
 
+    fun closeNavigationDrawer(context: Context){
+        val drawerLayout: DrawerLayout = (context as AppCompatActivity).findViewById(R.id.drawerLayout)
+        val navigationDrawerLayout = context.findViewById<View>(R.id.navDrawer)
 
+        drawerLayout.closeDrawer(navigationDrawerLayout)
     }
 
     fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
