@@ -10,7 +10,6 @@
     android:clickable="true"
     android:id="@+id/themeSwitchLayout"
     android:onClick="onThemeSwitchLayoutClick"
-    android:background="@drawable/background_normal"
 
     >
 
@@ -59,7 +58,6 @@
         android:layout_alignEnd="@id/headerLayoutEmptyView"
         android:layout_marginEnd="-1dp"
         android:checked="?attr/settingsThemeSwitchIndicator"
-
 
         android:focusable="false"
         android:clickable="false"

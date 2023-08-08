@@ -8,23 +8,37 @@
     android:layout_alignParentStart="true"
     >
 
-    <Button
-        android:id="@+id/settingsBackButton"
-        android:contentDescription="@string/closeSettings"
-        android:layout_width="30dp"
-        android:layout_height="25dp"
+    <RelativeLayout
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:id="@+id/settingsBackButtonView"
         android:layout_alignParentStart="true"
-
-        android:layout_marginTop="14dp"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/arrow_back_40px"
-
-        android:gravity="left"
-
         android:layout_centerVertical="true"
 
-        android:visibility="visible"
-        tools:visibility="visible" />
+        >
+
+        <Button
+            android:id="@+id/settingsBackButton"
+            android:contentDescription="@string/closeSettings"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/arrow_back_40px"
+
+            android:gravity="left"
+
+            android:layout_centerVertical="true"
+
+            android:clickable="false"
+            android:focusable="false"
+
+            android:visibility="visible"
+            tools:visibility="visible" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/settingsToolbarHeaderText"

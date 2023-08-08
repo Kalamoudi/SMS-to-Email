@@ -84,35 +84,35 @@ open class MainActivity : AppCompatActivity() {
 //        ===========================================================================
 
 
-        oneTapClient = Identity.getSignInClient(this)
-        signInRequest = BeginSignInRequest.builder()
-            .setGoogleIdTokenRequestOptions(
-                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                    .setSupported(true)
-                    // Your server's client ID, not your Android client ID.
-                    .setServerClientId(getString(R.string.my_client_id))
-                    // Only show accounts previously used to sign in.
-                    .setFilterByAuthorizedAccounts(true)
-                    .build())
-            // Automatically sign in when exactly one credential is retrieved.
-            .setAutoSelectEnabled(true)
-            .build()
-
-        oneTapClient.beginSignIn(signInRequest)
-            .addOnSuccessListener(this) { result ->
-                try {
-                    startIntentSenderForResult(
-                        result.pendingIntent.intentSender, REQ_ONE_TAP,
-                        null, 0, 0, 0, null)
-                } catch (e: IntentSender.SendIntentException) {
-                    Log.e(TAG, "Couldn't start One Tap UI: ${e.localizedMessage}")
-                }
-            }
-            .addOnFailureListener(this) { e ->
-                // No saved credentials found. Launch the One Tap sign-up flow, or
-                // do nothing and continue presenting the signed-out UI.
-                Log.d(TAG, e.localizedMessage)
-            }
+//        oneTapClient = Identity.getSignInClient(this)
+//        signInRequest = BeginSignInRequest.builder()
+//            .setGoogleIdTokenRequestOptions(
+//                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+//                    .setSupported(true)
+//                    // Your server's client ID, not your Android client ID.
+//                    .setServerClientId(getString(R.string.my_client_id))
+//                    // Only show accounts previously used to sign in.
+//                    .setFilterByAuthorizedAccounts(true)
+//                    .build())
+//            // Automatically sign in when exactly one credential is retrieved.
+//            .setAutoSelectEnabled(true)
+//            .build()
+//
+//        oneTapClient.beginSignIn(signInRequest)
+//            .addOnSuccessListener(this) { result ->
+//                try {
+//                    startIntentSenderForResult(
+//                        result.pendingIntent.intentSender, REQ_ONE_TAP,
+//                        null, 0, 0, 0, null)
+//                } catch (e: IntentSender.SendIntentException) {
+//                    Log.e(TAG, "Couldn't start One Tap UI: ${e.localizedMessage}")
+//                }
+//            }
+//            .addOnFailureListener(this) { e ->
+//                // No saved credentials found. Launch the One Tap sign-up flow, or
+//                // do nothing and continue presenting the signed-out UI.
+//                Log.d(TAG, e.localizedMessage)
+//            }
 
 
 //        ========================================================================

@@ -7,6 +7,7 @@
     android:paddingStart="16dp"
     android:gravity="center_vertical"
     android:id="@+id/checkbox2Layout"
+    android:background="@drawable/background_normal"
 
     >
 

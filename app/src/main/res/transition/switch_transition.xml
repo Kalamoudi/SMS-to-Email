@@ -1,0 +1,20 @@
+<transition xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:fromId="@id/unchecked" android:toId="@id/checked">
+        <objectAnimator
+            android:propertyName="thumbAlpha"
+            android:duration="@android:integer/config_shortAnimTime"
+            android:valueType="floatType"
+            android:valueTo="1"
+            android:interpolator="@android:interpolator/fast_out_slow_in"/>
+        <!-- Additional animations for other properties if needed -->
+    </item>
+    <item android:fromId="@id/checked" android:toId="@id/unchecked">
+        <objectAnimator
+            android:propertyName="thumbAlpha"
+            android:duration="@android:integer/config_shortAnimTime"
+            android:valueType="floatType"
+            android:valueTo="0"
+            android:interpolator="@android:interpolator/fast_out_slow_in"/>
+        <!-- Additional animations for other properties if needed -->
+    </item>
+</transition>

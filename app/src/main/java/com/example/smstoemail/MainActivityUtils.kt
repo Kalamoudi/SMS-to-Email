@@ -7,6 +7,7 @@ import android.content.res.Resources
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.RelativeLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -81,13 +82,14 @@ object MainActivityUtils {
         val openSlidingButton = context.findViewById<Button>(R.id.openSlidingButton)
         val navigationDrawerLayout = context.findViewById<View>(R.id.navDrawer)
         val menuButton: Button = context.findViewById(R.id.menuButton)
+        val menuButtonLayout: RelativeLayout = context.findViewById(R.id.menuButtonLayout)
 
         openSlidingButton.setOnClickListener {
             // Open the sliding window if the view is not null
             drawerLayout.openDrawer(navigationDrawerLayout)
         }
 
-        menuButton.setOnClickListener {
+        menuButtonLayout.setOnClickListener {
             // Open the sliding window if the view is not null
             Log.d("MenuButton", "Menu button clicked!")
             drawerLayout.openDrawer(navigationDrawerLayout)

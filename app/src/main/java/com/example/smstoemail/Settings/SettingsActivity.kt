@@ -1,36 +1,34 @@
-package com.example.smstoemail
+package com.example.smstoemail.Settings
 
 
-import android.animation.ObjectAnimator
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.view.get
 import androidx.core.view.iterator
-import androidx.core.view.marginTop
-import androidx.core.view.size
-import androidx.fragment.app.commit
-import androidx.preference.PreferenceManager
-import androidx.preference.SwitchPreference
-import androidx.preference.SwitchPreferenceCompat
+import com.example.smstoemail.MainActivityUtils
+import com.example.smstoemail.R
 import com.example.smstoemail.Services.BackgroundService
-import com.google.android.material.internal.ViewUtils.dpToPx
+import com.example.smstoemail.SettingsFragment
+import com.example.smstoemail.sharedPrefs
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var settingsFragment: SettingsFragment
+    private var isAnimating = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -42,8 +40,9 @@ class SettingsActivity : AppCompatActivity() {
 
 
         val backButton = findViewById<Button>(R.id.settingsBackButton)
+        val backButtonLayout = findViewById<RelativeLayout>(R.id.settingsBackButtonView)
 
-        backButton.setOnClickListener{
+        backButtonLayout.setOnClickListener{
             finish()
         }
 
@@ -92,12 +91,13 @@ class SettingsActivity : AppCompatActivity() {
         // Sets the checkbox on or off depending on whether the background service is on or off
         checkbox1.isChecked = sharedPrefs.getBoolean("backgroundService", true)
 
-     //   checkbox1.isChecked = sharedPrefs.getBoolean("backgroundService", true)
 
-        val serviceIntent = Intent(this, BackgroundService::class.java)
-        addHighlight(checkbox1Layout)
+       // addHighlight(checkbox1Layout)
 
-        checkbox1Layout.setOnClickListener{
+        SettingsUtils.processClickWithHighlight(this, checkbox1Layout){
+
+
+            val serviceIntent = Intent(this, BackgroundService::class.java)
             if(sharedPrefs.getBoolean("backgroundService", true)){
                 stopService(serviceIntent)
                 sharedPrefs.edit().putBoolean("backgroundServiceOn", false).apply()
@@ -112,18 +112,6 @@ class SettingsActivity : AppCompatActivity() {
 
         }
 
-//        checkbox1.setOnClickListener{
-//
-//            if(sharedPrefs.getBoolean("backgroundService", true)){
-//                stopService(serviceIntent)
-//                sharedPrefs.edit().putBoolean("backgroundServiceOn", false).apply()
-//            }
-//            else{
-//                startService(serviceIntent)
-//                sharedPrefs.edit().putBoolean("backgroundServiceOn", true).apply()
-//            }
-//            sharedPrefs.edit().putBoolean("backgroundService", !sharedPrefs.getBoolean("backgroundService", true)).apply()
-//        }
 
     }
 
@@ -131,41 +119,62 @@ class SettingsActivity : AppCompatActivity() {
 
         val switchLayout = findViewById<RelativeLayout>(R.id.themeSwitchLayout)
         val switchCompat = findViewById<SwitchCompat>(R.id.switchWidgetTest)
-
-        addHighlight(switchLayout)
-        switchLayout.setOnClickListener{
-            val currentTheme = sharedPrefs.getBoolean("isNightMode", true)
-            sharedPrefs.edit().putBoolean("isNightMode", !currentTheme).apply()
-            switchCompat.isChecked = !switchCompat.isChecked
+        val settingsContext = this
 
 
-            updateTheme()
-            recreate()
+            SettingsUtils.processClickWithHighlight(settingsContext, switchLayout) {
+
+                if (isAnimating) {
+                    return@processClickWithHighlight // Do nothing if animation is ongoing
+                }
 
 
-        }
-//        switchCompat.setOnClickListener{
-//            val currentTheme = sharedPrefs.getBoolean("isNightMode", true)
-//            sharedPrefs.edit().putBoolean("isNightMode", !currentTheme).apply()
-//            updateTheme()
-//            recreate()
-//
-//        }
+                CoroutineScope(Dispatchers.Main).launch {
+                    if (isAnimating) {
+                        return@launch // Do nothing if animation is ongoing
+                    }
+
+                    isAnimating = true
+                    val currentTheme = sharedPrefs.getBoolean("isNightMode", true)
+                    sharedPrefs.edit().putBoolean("isNightMode", !currentTheme).apply()
+                    switchCompat.isChecked = !switchCompat.isChecked
+                    //    isAnimating = true
+                    switchCompat.animate()
+                        .alpha(1f)
+                        .setDuration(200L)
+                        .start()
+                       delay(300)
+                    SettingsUtils.updateSettingsTheme(switchCompat)
+
+                    isAnimating = false
+                }
+
+            }
+
+    }
+
+    private suspend fun animateSwitch(switchCompat: SwitchCompat) {
+        var animation = AlphaAnimation(1f, 1f)
+        animation.duration = 300L
+        switchCompat.startAnimation(animation)
+
+        delay(animation.duration)
+
+
     }
 
 
-    fun pressCheckbox3(){
+
+
+
+    private fun pressCheckbox3(){
         val checkbox2Layout = findViewById<RelativeLayout>(R.id.checkbox2Layout)
         val checkbox2 = findViewById<CheckBox>(R.id.checkbox2)
 
-        addHighlight(checkbox2Layout)
-        checkbox2Layout.setOnClickListener{
 
+        SettingsUtils.processClickWithHighlight(this, checkbox2Layout) {
             checkbox2.isChecked = !checkbox2.isChecked
-
-
         }
-
 
     }
     override fun onSupportNavigateUp(): Boolean {
@@ -174,29 +183,6 @@ class SettingsActivity : AppCompatActivity() {
     }
 
 
-    private fun updateTheme(){
-        val nightMode = sharedPrefs.getBoolean("isNightMode", true)
 
-        if (nightMode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
-    }
-
-    private fun addHighlight(relativeLayout: RelativeLayout){
-
-        relativeLayout.setBackgroundResource(R.drawable.background_clicked)
-        relativeLayout.elevation = 20f.dpToPx(this)
-
-        relativeLayout.postDelayed({
-            relativeLayout.setBackgroundResource(R.drawable.background_normal)
-            relativeLayout.elevation = 0f.dpToPx(this)
-        }, 100000) // Delay in milliseconds
-    }
-
-    fun Float.dpToPx(context: Context): Float {
-        return this * context.resources.displayMetrics.density
-    }
 }
 

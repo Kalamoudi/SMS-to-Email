@@ -3,18 +3,11 @@ package com.example.smstoemail.NavigationDrawer
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
-import android.util.Log
 import android.widget.ListView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityOptionsCompat
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.smstoemail.MainActivity
 import com.example.smstoemail.R
-import com.example.smstoemail.SettingsActivity
+import com.example.smstoemail.Settings.SettingsActivity
 import com.example.smstoemail.Utils
 
 
@@ -71,11 +64,13 @@ class HandleNavDrawer (private val context: Context) {
     private fun goBackToMainPage(context: Context){
         val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         context.startActivity(intent)
     }
 
     private fun openSettingsPage(context: Context) {
         val intent = Intent(context, SettingsActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         context.startActivity(intent)
         (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
