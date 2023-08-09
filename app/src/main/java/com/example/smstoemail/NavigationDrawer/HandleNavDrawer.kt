@@ -71,14 +71,15 @@ class HandleNavDrawer (private val context: Context) {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
 //        context.startActivity(intent)
-        (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        (context as AppCompatActivity).overridePendingTransition(R.anim.slide_none, R.anim.slide_none)
     }
 
     private fun openSettingsPage(context: Context) {
         val intent = Intent(context, SettingsActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         context.startActivity(intent)
-        (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+       // (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_none)
     }
 
     private fun openSmtpPage(context: Context){
@@ -90,7 +91,7 @@ class HandleNavDrawer (private val context: Context) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         MainActivityUtils.closeNavigationDrawer(context)
         context.startActivity(intent)
-        (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_none)
     }
 
 }

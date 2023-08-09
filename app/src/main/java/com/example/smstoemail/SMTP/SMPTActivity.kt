@@ -11,6 +11,7 @@ import com.example.smstoemail.utilsContext
 class SMPTActivity :AppCompatActivity(){
 
     private lateinit var handleNavDrawer: HandleNavDrawer
+    private lateinit var handleSMTPViews: HandleSmtpViews
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -24,6 +25,10 @@ class SMPTActivity :AppCompatActivity(){
 
         handleNavDrawer = HandleNavDrawer(this)
         handleNavDrawer.handleNavDrawer()
+
+        handleSMTPViews = HandleSmtpViews()
+        handleSMTPViews.handleViews(this)
+
 
 
 

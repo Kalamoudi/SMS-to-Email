@@ -122,6 +122,7 @@ class SettingsActivity : AppCompatActivity() {
         val switchCompat = findViewById<SwitchCompat>(R.id.switchWidgetTest)
 
 
+        sharedPrefs.edit().putBoolean("changingTheme", true).apply()
         SettingsUtils.processClickWithHighlight(this, switchLayout) {
 
             if (isAnimating) {
@@ -155,27 +156,21 @@ class SettingsActivity : AppCompatActivity() {
 
     }
 
-    private suspend fun animateSwitch(switchCompat: SwitchCompat) {
-        var animation = AlphaAnimation(1f, 1f)
-        animation.duration = 300L
-        switchCompat.startAnimation(animation)
-
-        delay(animation.duration)
-
-
-    }
-
-
-
 
 
     private fun pressCheckbox3(){
         val checkbox2Layout = findViewById<RelativeLayout>(R.id.checkbox2Layout)
         val checkbox2 = findViewById<CheckBox>(R.id.checkbox2)
 
+        if(!sharedPrefs.contains("useSmtp")){
+            sharedPrefs.edit().putBoolean("useSmtp", false).apply()
+        }
+
+        checkbox2.isChecked = sharedPrefs.getBoolean("useSmtp", true)
 
         SettingsUtils.processClickWithHighlight(this, checkbox2Layout) {
             checkbox2.isChecked = !checkbox2.isChecked
+            sharedPrefs.edit().putBoolean("useSmtp", checkbox2.isChecked).apply()
         }
 
     }

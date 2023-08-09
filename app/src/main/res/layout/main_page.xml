@@ -45,7 +45,9 @@
         android:backgroundTint="?android:colorPrimary"
         android:textColor="?attr/textHeaderColorPrimary"
         android:visibility="invisible"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+
+        />
 
     <TextView
         android:id="@+id/selectedEmail"

@@ -11,6 +11,7 @@
     <color name="grey">#CD9A9A9A</color>
     <color name="yellowDark">#D3A92D</color>
     <color name="darkWhite">#C6C6C6</color>
+    <color name="transparent">#00000000</color>
 
 
     <!-- Light Themes Colors-->

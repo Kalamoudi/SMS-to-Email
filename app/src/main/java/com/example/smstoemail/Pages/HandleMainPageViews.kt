@@ -71,12 +71,12 @@ class HandleMainPageViews {
 
             // Update UI to display the selected email and hide the EditText and button
 
-            if(Utils.isValidEmail(com.example.smstoemail.userEmail)){
+            if(Utils.isValidInput(com.example.smstoemail.userEmail, "Email")){
                 processAddEmail(context, com.example.smstoemail.userEmail)
                 Utils.saveEmailToSharedPreferences(context, com.example.smstoemail.userEmail)
             }
             else{
-                invalidEmailInput(context, com.example.smstoemail.userEmail)
+                Utils.invalidEditTextInput(context, addEmailText, com.example.smstoemail.userEmail, "Email")
             }
 
 
@@ -90,19 +90,14 @@ class HandleMainPageViews {
 
         }
     }
-    private fun invalidEmailInput(context: Context, email: String){
-        selectedEmail.text = "$email"
-        addEmailText.error = "Incorrect Email Format"
-        addEmailText.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.errorRed))
-    }
 
     private fun processAddEmail(context: Context, email: String) {
         // Display the selected email in a TextView or any other UI element
-        selectedEmail.text = "$email"
+        selectedEmail.text = email
         //addEmailText.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.attr.textColorPrimary))
 
         // Set color back to original state after an error has occured and fixed
-        Utils.setBackgroundTint(context, addEmailText, android.R.attr.textColorPrimary)
+        Utils.setBackgroundTint(context, android.R.attr.textColorPrimary, addEmailText)
 
         // Change visibility of relevant elements
         addEmailText.visibility = View.INVISIBLE

@@ -16,6 +16,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 import com.example.smstoemail.R
+import com.example.smstoemail.Utils
 import com.example.smstoemail.sharedPrefs
 import kotlinx.coroutines.CoroutineScope
 
@@ -66,7 +67,7 @@ object SettingsUtils {
                 MotionEvent.ACTION_DOWN -> {
                     //       checkbox2Layout.setBackgroundResource(R.drawable.background_clicked)
 
-                   val backgroundColor = getBackgroundColorFromAttribute(context, "clickBackgroundClicked")
+                   val backgroundColor = Utils.getColorFromAttribute(context, "clickBackgroundClicked")
 
                     relativeLayout.setBackgroundColor(backgroundColor)
                     relativeLayout.elevation = 8f.dpToPx(context)
@@ -74,7 +75,7 @@ object SettingsUtils {
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     // Stop the highlight animation when releasing
 
-                    val backgroundColor = getBackgroundColorFromAttribute(context, "clickBackgroundNormal")
+                    val backgroundColor = Utils.getColorFromAttribute(context, "clickBackgroundNormal")
 
                     relativeLayout.postDelayed({
                         relativeLayout.setBackgroundColor(backgroundColor)
@@ -99,18 +100,6 @@ object SettingsUtils {
 
     }
 
-
-    fun getBackgroundColorFromAttribute(context: Context, attributeName: String): Int{
-
-        val attributeId = context.resources.getIdentifier(attributeName,
-            "attr", "com.example.smstoemail")
-        val typedValue = TypedValue()
-        context.theme.resolveAttribute(attributeId, typedValue, true)
-        val backgroundColor = typedValue.data
-
-        return backgroundColor
-
-    }
 
     private fun playBuiltInClickSound(audioManager: AudioManager) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

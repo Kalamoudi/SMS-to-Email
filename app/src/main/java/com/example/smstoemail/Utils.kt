@@ -11,6 +11,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.util.TypedValue
 import android.view.ContextThemeWrapper
+import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.example.smstoemail.Entity.RecyclerMessage
+import com.example.smstoemail.Entity.SmtpData
 import com.example.smstoemail.Interfaces.BaseDao
 import com.example.smstoemail.Interfaces.RecyclerMessageDao
 import com.example.smstoemail.Pages.HandleMainPageViews
@@ -34,13 +36,14 @@ import javax.mail.internet.InternetAddress
 
 public lateinit var utilsContext: Context
 public var userEmail = ""
-public var isNightMode: Boolean = false
 public lateinit var sharedPrefs: SharedPreferences
+public lateinit var database: AppDatabase
+public lateinit var smtpDataList: List<SmtpData>
 
-public lateinit var RecyclerMessageDao: RecyclerMessageDao
 
 object TableNames {
     const val RECYCLER_MESSAGE_TABLE = "RecyclerMessage"
+    const val SMTP_DATA_TABLE = "SmtpData"
 }
 
 
@@ -55,6 +58,23 @@ object Utils {
 
         return emailRegex.matches(email)
 
+    }
+
+    fun isValidSMTP(smtpString: String): Boolean {
+        val smtpPattern = Regex("[A-Za-z0-9_%+-]+\\.[A-Za-z0-9-]+(\\.[A-Za-z]{2,}){1,2}")
+        return smtpPattern.matches(smtpString)
+    }
+
+    fun isValidInput(text: String, type: String): Boolean{
+
+        when(type){
+            "Email" -> return Regex("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}").matches(text)
+            "SMTP" -> return Regex("[A-Za-z0-9_%+-]+\\.[A-Za-z0-9-]+(\\.[A-Za-z]{2,}){1,2}").matches(text)
+            "Port" -> return ((text.toIntOrNull() != null)  && (text.toIntOrNull() in 1 .. 65535))
+            "Password" -> Regex("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{8,}$").matches(text)
+            else -> false
+        }
+        return false
     }
 
     fun saveEmailToSharedPreferences(context: Context, email: String) {
@@ -101,13 +121,14 @@ object Utils {
 
 
 
-    fun setBackgroundTint(context: Context, myEditText: EditText?, attribute: Int) {
+    fun setBackgroundTint(context: Context, attribute: Int, view: View) {
         // Get the color from the theme attribute
         val typedValue = TypedValue()
         context.theme.resolveAttribute(attribute, typedValue, true)
 
         // Set the underline color programmatically using the resolved color
-        myEditText?.backgroundTintList = AppCompatResources.getColorStateList(context, typedValue.resourceId)
+
+        view.backgroundTintList = AppCompatResources.getColorStateList(context, typedValue.resourceId)
     }
 
     fun setTheme(context: Context, xmlId: Int, attribute: Int){
@@ -137,13 +158,13 @@ object Utils {
     }
 
     // saves recyclerMessage to Database
-    suspend fun saveNewItem(recyclerMessage: RecyclerMessage) {
-        // Perform the database operation using a coroutine on a background thread
-        withContext(Dispatchers.IO) {
-            val itemDao = RecyclerMessageDao
-            itemDao.insert(recyclerMessage)
-        }
-    }
+//    suspend fun saveNewItem(recyclerMessage: RecyclerMessage) {
+//        // Perform the database operation using a coroutine on a background thread
+//        withContext(Dispatchers.IO) {
+//            val itemDao = RecyclerMessageDao
+//            itemDao.insert(recyclerMessage)
+//        }
+//    }
 
     suspend fun <T> saveNewItem(item: T, itemDao: BaseDao<T>) {
         // Perform the database operation using a coroutine on a background thread
@@ -189,6 +210,25 @@ object Utils {
             else -> "Unknown Meridiem"
         }
         return meridiem
+    }
+
+    fun getColorFromAttribute(context: Context, attributeName: String): Int{
+
+        val attributeId = context.resources.getIdentifier(attributeName,
+            "attr", "com.example.smstoemail")
+        val typedValue = TypedValue()
+        context.theme.resolveAttribute(attributeId, typedValue, true)
+        val backgroundColor = typedValue.data
+
+        return backgroundColor
+
+    }
+
+    fun invalidEditTextInput(context: Context, editText: EditText, text: String, type: String){
+
+        editText.setText(text)
+        editText.error = "Incorrect $type Format"
+        editText.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.errorRed))
     }
 
 }

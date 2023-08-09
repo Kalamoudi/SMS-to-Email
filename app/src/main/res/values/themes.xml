@@ -9,11 +9,13 @@
         <item name="colorPrimary">@color/colorPrimaryLight</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkLight</item>
         <item name="colorAccent">?attr/iconColor</item>
+        <item name="transparent">@color/transparent</item>
 
         <!-- Other attributes for the light theme -->
         <item name="android:windowBackground">@color/backgroundColorLight</item>
         <item name="android:textColorPrimary">@color/textColorPrimaryLight</item>
         <item name="textHeaderColorPrimary">@color/textHeaderColorPrimaryLight</item>
+        <item name="textColorPrimary">@color/textColorPrimaryLight</item>
 
         <!-- Icon Color Light-->
         <item name="iconColor">#C4000000</item>
@@ -49,11 +51,13 @@
         <item name="colorPrimary">#8C701E</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkDark</item>
         <item name="colorAccent">#7E7E7E</item>
+        <item name="transparent">@color/transparent</item>
 
         <!-- Other attributes for the dark theme -->
         <item name="android:windowBackground">@color/backgroundColorDark</item>
         <item name="android:textColorPrimary">@color/darkWhite</item>
         <item name="textHeaderColorPrimary">@color/textHeaderColorPrimaryDark</item>
+        <item name="textColorPrimary">@color/darkWhite</item>
 
         <!-- Drawable Icons Color Dark-->
         <item name="iconColor">@color/textColorPrimaryDark</item>

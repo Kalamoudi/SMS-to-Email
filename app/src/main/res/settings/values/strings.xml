@@ -12,8 +12,11 @@
 
 
 
-    <string name="settingsCheckbox2">Click me</string>
-    <string name="settingsCheckbox2Summary">Placeholder summary for now</string>
+    <string name="settingsCheckbox2">SMTP functionality</string>
+<!--    <string name="settingsCheckbox2Summary">If checked, sms will be sent from smtp of email that you provide</string>-->
+    <string name="settingsCheckbox2Summary"><![CDATA[
+    If checked, sms will be sent from smtp \nof email that you provide
+                                                    ]]></string>
 
     <string name="settingsToolbarHeaderText">Settings</string>
     <string name="closeSettings">Go back</string>

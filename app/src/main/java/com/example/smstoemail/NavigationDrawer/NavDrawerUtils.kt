@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.res.AssetManager
 import com.example.smstoemail.R
 import com.example.smstoemail.Utils
-import com.example.smstoemail.isNightMode
 import com.example.smstoemail.sharedPrefs
 import java.io.IOException
 

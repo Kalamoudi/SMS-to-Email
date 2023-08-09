@@ -15,9 +15,11 @@ import android.widget.CheckBox
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.smstoemail.Interfaces.smtpDao
 import com.example.smstoemail.NavigationDrawer.HandleNavDrawer
 import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Permissions.CheckPermissions
+import com.example.smstoemail.Repository.AppDatabase
 import com.example.smstoemail.Services.BackgroundService
 import com.example.smstoemail.Sms.HandleSMS
 import com.example.smstoemail.databinding.ActivitySettingsBinding
@@ -31,6 +33,9 @@ import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.tasks.Tasks
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 // Kotlin imports
@@ -61,12 +66,30 @@ open class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-        utilsContext = this
 
+
+        utilsContext = this
         // Instantiate the getSharedPreferences with tableName = "preferences
         sharedPrefs = getSharedPreferences("preferences", MODE_PRIVATE)
+
+        if(!sharedPrefs.contains("firstVisit")){
+            sharedPrefs.edit().putBoolean("firstVisit", true).apply()
+        }
+        if(!sharedPrefs.contains("changingTheme")){
+            sharedPrefs.edit().putBoolean("changingTheme", false).apply()
+        }
+
+        if(sharedPrefs.getBoolean("firstVisit", true)) {
+            GlobalScope.launch(Dispatchers.IO) {
+                val database = AppDatabase.getInstance(utilsContext)
+                smtpDao = database.smtpDao()
+                smtpDataList = smtpDao.getAllItems()
+                // Use the 'items' in the UI if needed (e.g., update the UI with the data)
+            }
+            sharedPrefs.getBoolean("firstVisit", false)
+        }
+
 
         // Set the theme of the app based on isNightMode trigger
         MainActivityUtils.processAppTheme(this)
@@ -248,10 +271,13 @@ open class MainActivity : AppCompatActivity() {
         Log.d("RecyclerInformationSaved", "CheckingIfItWillSaveTheInformation")
 
         // Save a flag to SharedPreferences indicating the app was force-stopped
-        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("save", true)
-        editor.apply()
+        sharedPrefs.edit().putBoolean("firstVisit", true).apply()
+        sharedPrefs.edit().putBoolean("save", true).apply()
+
+//        val sharedPreferences = getSharedPreferences("preferences", Context.MODE_PRIVATE)
+//        val editor = sharedPreferences.edit()
+//        editor.putBoolean("save", true)
+//        editor.apply()
 
     }
 

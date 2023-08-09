@@ -2,7 +2,10 @@ package com.example.smstoemail.Email
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
+import com.example.smstoemail.sharedPrefs
+import com.example.smstoemail.smtpDataList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
@@ -19,22 +22,43 @@ import javax.mail.internet.MimeMessage
 
 class HandleEmail {
 
+
+
+
     fun sendEmail(context: Context, recipientEmail: String, mailSubject: String, mailBody: String) {
+
+        var host = "smtp.gmail.com"
+        var port = 587
+        var username = "khalid.smssender@gmail.com" // Replace with your Yahoo email address
+        var password = "bkvtmglaxjuslbxe" // Replace with your Yahoo email password
+
+        if(!smtpDataList.isEmpty() && sharedPrefs.getBoolean("useSmtp", true) ){
+            host = smtpDataList[0].host
+            port = smtpDataList[0].port.toInt()
+            username = smtpDataList[0].username
+            password = smtpDataList[0].password
+        }
+
+//        Log.d("Host", host)
+//        Log.d("Port", port.toString())
+//        Log.d("Username", username)
+//        Log.d("Password", password)
         //val host = "smtp.mail.yahoo.com" // Yahoo SMTP server
-        val host = "smtp.gmail.com"
-        val port = 587 // Yahoo SMTP port
+//        val host = "smtp.gmail.com"
+//        val port = 587 // Yahoo SMTP port
         //val username = "khalid.smssender@yahoo.com" // Replace with your Yahoo email address
         //val password = "Alamoudi1234!" // Replace with your Yahoo email password
 
-        //val host = "mail.smtp2go.com"
-        //val port = 2525
+//        host = "mail.smtp2go.com"
+//        port = 2525
+//        username = "khalid.alamoudi@amoudi.us"
+//        password = "mustadim"
 
 
-        val username = "khalid.smssender@gmail.com" // Replace with your Yahoo email address
-        val password = "bkvtmglaxjuslbxe" // Replace with your Yahoo email password
 
-        //val username = "khalid.alamoudi@amoudi.us"
-        //val password = "mustadim"
+//        val username = "khalid.smssender@gmail.com" // Replace with your Yahoo email address
+//        val password = "bkvtmglaxjuslbxe" // Replace with your Yahoo email password
+
 
         val props = Properties()
         props["mail.smtp.auth"] = "true"
