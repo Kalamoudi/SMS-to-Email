@@ -12,12 +12,17 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.smstoemail.Interfaces.smtpDao
 import com.example.smstoemail.Pages.HandleMainPageViews
+import com.example.smstoemail.Repository.AppDatabase
 import com.example.smstoemail.Services.BackgroundService
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.android.material.navigation.NavigationView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 object MainActivityUtils {
@@ -49,18 +54,21 @@ object MainActivityUtils {
     fun startBackgroundService(context: Context){
 
         val serviceIntent = Intent(context, BackgroundService::class.java)
-        if(!sharedPrefs.contains("backgroundService")){
+        if(sharedPrefs.getBoolean("backgroundService", true)){
             context.startService(serviceIntent)
-            sharedPrefs.edit().putBoolean("backgroundService", true).apply()
-            sharedPrefs.edit().putBoolean("backgroundServiceOn", true).apply()
         }
-        else{
-            if(sharedPrefs.getBoolean("backgroundServiceOn", true) == false){
-                if (sharedPrefs.getBoolean("backgroundService", true)){
-                    context.startService(serviceIntent)
-                }
-            }
-        }
+//        if(!sharedPrefs.contains("backgroundService")){
+//            context.startService(serviceIntent)
+//            sharedPrefs.edit().putBoolean("backgroundService", true).apply()
+//            sharedPrefs.edit().putBoolean("backgroundServiceOn", true).apply()
+//        }
+//        else{
+//            if(sharedPrefs.getBoolean("backgroundServiceOn", true) == false){
+//                if (sharedPrefs.getBoolean("backgroundService", true)){
+//                    context.startService(serviceIntent)
+//                }
+//            }
+//        }
 
     }
 
@@ -109,6 +117,32 @@ object MainActivityUtils {
             // The ApiException status code indicates the error reason.
             Log.e("GoogleSignIn", "signInResult:failed code=${e.statusCode}")
         }
+    }
+
+
+    fun handleSharedPreferencesOnInitialization(){
+
+        if(!sharedPrefs.contains("firstVisit")){
+            sharedPrefs.edit().putBoolean("firstVisit", true).apply()
+        }
+        if(!sharedPrefs.contains("changingTheme")){
+            sharedPrefs.edit().putBoolean("changingTheme", false).apply()
+        }
+        if(!sharedPrefs.contains("backgroundService")){
+            sharedPrefs.edit().putBoolean("backgroundServiceOn", true).apply()
+            sharedPrefs.edit().putBoolean("backgroundService", true).apply()
+        }
+
+        if(sharedPrefs.getBoolean("firstVisit", true)) {
+            GlobalScope.launch(Dispatchers.IO) {
+                val database = AppDatabase.getInstance(utilsContext)
+                smtpDao = database.smtpDao()
+                smtpDataList = smtpDao.getAllItems()
+                // Use the 'items' in the UI if needed (e.g., update the UI with the data)
+            }
+            sharedPrefs.getBoolean("firstVisit", false)
+        }
+
     }
 
 }

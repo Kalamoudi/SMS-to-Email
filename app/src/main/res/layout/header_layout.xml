@@ -53,12 +53,14 @@
 
 
     <include
-        android:id="@+id/googleSignInButton"
-        layout="@layout/sign_in_button"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_centerHorizontal="true"
+        android:id="@+id/googleSignInButtonLayout"
+        layout="@layout/sign_in_button_layout"
+
+        android:layout_width="60dp"
+        android:layout_height="70dp"
         android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+
 
         android:layout_alignEnd="@id/headerLayoutEmptyView"
 

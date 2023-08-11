@@ -77,7 +77,7 @@ android {
         main {
             res {
                 srcDirs 'src\\main\\res\\navigation_drawer',
-                        'src\\main\\res', 'src\\main\\res\\settings', 'src\\main\\res\\SMTP'
+                        'src\\main\\res', 'src\\main\\res\\settings', 'src\\main\\res\\SMTP', 'src\\main\\res\\google_sign_in'
             }
         }
     }
@@ -120,9 +120,22 @@ dependencies {
     implementation 'com.google.api-client:google-api-client:1.32.1'
     implementation 'com.google.api-client:google-api-client-android:1.32.1'
     implementation 'com.google.api-client:google-api-client-gson:1.32.1'
+    implementation 'com.google.apis:google-api-services-people:v1-rev99-1.22.0'
+    implementation 'com.google.http-client:google-http-client-jackson2:1.38.0'
+    implementation 'com.google.http-client:google-http-client-android:1.38.0'
 
     //Google credentials/sign-in services
     implementation 'com.google.android.gms:play-services-auth:20.6.0'
+        //Retrofit for google signin
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.google.auth:google-auth-library-oauth2-http:1.2.0'
+
+    // UiAutomatorTesting
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+    androidTestImplementation 'androidx.annotation:annotation:1.1.0'
 
 
     // Mailsac dependencies

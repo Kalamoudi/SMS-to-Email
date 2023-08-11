@@ -94,8 +94,8 @@ class BackgroundService : Service() {
         super.onTaskRemoved(rootIntent)
         Log.d(TAG, "Service onTaskRemoved - App was force-stopped from the settings")
 
-        // Save a flag to SharedPreferences indicating the app was force-stopped
-        //val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+       //  Save a flag to SharedPreferences indicating the app was force-stopped
+//        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 //        val editor = sharedPreferences.edit()
 //        editor.putBoolean("app_force_stopped", true)
 //        editor.apply()

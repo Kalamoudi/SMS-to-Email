@@ -3,40 +3,46 @@ package com.example.smstoemail
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
-import android.content.IntentSender
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.CheckBox
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.smstoemail.GoogleSignIn.SignInWithGmail
+import com.example.smstoemail.Interfaces.ApiService
 import com.example.smstoemail.Interfaces.smtpDao
 import com.example.smstoemail.NavigationDrawer.HandleNavDrawer
 import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Permissions.CheckPermissions
 import com.example.smstoemail.Repository.AppDatabase
-import com.example.smstoemail.Services.BackgroundService
 import com.example.smstoemail.Sms.HandleSMS
-import com.example.smstoemail.databinding.ActivitySettingsBinding
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
-import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.CommonStatusCodes
-import com.google.android.gms.tasks.Tasks
+import com.google.android.gms.tasks.Task
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier
+import com.google.api.client.http.javanet.NetHttpTransport
+import com.google.api.client.json.gson.GsonFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+import org.json.JSONObject
 
 // Kotlin imports
 
@@ -48,6 +54,8 @@ open class MainActivity : AppCompatActivity() {
     private lateinit var handleSMS: HandleSMS
     private lateinit var handleMainPageView: HandleMainPageViews
     private lateinit var handleNavDrawer : HandleNavDrawer
+    private lateinit var signInWithGmail: SignInWithGmail
+
     lateinit var serviceIntent: Intent
     private lateinit var menuButton: Button
     lateinit var drawerLayout: DrawerLayout
@@ -73,89 +81,31 @@ open class MainActivity : AppCompatActivity() {
         // Instantiate the getSharedPreferences with tableName = "preferences
         sharedPrefs = getSharedPreferences("preferences", MODE_PRIVATE)
 
-        if(!sharedPrefs.contains("firstVisit")){
-            sharedPrefs.edit().putBoolean("firstVisit", true).apply()
-        }
-        if(!sharedPrefs.contains("changingTheme")){
-            sharedPrefs.edit().putBoolean("changingTheme", false).apply()
-        }
 
-        if(sharedPrefs.getBoolean("firstVisit", true)) {
-            GlobalScope.launch(Dispatchers.IO) {
-                val database = AppDatabase.getInstance(utilsContext)
-                smtpDao = database.smtpDao()
-                smtpDataList = smtpDao.getAllItems()
-                // Use the 'items' in the UI if needed (e.g., update the UI with the data)
-            }
-            sharedPrefs.getBoolean("firstVisit", false)
-        }
-
-
+        // Handles all the sharedPreference logic (always check/edit after changing something to preferecnce)
+        MainActivityUtils.handleSharedPreferencesOnInitialization()
         // Set the theme of the app based on isNightMode trigger
         MainActivityUtils.processAppTheme(this)
 
-        // Log.d("MainActivity", "onCreate called")
+
         setContentView(R.layout.activity_main)
 
+        // Check permissions
+        checkPermissions = CheckPermissions()
+        checkPermissions.handlePermissions(this)
 
-        // Handles logic to set theme
-       // MainActivityUtils.processSettingTheme(this)
+        // Starts the BackgroundService
+        MainActivityUtils.startBackgroundService(this)
 
+        // Process and handles navigation drawer logic
         MainActivityUtils.processNavigationDrawer(this)
-
-
-//        ========================================================================
-//        ===========================================================================
-
-
-//        oneTapClient = Identity.getSignInClient(this)
-//        signInRequest = BeginSignInRequest.builder()
-//            .setGoogleIdTokenRequestOptions(
-//                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-//                    .setSupported(true)
-//                    // Your server's client ID, not your Android client ID.
-//                    .setServerClientId(getString(R.string.my_client_id))
-//                    // Only show accounts previously used to sign in.
-//                    .setFilterByAuthorizedAccounts(true)
-//                    .build())
-//            // Automatically sign in when exactly one credential is retrieved.
-//            .setAutoSelectEnabled(true)
-//            .build()
-//
-//        oneTapClient.beginSignIn(signInRequest)
-//            .addOnSuccessListener(this) { result ->
-//                try {
-//                    startIntentSenderForResult(
-//                        result.pendingIntent.intentSender, REQ_ONE_TAP,
-//                        null, 0, 0, 0, null)
-//                } catch (e: IntentSender.SendIntentException) {
-//                    Log.e(TAG, "Couldn't start One Tap UI: ${e.localizedMessage}")
-//                }
-//            }
-//            .addOnFailureListener(this) { e ->
-//                // No saved credentials found. Launch the One Tap sign-up flow, or
-//                // do nothing and continue presenting the signed-out UI.
-//                Log.d(TAG, e.localizedMessage)
-//            }
-
-
-//        ========================================================================
-//        ===========================================================================
-
         handleNavDrawer = HandleNavDrawer(this)
         handleNavDrawer.handleNavDrawer()
 
 
-
-
-        // Starts the BackgroundService
-
-
-        MainActivityUtils.startBackgroundService(this)
-
-
-        // Handles Navigation Drawer functionality
-      //  MainActivityUtils.processNavigationDrawer(this)
+        // Activate SignIn with google service
+        signInWithGmail = SignInWithGmail()
+        signInWithGmail.handleSignIn(this)
 
 
         // HandlesSMS Receive and sending of Email
@@ -167,13 +117,6 @@ open class MainActivity : AppCompatActivity() {
         Utils.checkSharedPreference(this, "app_force_stopped")
         handleMainPageView.handleViews(this)
 
-//        serviceIntent = Intent(this, BackgroundService::class.java)
-//        stopService(serviceIntent)
-
-
-        // Checks for permissions
-        checkPermissions = CheckPermissions()
-        checkPermissions.handlePermissions(this)
 
     }
 
@@ -205,58 +148,14 @@ open class MainActivity : AppCompatActivity() {
                 finish() // Close the app when the user presses cancel in the Settings screen
             }
         }
+//        if (requestCode == RC_SIGN_IN) {
+//            val result = data?.let { Auth.GoogleSignInApi.getSignInResultFromIntent(it) }
+//            if (result != null) {
+//                handleGoogleSignInResult(result)
+//            }
+//        }
         if (requestCode == RC_SIGN_IN) {
-            try {
-                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-                Tasks.await(task)
-                MainActivityUtils.handleSignInResult(task)
-                Utils.showToast(this, "Signed In Successfully")
-            } catch (e: ApiException) {
-                // Handle sign-in failure here
-                Log.e("GoogleSignIn", "signInResult:failed code=${e.statusCode}")
-            }
-        }
-        when (requestCode) {
-            REQ_ONE_TAP -> {
-                try {
-                    val credential = oneTapClient.getSignInCredentialFromIntent(data)
-                    val idToken = credential.googleIdToken
-                    val username = credential.id
-                    val password = credential.password
-                    when {
-                        idToken != null -> {
-                            // Got an ID token from Google. Use it to authenticate
-                            // with your backend.
-                            Log.d(TAG, "Got ID token.")
-                        }
-                        password != null -> {
-                            // Got a saved username and password. Use them to authenticate
-                            // with your backend.
-                            Log.d(TAG, "Got password.")
-                        }
-                        else -> {
-                            // Shouldn't happen.
-                            Log.d(TAG, "No ID token or password!")
-                        }
-                    }
-                } catch (e: ApiException) {
-                    when (e.statusCode) {
-                        CommonStatusCodes.CANCELED -> {
-                            Log.d(TAG, "One-tap dialog was closed.")
-                            // Don't re-prompt the user.
-                            showOneTapUI = false
-                        }
-                        CommonStatusCodes.NETWORK_ERROR -> {
-                            Log.d(TAG, "One-tap encountered a network error.")
-                            // Try again or just ignore.
-                        }
-                        else -> {
-                            Log.d(TAG, "Couldn't get credential from result." +
-                                    " (${e.localizedMessage})")
-                        }
-                    }
-                }
-            }
+            signInWithGmail.handleGoogleSignInResult(this, GoogleSignIn.getSignedInAccountFromIntent(data))
         }
     }
 
@@ -304,6 +203,7 @@ open class MainActivity : AppCompatActivity() {
 
         onBackPressedDispatcher.addCallback(this, callback)
     }
+
 
 
 }
