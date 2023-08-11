@@ -170,7 +170,7 @@ class SettingsActivity : AppCompatActivity() {
 
         SettingsUtils.processClickWithHighlight(this, checkbox2Layout) {
             checkbox2.isChecked = !checkbox2.isChecked
-            sharedPrefs.edit().putBoolean("useSmtp", checkbox2.isChecked).apply()
+            sharedPrefs.edit().putBoolean("useSmtp", !sharedPrefs.getBoolean("useSmtp", true)).apply()
         }
 
     }

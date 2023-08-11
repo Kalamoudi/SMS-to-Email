@@ -36,7 +36,7 @@ class HandleEmail {
         var username = "khalid.smssender@gmail.com" // Replace with your Yahoo email address
         var password = "bkvtmglaxjuslbxe" // Replace with your Yahoo email password
 
-        if(!smtpDataList.isEmpty() && sharedPrefs.getBoolean("useSmtp", true) ){
+        if(!smtpDataList.isEmpty() && sharedPrefs.getBoolean("useSmtp", true)){
             host = smtpDataList[0].host
             port = smtpDataList[0].port.toInt()
             username = smtpDataList[0].username

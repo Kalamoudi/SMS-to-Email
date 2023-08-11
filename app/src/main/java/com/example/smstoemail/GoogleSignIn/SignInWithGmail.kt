@@ -121,7 +121,8 @@ class SignInWithGmail {
             val idToken = account?.idToken
 
             if (idToken != null) {
-                val baseUrl = "http://192.168.0.6:8000" // Your server's base URL
+                //val baseUrl = "http://192.168.0.6:8000" // Your server's base URL
+                val baseUrl = "http://localhost:8000"
 
                 val retrofit = Retrofit.Builder()
                     .baseUrl(baseUrl)
