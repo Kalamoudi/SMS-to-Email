@@ -2,11 +2,15 @@ package com.example.smstoemail.Email
 
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.example.smstoemail.sharedPrefs
 import com.example.smstoemail.smtpDataList
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -39,6 +43,15 @@ class HandleEmail {
             password = smtpDataList[0].password
         }
 
+        val account = GoogleSignIn.getLastSignedInAccount(context)
+
+        if (account != null) {
+            GlobalScope.launch(Dispatchers.Main) {
+                SendWithGoogleMail.sendEmailUsingGmailAPI(context, account, recipientEmail, mailSubject, mailBody)
+            }
+            return
+        }
+
 //        Log.d("Host", host)
 //        Log.d("Port", port.toString())
 //        Log.d("Username", username)
@@ -47,12 +60,10 @@ class HandleEmail {
 //        val host = "smtp.gmail.com"
 //        val port = 587 // Yahoo SMTP port
         //val username = "khalid.smssender@yahoo.com" // Replace with your Yahoo email address
-        //val password = "Alamoudi1234!" // Replace with your Yahoo email password
 
 //        host = "mail.smtp2go.com"
 //        port = 2525
 //        username = "khalid.alamoudi@amoudi.us"
-//        password = "mustadim"
 
 
 

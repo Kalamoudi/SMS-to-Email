@@ -51,6 +51,7 @@ object Utils {
 
     public const val REQUEST_CODE_PERMISSIONS = 101
     public const val PERMISSION_SETTINGS_REQUEST_CODE = 102
+    public const val REQUEST_AUTHORIZATION = 1001
     val permissionsList: Array<String> = getPermissionsMap().keys.toTypedArray()
 
     fun isValidEmail(email: String): Boolean {

@@ -4,9 +4,13 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.recreate
 import androidx.core.app.ActivityCompat.startActivityForResult
+import com.example.smstoemail.GoogleSignIn.GoogleSignInUtils.generateGoogleAccountIcon
 import com.example.smstoemail.Interfaces.ApiService
 import com.example.smstoemail.R
 import com.example.smstoemail.Utils
@@ -15,6 +19,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.Scope
 import com.google.android.gms.tasks.Task
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier
 import com.google.api.client.http.javanet.NetHttpTransport
@@ -41,13 +46,36 @@ class SignInWithGmail {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             //  .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
+            .requestScopes(Scope("https://www.googleapis.com/auth/gmail.compose"))
             .build()
-
         mGoogleSignInClient = GoogleSignIn.getClient(context, gso)
-
         val signInButtonLayout: RelativeLayout = appCompatActivityContext.findViewById(R.id.googleSignInButtonLayout)
-        signInButtonLayout.setOnClickListener {
-            signInWithGoogle(context)
+        val sighInButton: ImageView = appCompatActivityContext.findViewById(R.id.googleSignInButton)
+        val sighOutButton: ImageView = appCompatActivityContext.findViewById(R.id.googleSignOutButton)
+
+        val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(context)
+
+        if (account == null){
+            sighInButton.visibility = View.VISIBLE
+            sighOutButton.visibility = View.GONE
+            signInButtonLayout.setOnClickListener {
+                signInWithGoogle(context)
+            }
+        }
+        else {
+            sighInButton.visibility = View.GONE // Hide SignInButton
+
+            val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(context)
+            if (account != null) {
+                val customIcon = generateGoogleAccountIcon(account.displayName ?: "")
+                sighOutButton.setImageBitmap(customIcon)
+                sighOutButton.visibility = View.VISIBLE // Show custom icon ImageView
+
+            }
+            signInButtonLayout.setOnClickListener {
+                sightOutFromGoogle(context, gso)
+                recreate(appCompatActivityContext)
+            }
         }
 
         //  validateGoogleIdToken(getString(R.string.default_web_client_id), this)
@@ -63,11 +91,29 @@ class SignInWithGmail {
 
     }
 
+
+
     private fun signInWithGoogle(context: Context) {
         val signInIntent = mGoogleSignInClient.signInIntent
         (context as Activity).startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
+    private fun sightOutFromGoogle(context:Context, gso: GoogleSignInOptions){
+        val googleSignInClient: GoogleSignInClient = GoogleSignIn.getClient(context, gso) // Replace 'gso' with your GoogleSignInOptions
+
+        googleSignInClient.signOut()
+            .addOnCompleteListener(context as Activity) { task ->
+                if (task.isSuccessful) {
+                    // Sign out successful
+                    // You can perform any necessary actions after sign-out here
+                    Utils.showToast(context, "Signed Out Successfully")
+                } else {
+                    // Sign out failed
+                    // You might want to handle errors here
+                    Utils.showToast(context, "Signed Out Failed")
+                }
+            }
+    }
 
     fun handleGoogleSignInResult(context: Context, completedTask: Task<GoogleSignInAccount>) {
         try {

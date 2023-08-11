@@ -1,5 +1,6 @@
 package com.example.smstoemail
 
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
@@ -20,6 +21,7 @@ import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Permissions.CheckPermissions
 import com.example.smstoemail.Repository.AppDatabase
 import com.example.smstoemail.Sms.HandleSMS
+import com.example.smstoemail.Utils.REQUEST_AUTHORIZATION
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -156,6 +158,16 @@ open class MainActivity : AppCompatActivity() {
 //        }
         if (requestCode == RC_SIGN_IN) {
             signInWithGmail.handleGoogleSignInResult(this, GoogleSignIn.getSignedInAccountFromIntent(data))
+            recreate()
+        }
+
+        if (requestCode == REQUEST_AUTHORIZATION) {
+            // Handle the result of user consent activity
+            if (resultCode == Activity.RESULT_OK) {
+                // User granted consent, you can now proceed with the operation
+            } else {
+                // User did not grant consent, handle as needed
+            }
         }
     }
 

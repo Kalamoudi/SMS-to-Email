@@ -36,8 +36,8 @@ class SMSAdapter(showAmount: Int = 100) : RecyclerView.Adapter<SMSAdapter.SMSVie
             Utils.saveNewItem(smsDataInRecyclerMessage, recyclerMessageDao)
         }
         //Log.d("SMSAdapter", "SMS added to the list")
-        //notifyDataSetChanged()
-        notifyItemChanged(0)
+        notifyDataSetChanged()
+        //notifyItemChanged(0)
     }
 
     // Function to update/load the messages that were already saved on the AppDatabase (tablename=RecyclerMessage)
