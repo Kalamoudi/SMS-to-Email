@@ -12,20 +12,25 @@ import com.example.smstoemail.R
 import com.example.smstoemail.SMTP.SMPTActivity
 import com.example.smstoemail.Settings.SettingsActivity
 import com.example.smstoemail.Utils
+import com.example.smstoemail.ViewMessages.ViewMessagesActivity
+import com.example.smstoemail.sharedPrefs
 
 
 class HandleNavDrawer (private val context: Context) {
 
     private val appCompatActivity: AppCompatActivity = context as AppCompatActivity
 
-    private val mainListData = listOf("Home", "Configure SMTP", "Settings")
+    private val mainListData = listOf("Home", "Received SMS", "Configure SMTP", "Settings")
     private val secondaryListData = listOf("Contact us", "Privacy policy")
 
-    private val mainListImages = listOf(
+    private var mainListImages = listOf(
         R.drawable.ic_home,
-        R.drawable.ic_home,
+        R.drawable.sms_40px,
+        R.drawable.forward_to_inbox_40px,
         R.drawable.ic_settings
     )
+
+
 
     private val mainListView: ListView =
         appCompatActivity.findViewById<ListView>(R.id.navDrawerMainList)
@@ -34,6 +39,7 @@ class HandleNavDrawer (private val context: Context) {
         appCompatActivity.findViewById<ListView>(R.id.navDrawerSecondaryList)
 
     fun handleNavDrawer() {
+        mainListImages = NavDrawerUtils.changeListToNight(mainListImages)
         val mainListAdapter = NavDrawerMainAdapter(context, mainListData, mainListImages)
         mainListView.adapter = mainListAdapter
 
@@ -42,6 +48,7 @@ class HandleNavDrawer (private val context: Context) {
 
             when(selectedItem){
                 "Home" -> goBackToMainPage(context)
+                "Received SMS" -> openViewMessagesPage(context)
                 "Configure SMTP" -> openSmtpPage(context)
                 "Settings" -> openSettingsPage(context)
             }
@@ -92,6 +99,19 @@ class HandleNavDrawer (private val context: Context) {
         MainActivityUtils.closeNavigationDrawer(context)
         context.startActivity(intent)
         (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_none)
+    }
+
+    private fun openViewMessagesPage(context: Context){
+        val intent = Intent(context, ViewMessagesActivity::class.java)
+        if(context::class.java == ViewMessagesActivity::class.java){
+            return
+        }
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        MainActivityUtils.closeNavigationDrawer(context)
+        context.startActivity(intent)
+        (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_none)
+
     }
 
 }

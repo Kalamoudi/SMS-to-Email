@@ -4,10 +4,15 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.text.InputType
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.TypedValue
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.recreate
@@ -55,6 +60,10 @@ class HandleSmtpViews {
     private lateinit var SMTPPasswordEdit: EditText
     private lateinit var SMTPSumbitForm: Button
 
+    // ImageViews
+    private lateinit var visibilityButtonLayout: RelativeLayout
+    private lateinit var visibilityButton: ImageView
+
     fun handleViews(context: Context){
         var appCompatActivity = context as AppCompatActivity
         // Defining the views
@@ -74,23 +83,16 @@ class HandleSmtpViews {
         // Buttons
         SMTPSumbitForm = appCompatActivity.findViewById(R.id.SMTPSubmitForm)
 
+        // ImageViews
+        visibilityButtonLayout = appCompatActivity.findViewById(R.id.visibilityButtonLayout)
+        visibilityButton = appCompatActivity.findViewById(R.id.visibilityButton)
 
-//        GlobalScope.launch(Dispatchers.IO) {
-//            val database = AppDatabase.getInstance(context)
-//            smtpDao = database.smtpDao()
-//            smtpDataList = smtpDao.getAllItems()
-//            // Use the 'items' in the UI if needed (e.g., update the UI with the data)
-//            if(smtpDataList.isEmpty()){
-//                sharedPrefs.edit().putBoolean("addingToSmtpDb", true).apply()
-//            }
-//            else{
-//                sharedPrefs.edit().putBoolean("addingToSmtpDb", false).apply()
-//            }
-//            if(!sharedPrefs.getBoolean("addingToSmtpDb", true)){
-//                accessSmtpFromDb(context, smtpDataList)
-//            }
-//
-//        }
+
+        processVisibilityButton(context)
+
+
+
+
 
         if(smtpDataList.isEmpty()){
                 sharedPrefs.edit().putBoolean("addingToSmtpDb", true).apply()
@@ -181,6 +183,8 @@ class HandleSmtpViews {
 
         SMTPPasswordText.visibility = visibility
         SMTPPasswordEdit.visibility = visibility
+        visibilityButton.visibility = visibility
+      //  visibilityButtonLayout.visibility = visibility
 
     }
 
@@ -219,9 +223,9 @@ class HandleSmtpViews {
 
         // Reset values to default
         SMTPSumbitForm.text = "Submit"
-        SMTPHostEdit.setText("")
-        SMTPPortEdit.setText("")
-        SMTPUsernameEdit.setText("")
+//        SMTPHostEdit.setText("")
+//        SMTPPortEdit.setText("")
+//        SMTPUsernameEdit.setText("")
         SMTPPasswordEdit.setText("")
 
         sharedPrefs.edit().putBoolean("addingToSmtpDb", true).apply()
@@ -264,6 +268,68 @@ class HandleSmtpViews {
         }
 
         return booleanList.all { it }
+    }
+
+//    private fun processVisibilityButton(context: Context){
+//
+//        var visibilityOn: Int = R.drawable.visibility_on_40px
+//        var visibilityOff: Int = R.drawable.visibility_off_40px
+//
+//        if(sharedPrefs.getBoolean("isNightMode", true)){
+//            visibilityOn = R.drawable.visibility_on_40px_hidden
+//            visibilityOff = R.drawable.visibility_off_40px_hidden
+//        }
+//
+//        if(sharedPrefs.getBoolean("passwordVisible", true)){
+//            visibilityButton.setImageResource(visibilityOn)
+//            SMTPPasswordEdit.transformationMethod = HideReturnsTransformationMethod.getInstance()
+//        }
+//        else{
+//            visibilityButton.setImageResource(visibilityOff)
+//
+//            SMTPPasswordEdit.transformationMethod = PasswordTransformationMethod.getInstance()
+//        }
+//
+//    }
+
+    private fun processVisibilityButton(context: Context){
+
+        var visibilityOn: Int = R.drawable.visibility_on_40px
+        var visibilityOff: Int = R.drawable.visibility_off_40px
+
+        if(sharedPrefs.getBoolean("isNightMode", true)){
+            visibilityOn = R.drawable.visibility_on_40px_hidden
+            visibilityOff = R.drawable.visibility_off_40px_hidden
+        }
+        SMTPPasswordEdit.setSelection(SMTPPasswordEdit.text.length)
+
+        if(sharedPrefs.getBoolean("passwordVisible", true)){
+            visibilityButton.setImageResource(visibilityOn)
+            SMTPPasswordEdit.transformationMethod = HideReturnsTransformationMethod.getInstance()
+        }
+        else{
+            visibilityButton.setImageResource(visibilityOff)
+
+            SMTPPasswordEdit.transformationMethod = PasswordTransformationMethod.getInstance()
+        }
+
+
+        visibilityButtonLayout.setOnClickListener {
+            val isPasswordVisible = SMTPPasswordEdit.transformationMethod is PasswordTransformationMethod
+
+            if (isPasswordVisible) {
+                visibilityButton.setImageResource(visibilityOn)
+                SMTPPasswordEdit.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                sharedPrefs.edit().putBoolean("passwordVisible", true).apply()
+            } else {
+                visibilityButton.setImageResource(visibilityOff)
+                SMTPPasswordEdit.transformationMethod = PasswordTransformationMethod.getInstance()
+                sharedPrefs.edit().putBoolean("passwordVisible", false).apply()
+            }
+
+            // Move the cursor to the end of the text after changing transformation method
+            SMTPPasswordEdit.setSelection(SMTPPasswordEdit.text.length)
+        }
     }
 
 

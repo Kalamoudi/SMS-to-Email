@@ -133,6 +133,14 @@ object MainActivityUtils {
             sharedPrefs.edit().putBoolean("backgroundService", true).apply()
         }
 
+        if(!sharedPrefs.contains("useSmtp")){
+            sharedPrefs.edit().putBoolean("useSmtp", false).apply()
+        }
+
+        if(!sharedPrefs.contains("passwordVisibility")){
+            sharedPrefs.edit().putBoolean("passwordVisibility", false).apply()
+        }
+
         if(sharedPrefs.getBoolean("firstVisit", true)) {
             GlobalScope.launch(Dispatchers.IO) {
                 val database = AppDatabase.getInstance(utilsContext)
@@ -142,6 +150,8 @@ object MainActivityUtils {
             }
             sharedPrefs.getBoolean("firstVisit", false)
         }
+
+
 
     }
 

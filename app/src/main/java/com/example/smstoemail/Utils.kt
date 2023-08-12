@@ -26,6 +26,7 @@ import com.example.smstoemail.Interfaces.RecyclerMessageDao
 import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Repository.AppDatabase
 import com.example.smstoemail.Services.BackgroundService
+import com.example.smstoemail.Sms.SMSAdapter
 import com.example.smstoemail.Sms.SmsData
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.Dispatchers
@@ -39,6 +40,7 @@ public var userEmail = ""
 public lateinit var sharedPrefs: SharedPreferences
 public lateinit var database: AppDatabase
 public lateinit var smtpDataList: List<SmtpData>
+public lateinit var smsAdapter: SMSAdapter
 
 
 object TableNames {
@@ -52,6 +54,7 @@ object Utils {
     public const val REQUEST_CODE_PERMISSIONS = 101
     public const val PERMISSION_SETTINGS_REQUEST_CODE = 102
     public const val REQUEST_AUTHORIZATION = 1001
+    public const val RC_SIGN_IN = 9001
     val permissionsList: Array<String> = getPermissionsMap().keys.toTypedArray()
 
     fun isValidEmail(email: String): Boolean {

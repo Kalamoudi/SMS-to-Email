@@ -72,6 +72,15 @@
             <!-- Add activity attributes here if needed -->
         </activity>
 
+        <activity
+            android:name=".ViewMessages.ViewMessagesActivity"
+            android:label="View Messages"
+            android:parentActivityName=".MainActivity"
+
+            >
+            <!-- Add activity attributes here if needed -->
+        </activity>
+
         <service
             android:name=".Services.BackgroundService"
             android:enabled="true"

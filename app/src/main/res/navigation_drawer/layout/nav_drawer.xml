@@ -9,7 +9,7 @@
     android:layout_gravity="start"
     android:background="?android:windowBackground">
 
-    <!-- Remove the RecyclerView and other views here -->
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -50,16 +50,15 @@
 
 
     </RelativeLayout>
+
+    <!-- Placeholder View for ads (advertisement)-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/purple_200"
+
+        android:layout_gravity="bottom"
+
+        />
 </com.google.android.material.navigation.NavigationView>
 
-<!--<com.google.android.material.navigation.NavigationView-->
-<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    android:id="@+id/navigationDrawer"-->
-<!--    android:layout_width="wrap_content"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:layout_gravity="start"-->
-<!-- -->
-
-
-<!--    />-->

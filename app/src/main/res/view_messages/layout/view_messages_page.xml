@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:textColor="?android:textColorPrimary"
+
+    >
+    <!-- Placeholder for ad (advertisement) -->
+    <View
+
+        android:id="@+id/adViewInViewMessages"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="69dp"
+        android:background="@color/purple_200"
+
+        />
+
+    <include
+        android:id="@+id/smsRecyclerViewInViewMessages"
+        android:layout_marginTop="180dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/messages_view"
+        />
+
+
+
+</RelativeLayout>

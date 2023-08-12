@@ -1,28 +1,36 @@
-package com.example.smstoemail.SMTP
+package com.example.smstoemail.ViewMessages
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.smstoemail.GoogleSignIn.SignInWithGmail
 import com.example.smstoemail.MainActivityUtils
 import com.example.smstoemail.NavigationDrawer.HandleNavDrawer
 import com.example.smstoemail.R
+import com.example.smstoemail.Settings.SettingsFragment
 import com.example.smstoemail.Utils
+import com.example.smstoemail.Utils.RC_SIGN_IN
+import com.example.smstoemail.smsAdapter
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 
-class SMPTActivity : AppCompatActivity(){
+class ViewMessagesActivity : AppCompatActivity() {
 
     private lateinit var handleNavDrawer: HandleNavDrawer
-    private lateinit var handleSMTPViews: HandleSmtpViews
     private lateinit var signInWithGmail: SignInWithGmail
+    private lateinit var smsRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         MainActivityUtils.processAppTheme(this)
 
-        setContentView(R.layout.activity_smtp)
+        setContentView(R.layout.view_messages_activity)
 
         //========= Tool bar functionalities ================
         // Process and handles navigation drawer logic
@@ -37,8 +45,11 @@ class SMPTActivity : AppCompatActivity(){
         //====================================================
 
 
-        handleSMTPViews = HandleSmtpViews()
-        handleSMTPViews.handleViews(this)
+
+        smsRecyclerView = findViewById(R.id.smsRecyclerViewInViewMessages)
+        smsRecyclerView.adapter = smsAdapter
+        smsRecyclerView.layoutManager = LinearLayoutManager(this)
+
 
     }
 
@@ -49,11 +60,10 @@ class SMPTActivity : AppCompatActivity(){
 
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == Utils.RC_SIGN_IN) {
+        if (requestCode == RC_SIGN_IN) {
             signInWithGmail.handleGoogleSignInResult(this, GoogleSignIn.getSignedInAccountFromIntent(data))
             recreate()
         }
@@ -67,6 +77,7 @@ class SMPTActivity : AppCompatActivity(){
             }
         }
     }
+
 
 
 }

@@ -104,8 +104,8 @@ class HandleMainPageViews {
         addEmailSubmit.visibility = View.INVISIBLE
         selectedEmail.visibility = View.VISIBLE
         editEmailButton.visibility = View.VISIBLE
-        smsTextHeader.visibility = View.VISIBLE
-        smsRecyclerView.visibility = View.VISIBLE
+       // smsTextHeader.visibility = View.VISIBLE
+       // smsRecyclerView.visibility = View.VISIBLE
     }
 
     private fun processEditEmail(){

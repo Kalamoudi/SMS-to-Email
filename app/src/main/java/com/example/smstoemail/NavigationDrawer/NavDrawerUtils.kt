@@ -41,6 +41,21 @@ object NavDrawerUtils {
         }
     }
 
+
+    fun changeListToNight(mainListImages: List<Int>): List<Int>{
+
+        var processedList = mainListImages
+        if(sharedPrefs.getBoolean("isNightMode", true)){
+            processedList = listOf(
+                R.drawable.ic_home_filled,
+                R.drawable.sms_40px_filled,
+                R.drawable.forward_to_inbox_40px_filled,
+                R.drawable.ic_settings_filled
+            )
+        }
+        return processedList
+    }
+
 //    fun readLicenseFile(context:Context): String {
 //        return try {
 //            val inputStream = context.assets.open("LICENSE.txt")

@@ -8,17 +8,17 @@ import com.example.smstoemail.Interfaces.RecyclerMessageDao
 import com.example.smstoemail.Interfaces.recyclerMessageDao
 import com.example.smstoemail.R
 import com.example.smstoemail.Repository.AppDatabase
+import com.example.smstoemail.smsAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class HandleSMS {
+class HandleSMS() {
 
 
     private lateinit var smsRecyclerView: RecyclerView
-    private lateinit var smsAdapter: SMSAdapter
     private lateinit var smsReceiver: SMSReceiver
 
     fun handleSMS(context: Context) {

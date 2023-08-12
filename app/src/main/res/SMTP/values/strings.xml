@@ -4,13 +4,15 @@
     <string name="smtp_toolbar_header_text">SMTP Configuration</string>
 
     <string name="smtp_host_text">SMTP host:</string>
-    <string name="smtp_host_edit">ex. smtp.gmail.com</string>
+    <string name="smtp_host_edit">e.g. smtp.gmail.com</string>
     <string name="smtp_port_text">SMTP Port:</string>
-    <string name="smtp_port_edit">ex. 587</string>
+    <string name="smtp_port_edit">e.g. 587</string>
     <string name="smtp_username_text">SMTP Username:</string>
-    <string name="smtp_username_edit">john.doe@domain.com</string>
+    <string name="smtp_username_edit">e.g. john.doe@domain.com</string>
     <string name="smtp_password_text">SMTP Password:</string>
-    <string name="smtp_password_edit">enter password</string>
+    <string name="smtp_password_edit">Enter password</string>
+
+    <string name="smtp_text_view">Please activate SMTP from settings</string>
 
     <string name="smtp_submit_button_text">Submit</string>
 

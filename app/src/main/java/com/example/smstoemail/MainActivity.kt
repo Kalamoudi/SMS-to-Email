@@ -21,6 +21,8 @@ import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Permissions.CheckPermissions
 import com.example.smstoemail.Repository.AppDatabase
 import com.example.smstoemail.Sms.HandleSMS
+import com.example.smstoemail.Sms.SMSAdapter
+import com.example.smstoemail.Utils.RC_SIGN_IN
 import com.example.smstoemail.Utils.REQUEST_AUTHORIZATION
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.SignInClient
@@ -67,7 +69,6 @@ open class MainActivity : AppCompatActivity() {
 
     // Google Sign In varaibles and constants
     private lateinit var mGoogleSignInClient: GoogleSignInClient
-    private val RC_SIGN_IN = 9001
     private val REQ_ONE_TAP = 9002
     private var showOneTapUI = true
 
@@ -96,9 +97,17 @@ open class MainActivity : AppCompatActivity() {
         checkPermissions = CheckPermissions()
         checkPermissions.handlePermissions(this)
 
+
+
         // Starts the BackgroundService
         MainActivityUtils.startBackgroundService(this)
 
+        // HandlesSMS Receive and sending of Email
+        handleSMS = HandleSMS()
+        handleSMS.handleSMS(this)
+
+
+        //========= Tool bar functionalities ================
         // Process and handles navigation drawer logic
         MainActivityUtils.processNavigationDrawer(this)
         handleNavDrawer = HandleNavDrawer(this)
@@ -108,11 +117,8 @@ open class MainActivity : AppCompatActivity() {
         // Activate SignIn with google service
         signInWithGmail = SignInWithGmail()
         signInWithGmail.handleSignIn(this)
+        //====================================================
 
-
-        // HandlesSMS Receive and sending of Email
-        handleSMS = HandleSMS()
-        handleSMS.handleSMS(this)
 
         // Handle main page views
         handleMainPageView = HandleMainPageViews()

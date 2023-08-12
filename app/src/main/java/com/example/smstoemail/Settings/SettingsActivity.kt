@@ -59,9 +59,9 @@ class SettingsActivity : AppCompatActivity() {
         var frameLayout = findViewById<FrameLayout>(R.id.settings_container)
         setsTopMarginForAllFramelayoutElements(frameLayout)
 
-        processBackgroundCheckbox()
-        processSettingsThemeSwitch()
-        pressCheckbox3()
+        SettingsOptions.processBackgroundCheckbox(this)
+        SettingsOptions.processSettingsThemeSwitch(this)
+        SettingsOptions.processSmtpCheckbox(this)
 
 
     }
@@ -83,97 +83,6 @@ class SettingsActivity : AppCompatActivity() {
     }
 
 
-    private fun processBackgroundCheckbox(){
-
-        val checkbox1Layout = findViewById<RelativeLayout>(R.id.checkbox1Layout)
-        val checkbox1 = findViewById<CheckBox>(R.id.checkbox1)
-
-
-        // Sets the checkbox on or off depending on whether the background service is on or off
-        checkbox1.isChecked = sharedPrefs.getBoolean("backgroundService", true)
-
-
-       // addHighlight(checkbox1Layout)
-
-        SettingsUtils.processClickWithHighlight(this, checkbox1Layout){
-
-
-            val serviceIntent = Intent(this, BackgroundService::class.java)
-            if(sharedPrefs.getBoolean("backgroundService", true)){
-                stopService(serviceIntent)
-                sharedPrefs.edit().putBoolean("backgroundServiceOn", false).apply()
-
-            }
-            else{
-                startService(serviceIntent)
-                sharedPrefs.edit().putBoolean("backgroundServiceOn", true).apply()
-            }
-            sharedPrefs.edit().putBoolean("backgroundService", !sharedPrefs.getBoolean("backgroundService", true)).apply()
-            checkbox1.isChecked = !checkbox1.isChecked
-
-        }
-
-
-    }
-
-    private fun processSettingsThemeSwitch(){
-
-        val switchLayout = findViewById<RelativeLayout>(R.id.themeSwitchLayout)
-        val switchCompat = findViewById<SwitchCompat>(R.id.switchWidgetTest)
-
-
-        sharedPrefs.edit().putBoolean("changingTheme", true).apply()
-        SettingsUtils.processClickWithHighlight(this, switchLayout) {
-
-            if (isAnimating) {
-                return@processClickWithHighlight // Do nothing if animation is ongoing
-            }
-
-
-            CoroutineScope(Dispatchers.Main).launch {
-                if (isAnimating) {
-                    return@launch // Do nothing if animation is ongoing
-                }
-
-                isAnimating = true
-                val currentTheme = sharedPrefs.getBoolean("isNightMode", true)
-               // sharedPrefs.edit().putBoolean("isNightMode", !currentTheme).apply()
-                switchCompat.isChecked = !switchCompat.isChecked
-                //    isAnimating = true
-                switchCompat.animate()
-                    .alpha(1f)
-                    .setDuration(200L)
-                    .start()
-                   delay(300)
-                SettingsUtils.updateSettingsTheme(switchCompat)
-              //  recreate(utilsContext as Activity)
-             //   recreate()
-
-                isAnimating = false
-            }
-
-        }
-
-    }
-
-
-
-    private fun pressCheckbox3(){
-        val checkbox2Layout = findViewById<RelativeLayout>(R.id.checkbox2Layout)
-        val checkbox2 = findViewById<CheckBox>(R.id.checkbox2)
-
-        if(!sharedPrefs.contains("useSmtp")){
-            sharedPrefs.edit().putBoolean("useSmtp", false).apply()
-        }
-
-        checkbox2.isChecked = sharedPrefs.getBoolean("useSmtp", true)
-
-        SettingsUtils.processClickWithHighlight(this, checkbox2Layout) {
-            checkbox2.isChecked = !checkbox2.isChecked
-            sharedPrefs.edit().putBoolean("useSmtp", !sharedPrefs.getBoolean("useSmtp", true)).apply()
-        }
-
-    }
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true

@@ -15,8 +15,8 @@
     android:visibility="visible"
     tools:visibility="visible"
 
-    >
 
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,16 +31,12 @@
 
             />
 
-        <!-- main content layout-->
-
         <include
-            layout="@layout/smtp_page"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
-            tools:visibility="visible"
+
+            layout="@layout/view_messages_page"
 
             />
+
     </RelativeLayout>
 
 

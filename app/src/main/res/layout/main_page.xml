@@ -102,7 +102,17 @@
 
     <include
         android:id="@+id/smsRecyclerView"
+        android:visibility="invisible"
         layout="@layout/messages_view"
         />
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/purple_200"
+
+        />
 </RelativeLayout>
