@@ -64,7 +64,7 @@
         </activity>
 
         <activity
-            android:name=".SMTP.SMPTActivity"
+            android:name=".Smtp.SmtpActivity"
             android:label="Smtp"
             android:parentActivityName=".MainActivity"
 

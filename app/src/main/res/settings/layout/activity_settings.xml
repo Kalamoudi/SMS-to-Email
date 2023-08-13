@@ -50,6 +50,7 @@
 
 
     <include
+        android:id="@+id/adViewInSettings"
         layout="@layout/big_advertisement"
         />
 

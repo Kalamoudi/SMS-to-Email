@@ -108,6 +108,7 @@
 
 
     <include
+        android:id="@+id/adViewInMain"
         layout="@layout/big_advertisement"
         />
 

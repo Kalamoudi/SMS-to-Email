@@ -23,6 +23,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.core.app.ActivityCompat.recreate
+import com.example.smstoemail.Utils
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -33,10 +34,15 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+
+
+
         MainActivityUtils.processAppTheme(this)
 
 
         setContentView(R.layout.activity_settings)
+
+        SettingsUtils.addAdvertisement(this)
 
 
         val backButton = findViewById<Button>(R.id.settingsBackButton)

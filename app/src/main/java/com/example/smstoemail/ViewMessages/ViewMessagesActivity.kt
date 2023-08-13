@@ -28,9 +28,11 @@ class ViewMessagesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         MainActivityUtils.processAppTheme(this)
 
         setContentView(R.layout.view_messages_activity)
+        ViewMessagesUtils.addAdvertisement(this)
 
         //========= Tool bar functionalities ================
         // Process and handles navigation drawer logic

@@ -237,4 +237,31 @@ object Utils {
         editText.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.errorRed))
     }
 
+    fun removeBigAdvertisement(context: Context){
+
+        val bigAdvertisement: View = (context as AppCompatActivity).findViewById(R.id.advertisementSmall)
+
+        bigAdvertisement.visibility = View.GONE
+
+
+    }
+
+    fun removeNavAdvertisement(context: Context){
+
+        val navAdvertisement: View = (context as AppCompatActivity).findViewById(R.id.advertisementNav)
+
+        navAdvertisement.visibility = View.GONE
+
+
+    }
+
+    fun removeSmallAdvertisement(context: Context){
+
+        val smallAdvertisement: View = (context as AppCompatActivity).findViewById(R.id.advertisementSmall)
+
+        smallAdvertisement.visibility = View.GONE
+
+
+    }
+
 }

@@ -9,7 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.smstoemail.MainActivity
 import com.example.smstoemail.MainActivityUtils
 import com.example.smstoemail.R
-import com.example.smstoemail.SMTP.SMPTActivity
+import com.example.smstoemail.Smtp.SmtpActivity
 import com.example.smstoemail.Settings.SettingsActivity
 import com.example.smstoemail.Utils
 import com.example.smstoemail.ViewMessages.ViewMessagesActivity
@@ -17,6 +17,7 @@ import com.example.smstoemail.sharedPrefs
 
 
 class HandleNavDrawer (private val context: Context) {
+
 
     private val appCompatActivity: AppCompatActivity = context as AppCompatActivity
 
@@ -38,7 +39,12 @@ class HandleNavDrawer (private val context: Context) {
     private val secondaryListView: ListView =
         appCompatActivity.findViewById<ListView>(R.id.navDrawerSecondaryList)
 
+
+
     fun handleNavDrawer() {
+
+        NavDrawerUtils.addAdvertisement(context)
+
         mainListImages = NavDrawerUtils.changeListToNight(mainListImages)
         val mainListAdapter = NavDrawerMainAdapter(context, mainListData, mainListImages)
         mainListView.adapter = mainListAdapter
@@ -90,8 +96,8 @@ class HandleNavDrawer (private val context: Context) {
     }
 
     private fun openSmtpPage(context: Context){
-        val intent = Intent(context, SMPTActivity::class.java)
-        if (context::class.java == SMPTActivity::class.java) {
+        val intent = Intent(context, SmtpActivity::class.java)
+        if (context::class.java == SmtpActivity::class.java) {
             return
         }
 

@@ -128,6 +128,9 @@ object MainActivityUtils {
         if(!sharedPrefs.contains("accountIconColor")){
             sharedPrefs.edit().putInt("accountIconColor", 0).apply()
         }
+        if(!sharedPrefs.contains("advertisementOff")){
+            sharedPrefs.edit().putBoolean("advertisementOff", false).apply()
+        }
 
         if(sharedPrefs.getBoolean("firstVisit", true)) {
             GlobalScope.launch(Dispatchers.IO) {
@@ -139,6 +142,16 @@ object MainActivityUtils {
             sharedPrefs.getBoolean("firstVisit", false)
         }
 
+    }
+
+    fun addAdvertisement(context: Context){
+        if(sharedPrefs.getBoolean("advertisementOff", true)){
+            return
+        }
+
+        val bigAdvertisement: View = (context as AppCompatActivity).findViewById(R.id.adViewInMain)
+
+        bigAdvertisement.visibility = View.VISIBLE
 
 
     }

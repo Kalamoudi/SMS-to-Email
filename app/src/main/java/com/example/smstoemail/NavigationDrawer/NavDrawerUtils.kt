@@ -3,6 +3,8 @@ package com.example.smstoemail.NavigationDrawer
 import android.app.AlertDialog
 import android.content.Context
 import android.content.res.AssetManager
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.smstoemail.R
 import com.example.smstoemail.Utils
 import com.example.smstoemail.sharedPrefs
@@ -70,5 +72,17 @@ object NavDrawerUtils {
 //            "License information not available."
 //        }
 //    }
+
+    fun addAdvertisement(context: Context){
+        if(sharedPrefs.getBoolean("advertisementOff", true)){
+            return
+        }
+
+        val navAdvertisement: View = (context as AppCompatActivity).findViewById(R.id.adViewInNav)
+
+        navAdvertisement.visibility = View.VISIBLE
+
+
+    }
 
 }

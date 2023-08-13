@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="view_messages_header_text">Shows up to 100 messages</string>
+
+</resources>

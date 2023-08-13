@@ -8,5 +8,6 @@
     android:background="@color/purple_200"
 
     android:layout_gravity="bottom"
+    android:visibility="gone"
 
     />

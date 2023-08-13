@@ -15,12 +15,26 @@
         layout="@layout/small_advertisement"
         />
 
+    <TextView
+        android:id="@+id/textInViewMessages"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/adViewInViewMessages"
+        android:text="@string/view_messages_header_text"
+        android:textSize="16sp"
+        android:textColor="?attr/textColorPrimary"
+        android:layout_marginTop="20dp"
+
+        />
+
     <include
         android:id="@+id/smsRecyclerViewInViewMessages"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/adViewInViewMessages"
+        android:layout_below="@id/textInViewMessages"
         layout="@layout/messages_view"
         />
 

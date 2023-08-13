@@ -11,8 +11,10 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.TypedValue
 import android.view.MotionEvent
+import android.view.View
 import android.widget.RelativeLayout
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 import com.example.smstoemail.R
@@ -119,6 +121,18 @@ object SettingsUtils {
     }
     fun Float.dpToPx(context: Context): Float {
         return this * context.resources.displayMetrics.density
+    }
+
+    fun addAdvertisement(context: Context){
+        if(sharedPrefs.getBoolean("advertisementOff", true)){
+            return
+        }
+
+        val bigAdvertisement: View = (context as AppCompatActivity).findViewById(R.id.adViewInSettings)
+
+        bigAdvertisement.visibility = View.VISIBLE
+
+
     }
 
 

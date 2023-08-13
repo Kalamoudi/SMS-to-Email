@@ -18,14 +18,11 @@
        />
 
 
-
-
-
    <TextView
        android:layout_width="match_parent"
        android:layout_height="30dp"
        android:gravity="center"
-       android:layout_centerVertical="true"
+       android:layout_centerHorizontal="true"
        android:layout_below="@id/adViewInSmtp"
        android:layout_marginTop="16dp"
        android:text="@string/smtp_text_view"

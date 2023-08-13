@@ -87,11 +87,16 @@ open class MainActivity : AppCompatActivity() {
 
         // Handles all the sharedPreference logic (always check/edit after changing something to preference)
         MainActivityUtils.handleSharedPreferencesOnInitialization()
+
+        sharedPrefs.edit().putBoolean("advertisementOff", false).apply()
+
         // Set the theme of the app based on isNightMode trigger
         MainActivityUtils.processAppTheme(this)
 
 
         setContentView(R.layout.activity_main)
+
+        MainActivityUtils.addAdvertisement(this)
 
         // Check permissions
         checkPermissions = CheckPermissions()

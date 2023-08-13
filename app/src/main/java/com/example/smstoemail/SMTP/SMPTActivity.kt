@@ -1,4 +1,4 @@
-package com.example.smstoemail.SMTP
+package com.example.smstoemail.Smtp
 
 import android.app.Activity
 import android.content.Intent
@@ -12,7 +12,7 @@ import com.example.smstoemail.Utils
 import com.example.smstoemail.signInWithGmail
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 
-class SMPTActivity : AppCompatActivity(){
+class SmtpActivity : AppCompatActivity(){
 
     private lateinit var handleNavDrawer: HandleNavDrawer
     private lateinit var handleSMTPViews: HandleSmtpViews
@@ -20,9 +20,12 @@ class SMPTActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         MainActivityUtils.processAppTheme(this)
 
         setContentView(R.layout.activity_smtp)
+
+        SmtpUtils.addAdvertisement(this)
 
         //========= Tool bar functionalities ================
         // Process and handles navigation drawer logic

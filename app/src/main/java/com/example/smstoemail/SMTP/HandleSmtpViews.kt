@@ -1,4 +1,4 @@
-package com.example.smstoemail.SMTP
+package com.example.smstoemail.Smtp
 
 import android.content.Context
 import android.content.res.ColorStateList
