@@ -88,7 +88,7 @@ open class MainActivity : AppCompatActivity() {
         // Handles all the sharedPreference logic (always check/edit after changing something to preference)
         MainActivityUtils.handleSharedPreferencesOnInitialization()
 
-        sharedPrefs.edit().putBoolean("advertisementOff", false).apply()
+        sharedPrefs.edit().putBoolean("advertisementOff", true).apply()
 
         // Set the theme of the app based on isNightMode trigger
         MainActivityUtils.processAppTheme(this)
