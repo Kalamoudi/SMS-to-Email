@@ -9,13 +9,13 @@ import com.example.smstoemail.MainActivityUtils
 import com.example.smstoemail.NavigationDrawer.HandleNavDrawer
 import com.example.smstoemail.R
 import com.example.smstoemail.Utils
+import com.example.smstoemail.signInWithGmail
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 
 class SMPTActivity : AppCompatActivity(){
 
     private lateinit var handleNavDrawer: HandleNavDrawer
     private lateinit var handleSMTPViews: HandleSmtpViews
-    private lateinit var signInWithGmail: SignInWithGmail
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ class SMPTActivity : AppCompatActivity(){
 
 
         // Activate SignIn with google service
-        signInWithGmail = SignInWithGmail()
+       // signInWithGmail = SignInWithGmail()
         signInWithGmail.handleSignIn(this)
         //====================================================
 

@@ -52,13 +52,8 @@
     </RelativeLayout>
 
     <!-- Placeholder View for ads (advertisement)-->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/purple_200"
-
-        android:layout_gravity="bottom"
-
+    <include
+        layout="@layout/nav_advertisement"
         />
 </com.google.android.material.navigation.NavigationView>
 

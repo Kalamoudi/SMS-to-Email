@@ -21,6 +21,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.example.smstoemail.Entity.RecyclerMessage
 import com.example.smstoemail.Entity.SmtpData
+import com.example.smstoemail.GoogleSignIn.SignInWithGmail
 import com.example.smstoemail.Interfaces.BaseDao
 import com.example.smstoemail.Interfaces.RecyclerMessageDao
 import com.example.smstoemail.Pages.HandleMainPageViews
@@ -41,6 +42,7 @@ public lateinit var sharedPrefs: SharedPreferences
 public lateinit var database: AppDatabase
 public lateinit var smtpDataList: List<SmtpData>
 public lateinit var smsAdapter: SMSAdapter
+public lateinit var signInWithGmail: SignInWithGmail
 
 
 object TableNames {

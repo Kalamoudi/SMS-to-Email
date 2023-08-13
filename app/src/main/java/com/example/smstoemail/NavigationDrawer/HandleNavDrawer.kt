@@ -73,11 +73,11 @@ class HandleNavDrawer (private val context: Context) {
         if (context::class.java == MainActivity::class.java) {
             return
         }
-        (context as AppCompatActivity).finish()
+       // (context as AppCompatActivity).finish()
         val intent = Intent(context, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+      //  intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-//        context.startActivity(intent)
+        context.startActivity(intent)
         (context as AppCompatActivity).overridePendingTransition(R.anim.slide_none, R.anim.slide_none)
     }
 

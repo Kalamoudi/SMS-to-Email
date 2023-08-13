@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+    <color name="redIcon">#BC2815</color>
+    <color name="blueIcon">#1C4FCF</color>
+    <color name="greenIcon">#39A30B</color>
+    <color name="yellowIcon">#E6C418</color>
+    <color name="orangeIcon">#F38D10</color>
+    <color name="greyIcon">#8E8E8E</color>
+    <color name="purpleIcon">#B120FF</color>
+    <color name="pinkIcon">#F61980</color>
+    <color name="brownIcon">#A36420</color>
+    <color name="violetIcon">#6447E6</color>
+
+
+
+
+
+
+
+
+
+
+    <color name="signOutOuterTabBackgroundColorLight">#A3A3A3</color>
+    <color name="signOutInnerTabBackgroundColorLight">@color/backgroundColorLight</color>
+
+    <color name="signOutOuterTabBackgroundColorDark">#535353</color>
+    <color name="signOutInnerTabBackgroundColorDark">@color/backgroundColorDark</color>
+
+</resources>

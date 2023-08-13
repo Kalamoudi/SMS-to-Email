@@ -39,6 +39,9 @@
         <item name="clickBackgroundNormal">@color/backgroundColorLight</item>
         <item name="clickBackgroundClicked">@color/settingsOptionClickedLight</item>
 
+        <!-- Signing in/out -->
+        <item name="signOutOuterTabBackgroundColor">@color/signOutOuterTabBackgroundColorLight</item>
+        <item name="signOutInnerTabBackgroundColor">@color/signOutInnerTabBackgroundColorLight</item>
 
 
 
@@ -81,6 +84,10 @@
         <item name="settingsThemeSwitchIndicator">true</item>
         <item name="clickBackgroundNormal">@color/backgroundColorDark</item>
         <item name="clickBackgroundClicked">@color/settingsOptionClickedDark</item>
+
+        <!-- Signing in/out -->
+        <item name="signOutOuterTabBackgroundColor">@color/signOutOuterTabBackgroundColorDark</item>
+        <item name="signOutInnerTabBackgroundColor">@color/signOutInnerTabBackgroundColorDark</item>
 
 
 

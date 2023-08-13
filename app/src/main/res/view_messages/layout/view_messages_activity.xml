@@ -15,7 +15,6 @@
     android:visibility="visible"
     tools:visibility="visible"
 
-
     >
 
     <RelativeLayout
@@ -34,7 +33,16 @@
         <include
 
             layout="@layout/view_messages_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
 
+
+            />
+
+        <include
+
+            layout="@layout/sign_out_tabs"
             />
 
     </RelativeLayout>

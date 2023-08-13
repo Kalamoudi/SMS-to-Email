@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+
+    android:id="@+id/SignOutOuterTab"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="220dp"
+
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginTop="80dp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_centerHorizontal="true"
+
+    android:background="@drawable/sign_out_outer_tab_background"
+    
+    android:visibility="visible"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <ImageView
+        android:id="@+id/signOutTabClose"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/close_40px"
+        android:clickable="true"
+        android:focusable="true"
+
+        />
+
+    <include
+        layout="@layout/sign_out_inner_tab"
+
+        />
+
+
+
+</RelativeLayout>

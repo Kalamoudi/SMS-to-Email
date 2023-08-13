@@ -11,14 +11,14 @@
     >
 
     <!-- Placeholder for ad (advertisement) -->
-    <View
-        android:id="@+id/adViewInSmtp"
-        android:layout_height="100dp"
-        android:layout_width="match_parent"
-        android:layout_marginTop="12.5dp"
-        android:background="@color/purple_200"
+   <include
+       android:id="@+id/adViewInSmtp"
+       layout="@layout/small_advertisement"
 
-        />
+       />
+
+
+
 
 
    <TextView
@@ -27,7 +27,7 @@
        android:gravity="center"
        android:layout_centerVertical="true"
        android:layout_below="@id/adViewInSmtp"
-       android:layout_marginTop="20dp"
+       android:layout_marginTop="16dp"
        android:text="@string/smtp_text_view"
        android:textColor="?android:textColorPrimary"
        android:textSize="20sp"

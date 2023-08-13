@@ -77,7 +77,7 @@ android {
         main {
             res {
                 srcDirs 'src\\main\\res\\navigation_drawer',
-                        'src\\main\\res', 'src\\main\\res\\settings', 'src\\main\\res\\SMTP', 'src\\main\\res\\google_sign_in', 'src\\main\\res\\view_messages'
+                        'src\\main\\res', 'src\\main\\res\\settings', 'src\\main\\res\\SMTP', 'src\\main\\res\\google_sign_in', 'src\\main\\res\\view_messages', 'src\\main\\res\\advertisement'
             }
         }
     }

@@ -38,14 +38,14 @@ object SettingsOptions {
             val serviceIntent = Intent(context, BackgroundService::class.java)
             if(sharedPrefs.getBoolean("backgroundService", true)){
                 context.stopService(serviceIntent)
-                sharedPrefs.edit().putBoolean("backgroundServiceOn", false).apply()
+                sharedPrefs.edit().putBoolean("backgroundService",false).apply()
 
             }
             else{
                 context.startService(serviceIntent)
-                sharedPrefs.edit().putBoolean("backgroundServiceOn", true).apply()
+                sharedPrefs.edit().putBoolean("backgroundService",true).apply()
             }
-            sharedPrefs.edit().putBoolean("backgroundService", !sharedPrefs.getBoolean("backgroundService", true)).apply()
+
             checkbox1.isChecked = !checkbox1.isChecked
 
         }

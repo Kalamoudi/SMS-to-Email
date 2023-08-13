@@ -58,7 +58,7 @@ open class MainActivity : AppCompatActivity() {
     private lateinit var handleSMS: HandleSMS
     private lateinit var handleMainPageView: HandleMainPageViews
     private lateinit var handleNavDrawer : HandleNavDrawer
-    private lateinit var signInWithGmail: SignInWithGmail
+   // private lateinit var signInWithGmail: SignInWithGmail
 
     lateinit var serviceIntent: Intent
     private lateinit var menuButton: Button
@@ -85,7 +85,7 @@ open class MainActivity : AppCompatActivity() {
         sharedPrefs = getSharedPreferences("preferences", MODE_PRIVATE)
 
 
-        // Handles all the sharedPreference logic (always check/edit after changing something to preferecnce)
+        // Handles all the sharedPreference logic (always check/edit after changing something to preference)
         MainActivityUtils.handleSharedPreferencesOnInitialization()
         // Set the theme of the app based on isNightMode trigger
         MainActivityUtils.processAppTheme(this)
@@ -97,10 +97,13 @@ open class MainActivity : AppCompatActivity() {
         checkPermissions = CheckPermissions()
         checkPermissions.handlePermissions(this)
 
-
-
         // Starts the BackgroundService
         MainActivityUtils.startBackgroundService(this)
+
+        // Activate SignIn with google service
+        signInWithGmail = SignInWithGmail()
+        signInWithGmail.handleSignIn(this)
+        //====================================================
 
         // HandlesSMS Receive and sending of Email
         handleSMS = HandleSMS()
@@ -113,11 +116,6 @@ open class MainActivity : AppCompatActivity() {
         handleNavDrawer = HandleNavDrawer(this)
         handleNavDrawer.handleNavDrawer()
 
-
-        // Activate SignIn with google service
-        signInWithGmail = SignInWithGmail()
-        signInWithGmail.handleSignIn(this)
-        //====================================================
 
 
         // Handle main page views

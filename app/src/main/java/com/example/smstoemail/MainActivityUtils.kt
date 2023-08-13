@@ -54,22 +54,10 @@ object MainActivityUtils {
     fun startBackgroundService(context: Context){
 
         val serviceIntent = Intent(context, BackgroundService::class.java)
-        if(sharedPrefs.getBoolean("backgroundService", true)){
+        if(!sharedPrefs.contains("backgroundService")){
             context.startService(serviceIntent)
+            sharedPrefs.edit().putBoolean("backgroundService", true).apply()
         }
-//        if(!sharedPrefs.contains("backgroundService")){
-//            context.startService(serviceIntent)
-//            sharedPrefs.edit().putBoolean("backgroundService", true).apply()
-//            sharedPrefs.edit().putBoolean("backgroundServiceOn", true).apply()
-//        }
-//        else{
-//            if(sharedPrefs.getBoolean("backgroundServiceOn", true) == false){
-//                if (sharedPrefs.getBoolean("backgroundService", true)){
-//                    context.startService(serviceIntent)
-//                }
-//            }
-//        }
-
     }
 
 
@@ -128,10 +116,6 @@ object MainActivityUtils {
         if(!sharedPrefs.contains("changingTheme")){
             sharedPrefs.edit().putBoolean("changingTheme", false).apply()
         }
-        if(!sharedPrefs.contains("backgroundService")){
-            sharedPrefs.edit().putBoolean("backgroundServiceOn", true).apply()
-            sharedPrefs.edit().putBoolean("backgroundService", true).apply()
-        }
 
         if(!sharedPrefs.contains("useSmtp")){
             sharedPrefs.edit().putBoolean("useSmtp", false).apply()
@@ -139,6 +123,10 @@ object MainActivityUtils {
 
         if(!sharedPrefs.contains("passwordVisibility")){
             sharedPrefs.edit().putBoolean("passwordVisibility", false).apply()
+        }
+
+        if(!sharedPrefs.contains("accountIconColor")){
+            sharedPrefs.edit().putInt("accountIconColor", 0).apply()
         }
 
         if(sharedPrefs.getBoolean("firstVisit", true)) {

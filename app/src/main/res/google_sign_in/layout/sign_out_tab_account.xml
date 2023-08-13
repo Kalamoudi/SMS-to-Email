@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/signOutTabAccount"
+    android:layout_alignParentEnd="true"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="10dp"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/signOutTabAccountDetail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+
+
+            >
+            <ImageView
+                android:id="@+id/signOutTabAccountImage"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+
+
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_toEndOf ="@+id/signOutTabAccountImage"
+                android:layout_marginStart="10dp"
+                android:layout_centerVertical="true"
+
+                >
+
+
+                <TextView
+                    android:id="@+id/signOutTabAccountName"
+                    android:layout_height="20dp"
+                    android:layout_width="match_parent"
+                    android:textSize="15sp"
+                    android:textColor="?attr/textColorPrimary"
+                    />
+
+
+                <TextView
+                    android:id="@+id/signOutTabAccountEmail"
+                    android:layout_height="20dp"
+                    android:layout_width="match_parent"
+                    android:textSize="13sp"
+                    android:textColor="?attr/textColorPrimary"
+                    android:layout_below="@+id/signOutTabAccountName"
+
+
+                    />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/signOutButtonLayout"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/signOutTabAccountDetail"
+            android:background="@drawable/sign_out_button_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="50dp"
+
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:clickable="false"
+                android:focusable="false"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="Sign Out"
+                android:textSize="16sp"
+                android:textColor="?attr/textColorPrimary"
+
+               />
+
+        </RelativeLayout>
+        
+        
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>
