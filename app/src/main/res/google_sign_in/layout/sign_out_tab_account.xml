@@ -66,16 +66,29 @@
 
         </RelativeLayout>
 
+
+        <View
+            android:id="@+id/signOutHorizontalLine"
+            android:layout_width="190dp"
+            android:layout_height="1dp"
+            android:background="@color/yellowDark"
+            android:layout_below="@id/signOutTabAccountDetail"
+            android:layout_centerHorizontal="true"
+
+            android:layout_marginTop="20dp"
+
+            />
+
         <RelativeLayout
             android:id="@+id/signOutButtonLayout"
             android:layout_width="100dp"
             android:layout_height="35dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/signOutTabAccountDetail"
+            android:layout_below="@+id/signOutHorizontalLine"
             android:background="@drawable/sign_out_button_background"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
 
             >
             <TextView

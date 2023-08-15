@@ -18,6 +18,12 @@
     If checked, sms will be sent from email \nof smtp that you provide
                                                     ]]></string>
 
+    <string name="settingsGmailCheckbox">Gmail functionality</string>
+    <!--    <string name="settingsCheckbox2Summary">If checked, sms will be sent from smtp of email that you provide</string>-->
+    <string name="settingsGmailCheckboxSummary"><![CDATA[
+    If checked, sms will be sent from \nlogged-in gmail account
+                                                    ]]></string>
+
     <string name="settingsToolbarHeaderText">Settings</string>
     <string name="closeSettings">Go back</string>
 

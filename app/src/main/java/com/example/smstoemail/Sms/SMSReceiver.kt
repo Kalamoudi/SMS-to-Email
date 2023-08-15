@@ -78,7 +78,7 @@ class SMSReceiver : BroadcastReceiver() {
             // Call the sendEmail function with all required arguments
             if(Utils.isValidEmail(userEmail)) {
                 handleEmail = HandleEmail()
-                handleEmail.sendEmail(context, userEmail, subject, body!!)
+                handleEmail.handleSendEmail(context, userEmail, subject, body!!)
             }
         } else {
             // Handle the case when sender or messageBody is null (e.g., show an error message)

@@ -27,30 +27,43 @@ import javax.mail.internet.MimeMessage
 class HandleEmail {
 
 
+    fun handleSendEmail(context: Context, recipientEmail: String, mailSubject: String, mailBody: String){
+
+        var smtpData = mutableMapOf<String, String>(
+            "host" to "smtp.gmail.com",
+            "port" to "587",
+            "username" to "smstoemail.smssender@gmail.com",
+            "password" to "sztwydqlysvcuinm"
+        )
+
+   //     var smtpData = mutableMapOf<String, String>()
 
 
-    fun sendEmail(context: Context, recipientEmail: String, mailSubject: String, mailBody: String) {
-
-        var host = "smtp.gmail.com"
-        var port = 587
-        var username = "khalid.smssender@gmail.com" // Replace with your Yahoo email address
-        var password = "bkvtmglaxjuslbxe" // Replace with your Yahoo email password
-
-        if(!smtpDataList.isEmpty() && sharedPrefs.getBoolean("useSmtp", true)){
-            host = smtpDataList[0].host
-            port = smtpDataList[0].port.toInt()
-            username = smtpDataList[0].username
-            password = smtpDataList[0].password
+        if(smtpDataList.isNotEmpty() && sharedPrefs.getBoolean("useSmtp", true)){
+            smtpData["host"] = smtpDataList[0].host
+            smtpData["port"] = smtpDataList[0].port
+            smtpData["username"] = smtpDataList[0].username
+            smtpData["password"] = smtpDataList[0].password
         }
 
         val account = GoogleSignIn.getLastSignedInAccount(context)
 
-        if (account != null) {
+        if (account != null && sharedPrefs.getBoolean("useGmail", true)) {
             GlobalScope.launch(Dispatchers.Main) {
                 SendWithGoogleMail.sendEmailUsingGmailAPI(context, account, recipientEmail, mailSubject, mailBody)
             }
-            return
         }
+
+
+
+        sendEmail(context, recipientEmail, mailSubject, mailBody, smtpData)
+
+
+
+    }
+
+    fun sendEmail(context: Context, recipientEmail: String, mailSubject: String, mailBody: String, smtpData: MutableMap<String, String>) {
+
 
 //        Log.d("Host", host)
 //        Log.d("Port", port.toString())
@@ -74,12 +87,12 @@ class HandleEmail {
         val props = Properties()
         props["mail.smtp.auth"] = "true"
         props["mail.smtp.starttls.enable"] = "true"
-        props["mail.smtp.host"] = host
-        props["mail.smtp.port"] = port
+        props["mail.smtp.host"] = smtpData["host"]
+        props["mail.smtp.port"] = smtpData["port"]
 
         val session = Session.getInstance(props, object : Authenticator() {
             override fun getPasswordAuthentication(): PasswordAuthentication {
-                return PasswordAuthentication(username, password)
+                return PasswordAuthentication(smtpData["username"], smtpData["password"])
             }
         })
 
@@ -89,7 +102,7 @@ class HandleEmail {
         mainScope.launch {
             try {
                 val message = MimeMessage(session)
-                message.setFrom(InternetAddress(username))
+                message.setFrom(InternetAddress(smtpData["username"]))
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail)) // Set the recipient's email address
                 message.subject = mailSubject
                 message.setText(mailBody)

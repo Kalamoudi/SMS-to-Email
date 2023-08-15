@@ -4,6 +4,7 @@ package com.example.smstoemail.Settings
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.widget.Button
@@ -68,6 +69,7 @@ class SettingsActivity : AppCompatActivity() {
         SettingsOptions.processBackgroundCheckbox(this)
         SettingsOptions.processSettingsThemeSwitch(this)
         SettingsOptions.processSmtpCheckbox(this)
+        SettingsOptions.processGmailCheckbox(this)
 
 
     }

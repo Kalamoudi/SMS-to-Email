@@ -111,5 +111,20 @@ object SettingsOptions {
 
     }
 
+    fun processGmailCheckbox(context: Context){
+
+        val contextAsAppCompatActivity = context as AppCompatActivity
+        val gmailCheckboxLayout = contextAsAppCompatActivity.findViewById<RelativeLayout>(R.id.gmailCheckboxLayout)
+        val gmailCheckbox = contextAsAppCompatActivity.findViewById<CheckBox>(R.id.gmailCheckbox)
+
+        gmailCheckbox.isChecked = sharedPrefs.getBoolean("useGmail", true)
+
+        SettingsUtils.processClickWithHighlight(context, gmailCheckboxLayout) {
+            gmailCheckbox.isChecked = !gmailCheckbox.isChecked
+            sharedPrefs.edit().putBoolean("useGmail", !sharedPrefs.getBoolean("useGmail", true)).apply()
+        }
+
+    }
+
 
 }
