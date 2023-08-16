@@ -43,7 +43,7 @@ class SettingsActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_settings)
 
-        SettingsUtils.addAdvertisement(this)
+        Utils.showAd(this, findViewById(R.id.adViewInSettings))
 
 
         val backButton = findViewById<Button>(R.id.settingsBackButton)

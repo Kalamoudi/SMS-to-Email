@@ -29,6 +29,10 @@ import com.example.smstoemail.Repository.AppDatabase
 import com.example.smstoemail.Services.BackgroundService
 import com.example.smstoemail.Sms.SMSAdapter
 import com.example.smstoemail.Sms.SmsData
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -262,6 +266,20 @@ object Utils {
         smallAdvertisement.visibility = View.GONE
 
 
+    }
+
+    fun showAd(context: Context, adView: AdView){
+      //  val adView = (context as AppCompatActivity).findViewById<AdView>(R.id.adViewMediumRectangle)
+        val adRequest = AdRequest.Builder().build()
+
+        adView.loadAd(adRequest)
+
+        adView.adListener = object : AdListener() {
+            override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                // Log error details
+                Log.e("AdMob", "Ad failed to load: ${loadAdError.message}")
+            }
+        }
     }
 
 }

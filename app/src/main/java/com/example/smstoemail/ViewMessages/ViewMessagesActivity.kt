@@ -32,7 +32,8 @@ class ViewMessagesActivity : AppCompatActivity() {
         MainActivityUtils.processAppTheme(this)
 
         setContentView(R.layout.view_messages_activity)
-        ViewMessagesUtils.addAdvertisement(this)
+
+        Utils.showAd(this, findViewById(R.id.adViewInViewMessages))
 
         //========= Tool bar functionalities ================
         // Process and handles navigation drawer logic

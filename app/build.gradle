@@ -2,6 +2,7 @@ buildscript {
 
     repositories {
         google()
+        mavenCentral()
 
         // If you're using a version of Gradle lower than 4.1, you must instead use:
         // maven {
@@ -10,6 +11,7 @@ buildscript {
     }
 
 }
+
 
 plugins {
     id 'com.android.application'
@@ -132,6 +134,8 @@ dependencies {
     implementation 'com.google.auth:google-auth-library-oauth2-http:1.2.0'
         //Send email with gmail
     implementation 'com.google.apis:google-api-services-gmail:v1-rev110-1.25.0'
+        //google ads (admob)
+    implementation 'com.google.android.gms:play-services-ads:22.2.0'
 
 
     // UiAutomatorTesting

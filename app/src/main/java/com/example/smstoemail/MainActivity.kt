@@ -1,52 +1,36 @@
 package com.example.smstoemail
 
 import android.app.Activity
-import android.content.ContentValues.TAG
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
-import android.widget.RelativeLayout
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.smstoemail.GoogleSignIn.SignInWithGmail
-import com.example.smstoemail.Interfaces.ApiService
-import com.example.smstoemail.Interfaces.smtpDao
 import com.example.smstoemail.NavigationDrawer.HandleNavDrawer
 import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Permissions.CheckPermissions
-import com.example.smstoemail.Repository.AppDatabase
 import com.example.smstoemail.Sms.HandleSMS
-import com.example.smstoemail.Sms.SMSAdapter
 import com.example.smstoemail.Utils.RC_SIGN_IN
 import com.example.smstoemail.Utils.REQUEST_AUTHORIZATION
+import com.google.android.gms.ads.AdError
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.appopen.AppOpenAd
+import com.google.android.gms.ads.appopen.AppOpenAd.AppOpenAdLoadCallback
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier
-import com.google.api.client.http.javanet.NetHttpTransport
-import com.google.api.client.json.gson.GsonFactory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import okhttp3.ResponseBody
 
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-
-import org.json.JSONObject
 
 // Kotlin imports
 
@@ -72,6 +56,11 @@ open class MainActivity : AppCompatActivity() {
     private val REQ_ONE_TAP = 9002
     private var showOneTapUI = true
 
+    // Ads
+
+    private var appOpenAd: AppOpenAd? = null
+    private lateinit var loadCallback: AppOpenAd.AppOpenAdLoadCallback
+
 
 
 
@@ -79,6 +68,7 @@ open class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+       // loadAppOpenAd()
 
         utilsContext = this
         // Instantiate the getSharedPreferences with tableName = "preferences
@@ -96,7 +86,11 @@ open class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        MainActivityUtils.addAdvertisement(this)
+        // Show main page bottom ad
+        Utils.showAd(this, findViewById(R.id.adViewMediumRectangle))
+
+
+   //     MainActivityUtils.addAdvertisement(this)
 
         // Check permissions
         checkPermissions = CheckPermissions()
@@ -204,6 +198,8 @@ open class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
+       // showAppOpenAd()
+
         // Re-register onBackPressed callback to ensure it works after coming back to the app
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -226,6 +222,33 @@ open class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun onStart(){
+        super.onStart()
+        //showAppOpenAd()
+    }
+
+
+//    private fun loadAppOpenAd() {
+//        // Create an instance of AppOpenAd.
+//        AppOpenAd.load(
+//            this,
+//            getString(R.string.admob_app_open_test_id),
+//            AdRequest.Builder().build(),
+//            AppOpenAd.APP_OPEN_AD_ORIENTATION_PORTRAIT,
+//            object : AppOpenAd.AppOpenAdLoadCallback() {
+//                override fun onAdLoaded(ad: AppOpenAd) {
+//                    appOpenAd = ad
+//                }
+//
+//                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+//                    // Handle ad load error.
+//                }
+//            }
+//        )
+//    }
+//    fun showAppOpenAd() {
+//        appOpenAd?.show(this)
+//    }
 
 }
 

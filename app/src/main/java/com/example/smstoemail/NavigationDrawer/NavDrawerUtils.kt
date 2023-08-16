@@ -73,16 +73,6 @@ object NavDrawerUtils {
 //        }
 //    }
 
-    fun addAdvertisement(context: Context){
-        if(sharedPrefs.getBoolean("advertisementOff", true)){
-            return
-        }
 
-        val navAdvertisement: View = (context as AppCompatActivity).findViewById(R.id.adViewInNav)
-
-        navAdvertisement.visibility = View.VISIBLE
-
-
-    }
 
 }

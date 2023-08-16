@@ -48,13 +48,12 @@
 
             />
 
-
+        <include
+            layout="@layout/ad_nav_banner"
+            />
     </RelativeLayout>
 
     <!-- Placeholder View for ads (advertisement)-->
-    <include
-        android:id="@+id/adViewInNav"
-        layout="@layout/nav_advertisement"
-        />
+
 </com.google.android.material.navigation.NavigationView>
 

@@ -43,7 +43,9 @@ class HandleNavDrawer (private val context: Context) {
 
     fun handleNavDrawer() {
 
-        NavDrawerUtils.addAdvertisement(context)
+      //  NavDrawerUtils.addAdvertisement(context)
+        Utils.showAd(context, (context as AppCompatActivity).findViewById(R.id.adViewNavBanner))
+
 
         mainListImages = NavDrawerUtils.changeListToNight(mainListImages)
         val mainListAdapter = NavDrawerMainAdapter(context, mainListData, mainListImages)
@@ -67,7 +69,7 @@ class HandleNavDrawer (private val context: Context) {
             val selectedItem = parent.getItemAtPosition(position) as String
 
             when(selectedItem){
-                "Contact us" -> Utils.showToast(context, "email: khalidsmssender@gmail.com")
+                "Contact us" -> Utils.showToast(context, "email: smstoemail.smssender@gmail.com")
                 "Privacy policy" -> NavDrawerUtils.showLicenseDialog(context)
             }
         }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.gms.ads.AdView
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/videoAdView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_alignParentBottom="true"
+    ads:adSize="CUSTOM"
+    ads:adUnitId="@string/admob_banner_ad_test_id"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    />

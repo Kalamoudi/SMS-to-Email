@@ -25,7 +25,8 @@ class SmtpActivity : AppCompatActivity(){
 
         setContentView(R.layout.activity_smtp)
 
-        SmtpUtils.addAdvertisement(this)
+        //SmtpUtils.addAdvertisement(this)
+        Utils.showAd(this, findViewById(R.id.adViewInSmtp))
 
         //========= Tool bar functionalities ================
         // Process and handles navigation drawer logic

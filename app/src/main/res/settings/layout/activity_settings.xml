@@ -57,8 +57,7 @@
 
 
     <include
-        android:id="@+id/adViewInSettings"
-        layout="@layout/big_advertisement"
+        layout="@layout/ad_in_settings"
         />
 
 </RelativeLayout>
