@@ -12,7 +12,7 @@
     <string name="smtp_password_text">SMTP Password:</string>
     <string name="smtp_password_edit">Enter password</string>
 
-    <string name="smtp_text_view">*Please activate SMTP from settings*</string>
+    <string name="smtp_text_view">*Activate SMTP from settings*</string>
 
     <string name="smtp_submit_button_text">Submit</string>
 

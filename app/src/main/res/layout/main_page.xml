@@ -27,7 +27,8 @@
         android:id="@+id/addEmailSubmit"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
         android:text="Submit"
         android:backgroundTint="?android:colorPrimary"
@@ -39,7 +40,8 @@
         android:id="@+id/editEmailButton"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
         android:text="Edit"
         android:backgroundTint="?android:colorPrimary"
@@ -51,7 +53,7 @@
 
     <TextView
         android:id="@+id/selectedEmail"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="63dp"
         android:layout_alignParentTop="false"
         android:layout_gravity="center"
@@ -69,7 +71,7 @@
 
     <EditText
         android:id="@+id/addEmailText"
-        android:layout_width="380dp"
+        android:layout_width="match_parent"
         android:layout_height="63dp"
         android:layout_alignParentTop="true"
         android:layout_gravity="center"
@@ -90,7 +92,8 @@
         android:layout_height="34dp"
         android:layout_below="@+id/selectedEmail"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="90dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="82dp"
         android:text="Sms messages received:"
         android:textColor="?android:textColorPrimary"

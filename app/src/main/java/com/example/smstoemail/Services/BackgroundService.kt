@@ -66,7 +66,8 @@ class BackgroundService : Service() {
         val builder = NotificationCompat.Builder(this, "channel_id")
             .setContentTitle("SMS To Email is running in the background")
             .setContentText("Tap to open the app.")
-            .setSmallIcon(R.drawable.ic_notification_icon_background)
+            //.setSmallIcon(R.drawable.ic_notification_icon_background)
+            .setSmallIcon(R.drawable.logo3)
 
         // Make the notification persistent
         builder.setOngoing(true)
