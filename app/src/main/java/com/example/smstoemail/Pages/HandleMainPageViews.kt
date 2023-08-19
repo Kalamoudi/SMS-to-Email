@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.smstoemail.R
 import com.example.smstoemail.Utils
 import com.example.smstoemail.userEmail
+import com.google.android.gms.ads.AdView
 
 class HandleMainPageViews {
 
@@ -85,7 +86,7 @@ class HandleMainPageViews {
 
     private fun editEmail(context: Context){
         editEmailButton.setOnClickListener {
-            processEditEmail()
+            processEditEmail(context)
             addEmail(context)
 
         }
@@ -104,11 +105,14 @@ class HandleMainPageViews {
         addEmailSubmit.visibility = View.INVISIBLE
         selectedEmail.visibility = View.VISIBLE
         editEmailButton.visibility = View.VISIBLE
+
+        val adView: AdView = (context as AppCompatActivity).findViewById(R.id.adViewMediumRectangle)
+        adView.visibility = View.VISIBLE
        // smsTextHeader.visibility = View.VISIBLE
        // smsRecyclerView.visibility = View.VISIBLE
     }
 
-    private fun processEditEmail(){
+    private fun processEditEmail(context: Context){
 
         // Change visibility of relevant elements
         selectedEmail.visibility = View.INVISIBLE
@@ -117,6 +121,9 @@ class HandleMainPageViews {
         editEmailButton.visibility = View.INVISIBLE
         smsTextHeader.visibility = View.INVISIBLE
         smsRecyclerView.visibility = View.INVISIBLE
+
+        val adView: AdView = (context as AppCompatActivity).findViewById(R.id.adViewMediumRectangle)
+        adView.visibility = View.INVISIBLE
         //   addEmailText.setBackgroundResource(R.drawable.edittext_normal_bottom_line)
 
     }

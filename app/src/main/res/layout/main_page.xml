@@ -107,12 +107,9 @@
         />
 
 
-    <include
-        android:id="@+id/adViewInMain"
-        layout="@layout/big_advertisement"
-        />
 
     <include
+
         layout="@layout/ad_medium_rectangle"
         />
 

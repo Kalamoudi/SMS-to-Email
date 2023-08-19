@@ -48,6 +48,9 @@ object MainActivityUtils {
     fun startBackgroundService(context: Context){
 
         val serviceIntent = Intent(context, BackgroundService::class.java)
+        if(sharedPrefs.getBoolean("backgroundService", true)){
+            context.startService(serviceIntent)
+        }
         if(!sharedPrefs.contains("backgroundService")){
             context.startService(serviceIntent)
             sharedPrefs.edit().putBoolean("backgroundService", true).apply()

@@ -31,7 +31,7 @@
         android:text="@string/view_messages_header_text"
         android:textSize="16sp"
         android:textColor="?attr/textColorPrimary"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
 
         />
 

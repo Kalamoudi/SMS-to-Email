@@ -46,7 +46,6 @@
             />
 
         <include
-
             layout="@layout/sign_out_tabs"
             />
 
