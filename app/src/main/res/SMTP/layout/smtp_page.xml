@@ -10,26 +10,14 @@
 
     >
 
-    <!-- Placeholder for ad (advertisement) -->
-    <RelativeLayout
-        android:id="@+id/adViewInSmtpLayout"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        >
-    <include
-        android:id="@+id/adViewInSmtp"
-        layout="@layout/ad_smtp_banner"
-        />
-
-    </RelativeLayout>
 
 
    <TextView
+       android:id="@+id/activateSmtpText"
        android:layout_width="match_parent"
        android:layout_height="30dp"
        android:gravity="center"
        android:layout_centerHorizontal="true"
-       android:layout_below="@id/adViewInSmtpLayout"
        android:layout_marginTop="16dp"
        android:text="@string/smtp_text_view"
        android:textColor="?android:textColorPrimary"
@@ -38,11 +26,30 @@
        />
     <include
 
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/smtpForm"
         layout="@layout/smtp_form"
+        android:layout_below="@+id/activateSmtpText"
         />
+
+    <!-- Placeholder for ad (advertisement) -->
+    <include
+        android:id="@+id/adViewInSmtp"
+        layout="@layout/ad_smtp_banner"
+        />
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/adViewInSmtpLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:layout_below="@id/smtpForm"-->
+<!--        >-->
+<!--        <include-->
+<!--            android:id="@+id/adViewInSmtp"-->
+<!--            layout="@layout/ad_smtp_banner"-->
+<!--            />-->
+
+<!--    </RelativeLayout>-->
 
 </RelativeLayout>

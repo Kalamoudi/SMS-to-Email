@@ -1,11 +1,14 @@
 package com.example.smstoemail.Settings
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.widget.CheckBox
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.app.ActivityCompat.recreate
+import com.example.smstoemail.MainActivityUtils
 import com.example.smstoemail.R
 import com.example.smstoemail.Services.BackgroundService
 import com.example.smstoemail.sharedPrefs
@@ -61,7 +64,9 @@ object SettingsOptions {
         val switchCompat = contextAsAppCompatActivity.findViewById<SwitchCompat>(R.id.switchWidgetTest)
 
 
-        sharedPrefs.edit().putBoolean("changingTheme", true).apply()
+      //  sharedPrefs.edit().putBoolean("changingTheme", true).apply()
+        switchCompat.isChecked = sharedPrefs.getBoolean("isNightMode", true)
+
         SettingsUtils.processClickWithHighlight(context, switchLayout) {
 
             if (isAnimating) {
@@ -75,18 +80,18 @@ object SettingsOptions {
                 }
 
                 isAnimating = true
-                val currentTheme = sharedPrefs.getBoolean("isNightMode", true)
-                // sharedPrefs.edit().putBoolean("isNightMode", !currentTheme).apply()
-                switchCompat.isChecked = !switchCompat.isChecked
+                sharedPrefs.edit().putBoolean("isNightMode", !sharedPrefs.getBoolean("isNightMode", true)).apply()
+                switchCompat.isChecked = sharedPrefs.getBoolean("isNightMode", true)
                 //    isAnimating = true
                 switchCompat.animate()
                     .alpha(1f)
                     .setDuration(200L)
                     .start()
                 delay(300)
-                SettingsUtils.updateSettingsTheme(switchCompat)
-                //  recreate(utilsContext as Activity)
-                //   recreate()
+               // SettingsUtils.updateSettingsTheme()
+                MainActivityUtils.processAppTheme(context)
+                //  recreate(context as Activity)
+               //    recreate()
 
                 isAnimating = false
             }

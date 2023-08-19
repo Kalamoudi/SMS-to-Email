@@ -68,15 +68,15 @@ open class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-       // loadAppOpenAd()
 
         utilsContext = this
+
         // Instantiate the getSharedPreferences with tableName = "preferences
         sharedPrefs = getSharedPreferences("preferences", MODE_PRIVATE)
 
 
         // Handles all the sharedPreference logic (always check/edit after changing something to preference)
-        MainActivityUtils.handleSharedPreferencesOnInitialization()
+        MainActivityUtils.handleSharedPreferencesOnInitialization(this)
 
         sharedPrefs.edit().putBoolean("advertisementOff", true).apply()
 

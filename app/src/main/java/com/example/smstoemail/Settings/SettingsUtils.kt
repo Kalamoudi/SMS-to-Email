@@ -24,11 +24,9 @@ import kotlinx.coroutines.CoroutineScope
 
 object SettingsUtils {
 
-    fun updateSettingsTheme(switchCompat: SwitchCompat){
+    fun updateSettingsTheme(){
 
-        sharedPrefs.edit().putBoolean("isNightMode", switchCompat.isChecked).apply()
-
-        if (switchCompat.isChecked) {
+        if (sharedPrefs.getBoolean("isNightMode", true)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

@@ -1,5 +1,6 @@
 package com.example.smstoemail
 
+import android.app.UiModeManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
@@ -32,20 +33,13 @@ object MainActivityUtils {
 
     fun processAppTheme(context: Context){
 
-        if(!sharedPrefs.contains("isNightMode")) {
-            val systemThemeSetting =
-                context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-
-            sharedPrefs.edit().putBoolean("isNightMode", systemThemeSetting == Configuration.UI_MODE_NIGHT_YES).apply()
-        }
-
         if(sharedPrefs.getBoolean("isNightMode", true)){
             context.setTheme(R.style.AppTheme_Dark)
-          //  AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
         else{
             context.setTheme(R.style.AppTheme)
-          //  AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
 
@@ -108,7 +102,7 @@ object MainActivityUtils {
     }
 
 
-    fun handleSharedPreferencesOnInitialization(){
+    fun handleSharedPreferencesOnInitialization(context: Context){
 
         if(!sharedPrefs.contains("firstVisit")){
             sharedPrefs.edit().putBoolean("firstVisit", true).apply()
@@ -130,6 +124,13 @@ object MainActivityUtils {
         }
         if(!sharedPrefs.contains("advertisementOff")){
             sharedPrefs.edit().putBoolean("advertisementOff", false).apply()
+        }
+        if(!sharedPrefs.contains("isNightMode")) {
+//            val uiModeManager = context.getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
+//            val systemNightMode = uiModeManager.nightMode
+//
+//            sharedPrefs.edit().putBoolean("isNightMode", systemNightMode == UiModeManager.MODE_NIGHT_YES).apply()
+            sharedPrefs.edit().putBoolean("isNightMode", true).apply()
         }
 
         if(sharedPrefs.getBoolean("firstVisit", true)) {

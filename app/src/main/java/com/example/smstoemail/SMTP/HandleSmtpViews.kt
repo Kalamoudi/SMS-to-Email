@@ -28,6 +28,7 @@ import com.example.smstoemail.Utils
 import com.example.smstoemail.sharedPrefs
 import com.example.smstoemail.smtpDataList
 import com.example.smstoemail.userEmail
+import com.google.android.gms.ads.AdView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -186,6 +187,9 @@ class HandleSmtpViews {
         visibilityButton.visibility = visibility
       //  visibilityButtonLayout.visibility = visibility
 
+        val smtpAd: AdView = (context as AppCompatActivity).findViewById(R.id.adViewInSmtp)
+        smtpAd.visibility = if(visibility==View.INVISIBLE) View.VISIBLE else View.INVISIBLE
+
     }
 
 
@@ -229,6 +233,7 @@ class HandleSmtpViews {
         SMTPPasswordEdit.setText("")
 
         sharedPrefs.edit().putBoolean("addingToSmtpDb", true).apply()
+
 
     }
 

@@ -8,182 +8,206 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:textColor="?android:textColorPrimary"
     android:id="@+id/smtpForm"
+    android:layout_marginTop="80dp"
 
     >
 
 
 
-
-    <TextView
-        android:id="@+id/SMTPHostTextView"
-        android:layout_width="241dp"
-        android:layout_height="34dp"
-        android:layout_alignParentStart="true"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="90dp"
-
-
-        android:text="@string/smtp_host_text"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="18sp"
-        tools:visibility="gone"
-
-
-        />
-
-    <EditText
-        android:id="@+id/SMTPHostEditText"
-        android:layout_width="380dp"
-        android:layout_height="63dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="110dp"
+        android:id="@+id/smtpFormLayout1"
         android:layout_marginEnd="10dp"
-        android:hint="@string/smtp_host_edit"
-        android:textColorHint="?attr/summaryColor"
-        android:backgroundTint="?android:textColorPrimary"
-        android:inputType="textAutoComplete"
-        android:visibility="visible"
-        tools:visibility="gone"
-        android:layout_below="@id/SMTPHostTextView"
-
-        />
-
-    <TextView
-        android:id="@+id/SMTPPortTextView"
-        android:layout_width="241dp"
-        android:layout_height="34dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="210dp"
-        android:text="@string/smtp_port_text"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="18sp"
-        tools:visibility="gone"
+        >
+            <TextView
+                android:id="@+id/SMTPHostTextView"
+                android:layout_width="241dp"
+                android:layout_height="34dp"
+                android:layout_alignParentStart="true"
+                android:text="@string/smtp_host_text"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="18sp"
+                tools:visibility="gone"
 
 
-        />
+                />
 
-    <EditText
-        android:id="@+id/SMTPPortEditText"
-        android:layout_width="380dp"
-        android:layout_height="63dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="230dp"
-        android:layout_marginEnd="10dp"
-        android:hint="@string/smtp_port_edit"
-        android:textColorHint="?attr/summaryColor"
-        android:backgroundTint="?android:textColorPrimary"
-        android:inputType="textAutoComplete"
+            <EditText
+                android:id="@+id/SMTPHostEditText"
+                android:layout_width="380dp"
+                android:layout_height="63dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20dp"
+                android:hint="@string/smtp_host_edit"
+                android:textColorHint="?attr/summaryColor"
+                android:backgroundTint="?android:textColorPrimary"
+                android:inputType="textAutoComplete"
+                android:visibility="visible"
+                tools:visibility="gone"
+                android:layout_below="@id/SMTPHostTextView"
 
-        tools:visibility="gone"
-        android:layout_below="@id/SMTPPortTextView"
+                />
 
-        />
-
-    <TextView
-        android:id="@+id/SMTPUsernameTextView"
-        android:layout_width="241dp"
-        android:layout_height="34dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="320dp"
-        android:text="@string/smtp_username_text"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="18sp"
-
-        tools:visibility="gone"
-
-
-        />
-
-    <EditText
-        android:id="@+id/SMTPUsernameEditText"
-        android:layout_width="380dp"
-        android:layout_height="63dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="340dp"
-        android:layout_marginEnd="10dp"
-        android:hint="@string/smtp_username_edit"
-        android:textColorHint="?attr/summaryColor"
-        android:backgroundTint="?android:textColorPrimary"
-        android:inputType="textAutoComplete"
-
-        tools:visibility="gone"
-        android:layout_below="@id/SMTPUsernameTextView"
-
-        />
-
-    <TextView
-        android:id="@+id/SMTPPasswordTextView"
-        android:layout_width="241dp"
-        android:layout_height="34dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="430dp"
-        android:text="@string/smtp_password_text"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="18sp"
-
-        tools:visibility="gone"
-
-
-        />
+    </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="380dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="450dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="12dp"
+        android:id="@+id/smtpFormLayout2"
+        android:layout_below="@+id/smtpFormLayout1"
         android:layout_marginEnd="10dp"
-
         >
+        <TextView
+            android:id="@+id/SMTPPortTextView"
+            android:layout_width="241dp"
+            android:layout_height="34dp"
+            android:layout_alignParentStart="true"
+            android:text="@string/smtp_port_text"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="18sp"
+            tools:visibility="gone"
+
+
+            />
 
         <EditText
-            android:id="@+id/SMTPPasswordEditText"
+            android:id="@+id/SMTPPortEditText"
             android:layout_width="380dp"
             android:layout_height="63dp"
             android:layout_alignParentTop="true"
-            android:hint="@string/smtp_password_edit"
+            android:layout_marginTop="20dp"
+            android:hint="@string/smtp_port_edit"
             android:textColorHint="?attr/summaryColor"
             android:backgroundTint="?android:textColorPrimary"
-            android:inputType="textPassword"
-            android:visibility="visible"
+            android:inputType="textAutoComplete"
+
             tools:visibility="gone"
+            android:layout_below="@id/SMTPPortTextView"
+
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="12dp"
+        android:id="@+id/smtpFormLayout3"
+        android:layout_below="@+id/smtpFormLayout2"
+        android:layout_marginEnd="10dp"
+        >
+
+        <TextView
+            android:id="@+id/SMTPUsernameTextView"
+            android:layout_width="241dp"
+            android:layout_height="34dp"
+            android:layout_alignParentStart="true"
+            android:text="@string/smtp_username_text"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="18sp"
+
+            tools:visibility="gone"
+
+
+            />
+
+        <EditText
+            android:id="@+id/SMTPUsernameEditText"
+            android:layout_width="380dp"
+            android:layout_height="63dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:hint="@string/smtp_username_edit"
+            android:textColorHint="?attr/summaryColor"
+            android:backgroundTint="?android:textColorPrimary"
+            android:inputType="textAutoComplete"
+
+            tools:visibility="gone"
+            android:layout_below="@id/SMTPUsernameTextView"
+
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="12dp"
+        android:id="@+id/smtpFormLayout4"
+        android:layout_below="@+id/smtpFormLayout3"
+        android:layout_marginEnd="10dp"
+        >
+
+        <TextView
+            android:id="@+id/SMTPPasswordTextView"
+            android:layout_width="241dp"
+            android:layout_height="34dp"
+            android:layout_alignParentStart="true"
+            android:text="@string/smtp_password_text"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="18sp"
+
+            tools:visibility="gone"
+
 
             />
 
         <RelativeLayout
-            android:id="@+id/visibilityButtonLayout"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_alignEnd="@+id/SMTPPasswordEditText"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_marginEnd="10dp"
-
+            android:layout_width="380dp"
+            android:layout_height="63dp"
+            android:layout_marginTop="20dp"
 
             >
 
-
-
-            <ImageView
-                android:id="@+id/visibilityButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:clickable="false"
-                android:focusable="false"
-
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-
-
-                android:src="@drawable/visibility_off_40px"
+            <EditText
+                android:id="@+id/SMTPPasswordEditText"
+                android:layout_width="380dp"
+                android:layout_height="63dp"
+                android:layout_alignParentTop="true"
+                android:hint="@string/smtp_password_edit"
+                android:textColorHint="?attr/summaryColor"
+                android:backgroundTint="?android:textColorPrimary"
+                android:inputType="textPassword"
+                android:visibility="visible"
+                tools:visibility="gone"
 
                 />
 
+            <RelativeLayout
+                android:id="@+id/visibilityButtonLayout"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignEnd="@+id/SMTPPasswordEditText"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginEnd="10dp"
+
+
+                >
+
+
+
+                <ImageView
+                    android:id="@+id/visibilityButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:clickable="false"
+                    android:focusable="false"
+
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+
+
+                    android:src="@drawable/visibility_off_40px"
+
+                    />
+
+            </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
 
@@ -191,11 +215,11 @@
         android:id="@+id/SMTPSubmitForm"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/smtpFormLayout4"
 
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_marginTop="550dp"
+        android:layout_marginTop="20dp"
         android:text="@string/smtp_submit_button_text"
         android:backgroundTint="?android:colorPrimary"
         android:textColor="?attr/textHeaderColorPrimary"
