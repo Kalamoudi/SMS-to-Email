@@ -89,7 +89,7 @@ object SettingsOptions {
                     .start()
                 delay(300)
                // SettingsUtils.updateSettingsTheme()
-                MainActivityUtils.processAppTheme(context)
+                MainActivityUtils.updateTheme(context)
                 //  recreate(context as Activity)
                //    recreate()
 

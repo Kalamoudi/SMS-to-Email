@@ -7,6 +7,9 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+<!--    <string name="AddEmailHeaderText">Recipient email:</string>-->
+    <string name="AddEmailHeaderText">Email that will receive the SMS:</string>
+
     <!-- Strings for header in toolbar -->
     <string name="menu_button">Opens the navigation drawer from the left</string>
     <string name="toggle_theme_button">To change theme from Light to Dark modes</string>

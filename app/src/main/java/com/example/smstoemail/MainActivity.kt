@@ -81,7 +81,7 @@ open class MainActivity : AppCompatActivity() {
         sharedPrefs.edit().putBoolean("advertisementOff", true).apply()
 
         // Set the theme of the app based on isNightMode trigger
-        MainActivityUtils.processAppTheme(this)
+        MainActivityUtils.initializeTheme(this)
 
 
         setContentView(R.layout.activity_main)

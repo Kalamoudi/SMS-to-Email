@@ -29,7 +29,7 @@ class ViewMessagesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-        MainActivityUtils.processAppTheme(this)
+        MainActivityUtils.updateTheme(this)
 
         setContentView(R.layout.view_messages_activity)
 

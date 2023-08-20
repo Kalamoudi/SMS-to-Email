@@ -32,6 +32,7 @@ class HandleMainPageViews {
     private lateinit var selectedEmail: TextView
     private lateinit var smsTextHeader: TextView
     private lateinit var smsRecyclerView: RecyclerView
+    private lateinit var addEmailButton: Button
 
     fun handleViews(context: Context){
         var appCompatActivity = context as AppCompatActivity
@@ -39,11 +40,12 @@ class HandleMainPageViews {
 
 
         addEmailText = appCompatActivity.findViewById(R.id.addEmailText)
-        addEmailSubmit = appCompatActivity.findViewById(R.id.addEmailSubmit)
-        editEmailButton = appCompatActivity.findViewById(R.id.editEmailButton)
+     //   addEmailSubmit = appCompatActivity.findViewById(R.id.addEmailSubmit)
+     //   editEmailButton = appCompatActivity.findViewById(R.id.editEmailButton)
         selectedEmail = appCompatActivity.findViewById(R.id.selectedEmail)
         smsTextHeader = appCompatActivity.findViewById(R.id.smsTextHeader)
         smsRecyclerView = appCompatActivity.findViewById(R.id.smsRecyclerView)
+        addEmailButton = appCompatActivity.findViewById(R.id.addEmailButton)
 
         var savedEmail = Utils.retrieveEmailFromSharedPreferences(context)
 
@@ -65,7 +67,7 @@ class HandleMainPageViews {
 
     private fun addEmail(context: Context){
 
-        addEmailSubmit.setOnClickListener {
+        addEmailButton.setOnClickListener {
             // Retrieve the email entered by the user
 
             com.example.smstoemail.userEmail = addEmailText.text.toString()
@@ -85,7 +87,7 @@ class HandleMainPageViews {
     }
 
     private fun editEmail(context: Context){
-        editEmailButton.setOnClickListener {
+        addEmailButton.setOnClickListener {
             processEditEmail(context)
             addEmail(context)
 
@@ -102,9 +104,10 @@ class HandleMainPageViews {
 
         // Change visibility of relevant elements
         addEmailText.visibility = View.INVISIBLE
-        addEmailSubmit.visibility = View.INVISIBLE
+      //  addEmailSubmit.visibility = View.INVISIBLE
         selectedEmail.visibility = View.VISIBLE
-        editEmailButton.visibility = View.VISIBLE
+      //  editEmailButton.visibility = View.VISIBLE
+        addEmailButton.text = "Edit"
 
         val adView: AdView = (context as AppCompatActivity).findViewById(R.id.adViewMediumRectangle)
         adView.visibility = View.VISIBLE
@@ -117,10 +120,11 @@ class HandleMainPageViews {
         // Change visibility of relevant elements
         selectedEmail.visibility = View.INVISIBLE
         addEmailText.visibility = View.VISIBLE
-        addEmailSubmit.visibility = View.VISIBLE
-        editEmailButton.visibility = View.INVISIBLE
+     //   addEmailSubmit.visibility = View.VISIBLE
+      //  editEmailButton.visibility = View.INVISIBLE
         smsTextHeader.visibility = View.INVISIBLE
         smsRecyclerView.visibility = View.INVISIBLE
+        addEmailButton.text = "Submit"
 
         val adView: AdView = (context as AppCompatActivity).findViewById(R.id.adViewMediumRectangle)
         adView.visibility = View.INVISIBLE

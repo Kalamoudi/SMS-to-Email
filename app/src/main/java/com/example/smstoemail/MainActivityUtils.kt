@@ -31,8 +31,18 @@ object MainActivityUtils {
 
 
 
-    fun processAppTheme(context: Context){
+    fun initializeTheme(context: Context){
 
+        if(sharedPrefs.getBoolean("isNightMode", true)){
+            context.setTheme(R.style.AppTheme_Dark)
+        }
+        else{
+            context.setTheme(R.style.AppTheme)
+        }
+
+    }
+
+    fun updateTheme(context: Context){
         if(sharedPrefs.getBoolean("isNightMode", true)){
             context.setTheme(R.style.AppTheme_Dark)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -41,8 +51,6 @@ object MainActivityUtils {
             context.setTheme(R.style.AppTheme)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-
-
     }
 
     fun startBackgroundService(context: Context){

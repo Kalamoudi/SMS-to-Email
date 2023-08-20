@@ -21,7 +21,7 @@ class SmtpActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
 
 
-        MainActivityUtils.processAppTheme(this)
+        MainActivityUtils.initializeTheme(this)
 
         setContentView(R.layout.activity_smtp)
 

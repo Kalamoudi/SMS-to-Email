@@ -29,7 +29,7 @@
 
         <!-- toolbar layout -->
         <include
-
+            android:id="@+id/mainToolbar"
             layout="@layout/toolbar"
 
             />
@@ -40,7 +40,7 @@
             layout="@layout/main_page"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
+            android:layout_below="@+id/mainToolbar"
             tools:visibility="visible"
 
             />

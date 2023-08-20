@@ -3,14 +3,14 @@
 
 
 
-    <color name="redIcon">#BC2815</color>
+    <color name="redIcon">#912012</color>
     <color name="blueIcon">#1C4FCF</color>
     <color name="greenIcon">#39A30B</color>
     <color name="yellowIcon">#E6C418</color>
     <color name="orangeIcon">#F38D10</color>
     <color name="greyIcon">#8E8E8E</color>
-    <color name="purpleIcon">#B120FF</color>
-    <color name="pinkIcon">#F61980</color>
+    <color name="purpleIcon">#8719C3</color>
+    <color name="pinkIcon">#C61568</color>
     <color name="brownIcon">#A36420</color>
     <color name="violetIcon">#6447E6</color>
 

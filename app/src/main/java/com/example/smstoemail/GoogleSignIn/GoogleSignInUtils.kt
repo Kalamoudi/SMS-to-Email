@@ -55,14 +55,14 @@ object GoogleSignInUtils {
         val colorArray =  arrayOf(
             R.color.purpleIcon,
             R.color.brownIcon,
-            R.color.redIcon,
+         //   R.color.redIcon,
             R.color.yellowIcon,
             R.color.greenIcon,
             R.color.violetIcon,
             R.color.blueIcon,
             R.color.greyIcon,
             R.color.orangeIcon,
-            R.color.pinkIcon
+         //   R.color.pinkIcon
 
         )
 
