@@ -271,6 +271,10 @@ object Utils {
 
     fun showAd(context: Context, adView: AdView){
       //  val adView = (context as AppCompatActivity).findViewById<AdView>(R.id.adViewMediumRectangle)
+
+        if(sharedPrefs.getBoolean("advertisementOff", true)){
+            return
+        }
         val adRequest = AdRequest.Builder().build()
 
         adView.loadAd(adRequest)

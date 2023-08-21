@@ -3,11 +3,11 @@
 
 
     <string name="settingsSwitch1">Dark Theme</string>
-    <string name="settingsSwitch1Summary">Changes the theme from light to dark</string>
+    <string name="settingsSwitch1Summary">Switches the theme from light to dark.</string>
 
 
     <string name="settingsCheckbox1">Background Service</string>
-    <string name="settingsCheckbox1Summary">If left unchecked the app will only work while it\'s open</string>
+    <string name="settingsCheckbox1Summary">If checked, SMS messages will be sent even when the app is not currently open</string>
 <!--    <string name="settingsCheckbox1Summary"><![CDATA[-->
 <!--    If left unchecked the app will only\nwork while it\'s open-->
 <!--                                                    ]]></string>-->
@@ -15,13 +15,13 @@
 
 
     <string name="settingsCheckbox2">SMTP Functionality</string>
-    <string name="settingsCheckbox2Summary">If checked, sms will be sent from email of smtp that you provide</string>
+    <string name="settingsCheckbox2Summary">If checked, SMS messages will be sent using the SMTP email address that you provide.</string>
 <!--    <string name="settingsCheckbox2Summary"><![CDATA[-->
 <!--    If checked, sms will be sent from email \nof smtp that you provide-->
 <!--                                                    ]]></string>-->
 
     <string name="settingsGmailCheckbox">Gmail Functionality</string>
-        <string name="settingsGmailCheckboxSummary">If checked, sms will be sent from logged-in gmail account</string>
+        <string name="settingsGmailCheckboxSummary">If checked, SMS messages will be sent from the logged-in Gmail account.</string>
 <!--    <string name="settingsGmailCheckboxSummary"><![CDATA[-->
 <!--    If checked, sms will be sent from \nlogged-in gmail account-->
 <!--                                                    ]]></string>-->
@@ -30,7 +30,7 @@
     <string name="closeSettings">Go back</string>
 
     <string name="settingsOnlyWifiCheckbox">Wifi Only</string>
-    <string name="settingsOnlyWifiCheckboxSummary">If checked then it will only send email if Wifi internet is active</string>
+    <string name="settingsOnlyWifiCheckboxSummary">If checked, it will only send emails when a WiFi internet connection is active.</string>
 
 
 
