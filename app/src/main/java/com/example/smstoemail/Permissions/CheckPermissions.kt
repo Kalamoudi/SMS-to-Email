@@ -17,6 +17,7 @@ import com.example.smstoemail.Services.BackgroundService
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.smstoemail.MainActivity
+import com.example.smstoemail.R
 import com.example.smstoemail.Sms.SMSAdapter
 import com.example.smstoemail.Utils
 
@@ -92,7 +93,7 @@ class CheckPermissions {
 
     private fun showPermissionRationale(context: Context) {
         // Show a dialog explaining the need for the permission
-        val dialogBuilder = AlertDialog.Builder(context)
+        val dialogBuilder = AlertDialog.Builder(context, R.style.CustomAlertDialogThemeDark)
         dialogBuilder.setTitle("Permissions Required")
         dialogBuilder.setMessage("Permissions required:\n -"
                 + permissionsMap[Utils.permissionsList[0]]?.get(0) +"\n -"

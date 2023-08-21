@@ -1,5 +1,6 @@
 package com.example.smstoemail
 
+import android.app.AlertDialog
 import android.app.UiModeManager
 import android.content.Context
 import android.content.Intent
@@ -24,6 +25,9 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
 
 
 object MainActivityUtils {
@@ -89,7 +93,7 @@ object MainActivityUtils {
 
         menuButtonLayout.setOnClickListener {
             // Open the sliding window if the view is not null
-            Log.d("MenuButton", "Menu button clicked!")
+           // Log.d("MenuButton", "Menu button clicked!")
             drawerLayout.openDrawer(navigationDrawerLayout)
         }
     }
@@ -151,6 +155,9 @@ object MainActivityUtils {
         if(!sharedPrefs.contains("foregroundService")){
             sharedPrefs.edit().putBoolean("foregroundService", true).apply()
         }
+        if(!sharedPrefs.contains("termsAgreement")){
+            sharedPrefs.edit().putBoolean("termsAgreement", false).apply()
+        }
 
         if(sharedPrefs.getBoolean("firstVisit", true)) {
             GlobalScope.launch(Dispatchers.IO) {
@@ -162,6 +169,41 @@ object MainActivityUtils {
             sharedPrefs.getBoolean("firstVisit", false)
         }
 
+    }
+
+
+    fun showUserAgreementDialog(context: Context, receivedCode: () -> Unit) {
+        val alertDialog = AlertDialog.Builder(context, Utils.getCurrentThemeAsInt())
+            .setTitle("User Agreement")
+            .setMessage(loadTermsAndAgreementTextFromAssets(context))
+            .setPositiveButton("Accept") { _, _ ->
+                sharedPrefs.edit().putBoolean("termsAgreement", true).apply()
+                receivedCode()
+            }
+            .setNegativeButton("Decline") { _, _ ->
+                Utils.closeAppCompletely(context)
+            }
+            .setCancelable(false)
+            .create()
+
+        alertDialog.show()
+    }
+
+    private fun loadTermsAndAgreementTextFromAssets(context: Context): String {
+        return try {
+            val inputStream = context.assets.open("terms_and_agreement.txt")
+            val reader = BufferedReader(InputStreamReader(inputStream))
+            val stringBuilder = StringBuilder()
+            var line: String?
+            while (reader.readLine().also { line = it } != null) {
+                stringBuilder.append(line).append("\n")
+            }
+            reader.close()
+            stringBuilder.toString()
+        } catch (e: IOException) {
+            e.printStackTrace()
+            "Error loading terms and agreement"
+        }
     }
 
 

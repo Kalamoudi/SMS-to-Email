@@ -45,7 +45,7 @@ class SMSAdapter(showAmount: Int = 100) : RecyclerView.Adapter<SMSAdapter.SMSVie
         val fetchedSmsList = mutableListOf<SmsData>()
 
         for(RecyclerMessage in RecyclerMessages){
-            Log.d("dataFound", "Found some data yo")
+         //   Log.d("dataFound", "Found some data yo")
            // val smsData = SmsData(RecyclerMessage.sender, RecyclerMessage.recipient, RecyclerMessage.messageBody)
             val smsData = SmsData(SmsStrings(RecyclerMessage.sender, RecyclerMessage.recipient,
                                             RecyclerMessage.messageBody, RecyclerMessage.calendar)

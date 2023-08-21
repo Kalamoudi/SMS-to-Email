@@ -31,6 +31,10 @@ import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 
 // Kotlin imports
@@ -87,15 +91,38 @@ open class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+
+//        CoroutineScope(Dispatchers.Main).launch {
+//
+//            if(!sharedPrefs.getBoolean("termsAgreement", true)){
+//                MainActivityUtils.showUserAgreementDialog(utilsContext)
+//            }
+//            else{
+//                checkPermissions = CheckPermissions()
+//                checkPermissions.handlePermissions(utilsContext)
+//            }
+//
+//        }
+        // Check for agreement and permissions
+        checkPermissions = CheckPermissions()
+        if(!sharedPrefs.getBoolean("termsAgreement", true)){
+            MainActivityUtils.showUserAgreementDialog(utilsContext) {
+                checkPermissions.handlePermissions(utilsContext)
+            }
+        }
+        else{
+
+            checkPermissions.handlePermissions(utilsContext)
+        }
+
+
+
         // Show main page bottom ad
         Utils.showAd(this, findViewById(R.id.adViewMediumRectangle))
 
 
    //     MainActivityUtils.addAdvertisement(this)
 
-        // Check permissions
-        checkPermissions = CheckPermissions()
-        checkPermissions.handlePermissions(this)
 
         // Starts the BackgroundService
         MainActivityUtils.startBackgroundService(this)
@@ -183,7 +210,7 @@ open class MainActivity : AppCompatActivity() {
         super.onDestroy()
 
         // Stops the background service when the app is manually killed
-        Log.d("RecyclerInformationSaved", "CheckingIfItWillSaveTheInformation")
+        //Log.d("RecyclerInformationSaved", "CheckingIfItWillSaveTheInformation")
 
         // Save a flag to SharedPreferences indicating the app was force-stopped
         sharedPrefs.edit().putBoolean("firstVisit", true).apply()

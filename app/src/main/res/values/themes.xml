@@ -3,6 +3,21 @@
 <!--    <style name="Theme.SMSToDiscord" parent="android:Theme.Material.Light.NoActionBar" />-->
 
 
+    <style name="CustomAlertDialogThemeLight" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Customize other attributes if needed -->
+    </style>
+
+    <style name="CustomAlertDialogThemeDark" parent="Theme.AppCompat.Dialog.Alert">
+        <!-- Customize other attributes if needed -->
+        <item name="colorPrimary">@color/colorToolbarDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkDark</item>
+        <item name="colorAccent">#7E7E7E</item>
+        <item name="android:textColorPrimary">@color/darkWhite</item>
+        <item name="android:windowBackground">@color/backgroundColorDark</item>
+    </style>
+
+
+
     <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here -->

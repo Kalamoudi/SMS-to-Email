@@ -117,13 +117,13 @@ class SignInWithGmail {
                         response: Response<ResponseBody>
                     ) {
                         if (response.isSuccessful) {
-                            Utils.showToast(context, "User creation Successful: ")
-                            Log.d("User Creation in server", "Successful")
+                         //   Utils.showToast(context, "User creation Successful: ")
+                         //   Log.d("User Creation in server", "Successful")
                             // User creation on the server was successful
                             // You can handle success here
                         } else {
-                            Utils.showToast(context, "User creation Failed: ")
-                            Log.d("User Creation in server", "Failed")
+                        //    Utils.showToast(context, "User creation Failed: ")
+                      //      Log.d("User Creation in server", "Failed")
                             // Handle server error
                             // You can parse response.errorBody() for details
                         }

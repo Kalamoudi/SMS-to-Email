@@ -21,11 +21,11 @@ class BackgroundService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        Log.d(TAG, "Service onCreate")
+      //  Log.d(TAG, "Service onCreate")
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d(TAG, "Service onStartCommand")
+      //  Log.d(TAG, "Service onStartCommand")
 
         if(sharedPrefs.getBoolean("foregroundService", true)){
             createForegroundNotification()
@@ -41,7 +41,7 @@ class BackgroundService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(TAG, "Service onDestroy")
+      //  Log.d(TAG, "Service onDestroy")
 
         // Stop the foreground service and remove the notification
         stopForeground(Service.STOP_FOREGROUND_REMOVE)
@@ -94,7 +94,7 @@ class BackgroundService : Service() {
 
     override fun onTaskRemoved(rootIntent: Intent?) {
         super.onTaskRemoved(rootIntent)
-        Log.d(TAG, "Service onTaskRemoved - App was force-stopped from the settings")
+      //  Log.d(TAG, "Service onTaskRemoved - App was force-stopped from the settings")
 
        //  Save a flag to SharedPreferences indicating the app was force-stopped
 //        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)

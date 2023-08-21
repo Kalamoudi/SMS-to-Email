@@ -147,7 +147,7 @@ object Utils {
         val navigationView: NavigationView = (context as AppCompatActivity).findViewById(xmlId)
         navigationView.context.theme.applyStyle(attribute, true)
 
-        Log.d("Theme", "    e successfully: $attribute")
+       // Log.d("Theme", "    e successfully: $attribute")
     }
 
     fun checkSharedPreference(context: Context, reason: String){

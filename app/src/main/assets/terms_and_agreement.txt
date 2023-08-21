@@ -1,0 +1,42 @@
+Terms and Conditions
+
+Last Updated: August 21, 2023
+
+Please read these terms and conditions ("Terms") carefully before using the "SMS to Email" app ("the App") developed by Khalid Alamoudi ("the Developer").
+
+By downloading, installing, or using the App, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use the App.
+
+1. **Use of the App:**
+   - The App is designed to facilitate the sending of SMS messages via email using various methods, including the Gmail API.
+   - You must be the owner of the device on which the App is installed or have the necessary permissions to use it.
+
+2. **Data Usage and Privacy:**
+   - The App may collect and process SMS message data for the purpose of sending them via email. The data is not retained by the Developer beyond immediate use and is deleted after email transmission.
+   - The App may access your Gmail account to send emails using the Gmail API. The Developer does not store Gmail login credentials and the data is sent directly to Google's servers.
+   - Please refer to the App's Privacy Policy for more details on data collection, usage, and security measures.
+
+3. **Intellectual Property:**
+   - The App and its contents are protected by intellectual property laws and are the sole property of the Developer.
+   - You may not copy, modify, distribute, or reverse engineer the App or any part thereof.
+
+4. **Limitation of Liability:**
+   - The Developer strives to ensure the accuracy and functionality of the App. However, the App is provided "as is" without warranties of any kind.
+   - The Developer is not liable for any damages, including direct, indirect, incidental, or consequential damages arising from the use of the App.
+
+5. **Changes to the App and Terms:**
+   - The Developer reserves the right to modify or discontinue the App at any time without notice.
+   - The Developer may update these Terms from time to time. It is your responsibility to review the Terms periodically.
+
+6. **User Responsibilities:**
+   - You agree to use the App in compliance with all applicable laws and regulations.
+   - You are responsible for maintaining the security and confidentiality of your device and login credentials.
+
+7. **Contact Information:**
+   - For questions or concerns regarding these Terms or the App, you can contact the Developer at:
+
+   Email: smstoemail.smssender@gmail.com
+   Khalid Alamoudi
+
+By using the App, you agree to abide by these Terms and our Privacy Policy.
+
+These Terms are effective as of August 21, 2023.
