@@ -27,8 +27,9 @@ class BackgroundService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.d(TAG, "Service onStartCommand")
 
-        createForegroundNotification()
-
+        if(sharedPrefs.getBoolean("foregroundService", true)){
+            createForegroundNotification()
+        }
 
         // Note that this method is called each time the service is started, so be careful with long-running tasks.
         return START_STICKY_COMPATIBILITY
@@ -64,10 +65,10 @@ class BackgroundService : Service() {
 
         // Create the notification
         val builder = NotificationCompat.Builder(this, "channel_id")
-            .setContentTitle("SMS To Email is running in the background")
+            .setContentTitle("SMS to Email is running in the background")
             .setContentText("Tap to open the app.")
-            //.setSmallIcon(R.drawable.ic_notification_icon_background)
             .setSmallIcon(R.drawable.logo3)
+            .setSound(null)
 
         // Make the notification persistent
         builder.setOngoing(true)

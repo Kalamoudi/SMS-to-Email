@@ -20,6 +20,7 @@ import com.example.smstoemail.Utils.REQUEST_AUTHORIZATION
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
@@ -78,7 +79,7 @@ open class MainActivity : AppCompatActivity() {
         // Handles all the sharedPreference logic (always check/edit after changing something to preference)
         MainActivityUtils.handleSharedPreferencesOnInitialization(this)
 
-        sharedPrefs.edit().putBoolean("advertisementOff", true).apply()
+        sharedPrefs.edit().putBoolean("advertisementOff", false).apply()
 
         // Set the theme of the app based on isNightMode trigger
         MainActivityUtils.initializeTheme(this)

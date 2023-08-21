@@ -8,6 +8,7 @@
     android:gravity="center_vertical"
     android:id="@+id/checkbox1Layout"
 
+
     >
 
 

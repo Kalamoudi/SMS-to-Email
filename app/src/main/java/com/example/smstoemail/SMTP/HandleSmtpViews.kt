@@ -62,8 +62,8 @@ class HandleSmtpViews {
     private lateinit var SMTPSumbitForm: Button
 
     // ImageViews
-    private lateinit var visibilityButtonLayout: RelativeLayout
-    private lateinit var visibilityButton: ImageView
+    private lateinit var passwordVisibilityButtonLayout: RelativeLayout
+    private lateinit var passwordVisibilityButton: ImageView
 
     fun handleViews(context: Context){
         var appCompatActivity = context as AppCompatActivity
@@ -85,8 +85,8 @@ class HandleSmtpViews {
         SMTPSumbitForm = appCompatActivity.findViewById(R.id.SMTPSubmitForm)
 
         // ImageViews
-        visibilityButtonLayout = appCompatActivity.findViewById(R.id.visibilityButtonLayout)
-        visibilityButton = appCompatActivity.findViewById(R.id.visibilityButton)
+        passwordVisibilityButtonLayout = appCompatActivity.findViewById(R.id.passwordVisibilityButtonLayout)
+        passwordVisibilityButton = appCompatActivity.findViewById(R.id.passwordVisibilityButton)
 
 
         processVisibilityButton(context)
@@ -182,9 +182,9 @@ class HandleSmtpViews {
 
     private fun elementsVisibility(context: Context, visibility: Int){
 
-        SMTPPasswordText.visibility = visibility
+      //  SMTPPasswordText.visibility = visibility
         SMTPPasswordEdit.visibility = visibility
-        visibilityButton.visibility = visibility
+        passwordVisibilityButton.visibility = visibility
       //  visibilityButtonLayout.visibility = visibility
 
         val smtpAd: AdView = (context as AppCompatActivity).findViewById(R.id.adViewInSmtp)
@@ -194,26 +194,26 @@ class HandleSmtpViews {
 
 
     private fun changeEditTextToTextView(context: Context, backgroundColor: Int,
-                 enabled: Boolean, textColor: Int = Utils.getColorFromAttribute(context, "textColorPrimary")){
+                 enable: Boolean, textColor: Int = Utils.getColorFromAttribute(context, "textColorPrimary")){
 
 
-        SMTPHostEdit.isEnabled = enabled
+        SMTPHostEdit.isEnabled = enable
         Utils.setBackgroundTint(context, backgroundColor, SMTPHostEdit)
         SMTPHostEdit.setTextColor(textColor)
 
 
-        SMTPPortEdit.isEnabled =enabled
+        SMTPPortEdit.isEnabled =enable
         Utils.setBackgroundTint(context, backgroundColor, SMTPPortEdit)
         SMTPPortEdit.setTextColor(textColor)
 
 
-        SMTPUsernameEdit.isEnabled = enabled
+        SMTPUsernameEdit.isEnabled = enable
         Utils.setBackgroundTint(context, backgroundColor, SMTPUsernameEdit)
         SMTPUsernameEdit.setTextColor(textColor)
 
 
-        SMTPPasswordEdit.isEnabled = enabled
-        Utils.setBackgroundTint(context, backgroundColor, SMTPUsernameEdit)
+        SMTPPasswordEdit.isEnabled = enable
+        Utils.setBackgroundTint(context, backgroundColor, SMTPPasswordEdit)
         SMTPPasswordEdit.setTextColor(textColor)
 
     }
@@ -309,25 +309,25 @@ class HandleSmtpViews {
         SMTPPasswordEdit.setSelection(SMTPPasswordEdit.text.length)
 
         if(sharedPrefs.getBoolean("passwordVisible", true)){
-            visibilityButton.setImageResource(visibilityOn)
+            passwordVisibilityButton.setImageResource(visibilityOn)
             SMTPPasswordEdit.transformationMethod = HideReturnsTransformationMethod.getInstance()
         }
         else{
-            visibilityButton.setImageResource(visibilityOff)
+            passwordVisibilityButton.setImageResource(visibilityOff)
 
             SMTPPasswordEdit.transformationMethod = PasswordTransformationMethod.getInstance()
         }
 
 
-        visibilityButtonLayout.setOnClickListener {
+        passwordVisibilityButtonLayout.setOnClickListener {
             val isPasswordVisible = SMTPPasswordEdit.transformationMethod is PasswordTransformationMethod
 
             if (isPasswordVisible) {
-                visibilityButton.setImageResource(visibilityOn)
+                passwordVisibilityButton.setImageResource(visibilityOn)
                 SMTPPasswordEdit.transformationMethod = HideReturnsTransformationMethod.getInstance()
                 sharedPrefs.edit().putBoolean("passwordVisible", true).apply()
             } else {
-                visibilityButton.setImageResource(visibilityOff)
+                passwordVisibilityButton.setImageResource(visibilityOff)
                 SMTPPasswordEdit.transformationMethod = PasswordTransformationMethod.getInstance()
                 sharedPrefs.edit().putBoolean("passwordVisible", false).apply()
             }

@@ -10,29 +10,36 @@
 
     >
 
-
-
-   <TextView
-       android:id="@+id/activateSmtpText"
-       android:layout_width="match_parent"
-       android:layout_height="30dp"
-       android:gravity="center"
-       android:layout_centerHorizontal="true"
-       android:layout_marginTop="16dp"
-       android:text="@string/smtp_text_view"
-       android:textColor="?android:textColorPrimary"
-       android:textSize="20sp"
-
-       />
-    <include
-
-        android:layout_marginTop="10dp"
+    <RelativeLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/smtpForm"
-        layout="@layout/smtp_form"
-        android:layout_below="@+id/activateSmtpText"
-        />
+        android:layout_height="600dp"
+        android:outlineProvider="bounds"
+
+        >
+       <TextView
+           android:id="@+id/activateSmtpText"
+           android:layout_width="match_parent"
+           android:layout_height="30dp"
+           android:gravity="center"
+           android:layout_centerHorizontal="true"
+           android:layout_marginTop="15dp"
+           android:text="@string/smtp_text_view"
+           android:textColor="?android:textColorPrimary"
+           android:textSize="20sp"
+
+           />
+        <include
+
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/smtpForm"
+            layout="@layout/smtp_form"
+            android:layout_below="@+id/activateSmtpText"
+            />
+
+    </RelativeLayout>
 
     <!-- Placeholder for ad (advertisement) -->
     <include

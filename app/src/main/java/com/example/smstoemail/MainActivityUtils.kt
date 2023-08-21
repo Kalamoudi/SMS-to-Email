@@ -63,6 +63,7 @@ object MainActivityUtils {
             context.startService(serviceIntent)
             sharedPrefs.edit().putBoolean("backgroundService", true).apply()
         }
+
     }
 
 
@@ -146,6 +147,9 @@ object MainActivityUtils {
 
         if(!sharedPrefs.contains("wifiOnly")){
             sharedPrefs.edit().putBoolean("wifiOnly", false).apply()
+        }
+        if(!sharedPrefs.contains("foregroundService")){
+            sharedPrefs.edit().putBoolean("foregroundService", true).apply()
         }
 
         if(sharedPrefs.getBoolean("firstVisit", true)) {

@@ -18,6 +18,7 @@
         <include
             android:id="@+id/navigationDrawerTop"
             layout="@layout/nav_drawer_header"
+
             />
 
         <include
@@ -29,17 +30,18 @@
 
             />
 
-        <!-- Divier between list views -->
+        <!-- Divider between list views -->
         <View
             android:id="@+id/navDrawerListsDivider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?attr/colorPrimary"
+            android:layout_height="2dp"
             android:layout_below="@+id/navDrawerMainList"
+            android:background="?attr/colorPrimary"
 
              />
 
         <include
+
             android:id="@+id/navDrawerSecondaryList"
             layout="@layout/nav_drawer_sec_list"
             android:layout_width="match_parent"

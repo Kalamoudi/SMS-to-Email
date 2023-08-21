@@ -38,7 +38,8 @@ class SettingsActivity : AppCompatActivity() {
 
 
 
-        MainActivityUtils.initializeTheme(this)
+        MainActivityUtils.updateTheme(this)
+
 
 
         setContentView(R.layout.activity_settings)
@@ -67,10 +68,11 @@ class SettingsActivity : AppCompatActivity() {
         setsTopMarginForAllFramelayoutElements(frameLayout)
 
         SettingsOptions.processBackgroundCheckbox(this)
-        SettingsOptions.processSettingsThemeSwitch(this)
+        SettingsOptions.processForegroundService(this)
         SettingsOptions.processSmtpCheckbox(this)
         SettingsOptions.processGmailCheckbox(this)
         SettingsOptions.processWifiOnlyCheckbox(this)
+        SettingsOptions.processSettingsThemeSwitch(this)
 
 
     }

@@ -6,6 +6,7 @@
     <!-- Primary colors -->
     <!--    <color name="colorPrimaryDark">#121D65</color>-->
     <color name="colorPrimaryDark">#302F2F</color>
+    <color name="colorToolbarDark">#8C701E</color>
 <!--    <color name="colorPrimaryDarkDark">#10154E</color>-->
     <color name="colorPrimaryDarkDark">@color/backgroundSecondaryColorDark</color>
     <color name="colorAccentDark">#8E1940</color>

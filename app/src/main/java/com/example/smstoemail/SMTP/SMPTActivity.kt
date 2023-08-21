@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smstoemail.GoogleSignIn.SignInWithGmail
+import com.example.smstoemail.MainActivity
 import com.example.smstoemail.MainActivityUtils
 import com.example.smstoemail.NavigationDrawer.HandleNavDrawer
 import com.example.smstoemail.R

@@ -71,7 +71,7 @@
             android:id="@+id/signOutHorizontalLine"
             android:layout_width="190dp"
             android:layout_height="1dp"
-            android:background="@color/yellowDark"
+            android:background="?attr/colorPrimary"
             android:layout_below="@id/signOutTabAccountDetail"
             android:layout_centerHorizontal="true"
 
@@ -88,7 +88,7 @@
             android:background="@drawable/sign_out_button_background"
             android:clickable="true"
             android:focusable="true"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
 
             >
             <TextView

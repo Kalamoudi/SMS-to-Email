@@ -18,9 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="5dp"
+        android:paddingStart="7dp"
         android:id="@+id/smtpFormLayout1"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="5dp"
         >
             <TextView
                 android:id="@+id/SMTPHostTextView"
@@ -50,6 +51,7 @@
                 android:layout_below="@id/SMTPHostTextView"
 
                 />
+
 
     </RelativeLayout>
 
@@ -179,7 +181,7 @@
                 />
 
             <RelativeLayout
-                android:id="@+id/visibilityButtonLayout"
+                android:id="@+id/passwordVisibilityButtonLayout"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_alignEnd="@+id/SMTPPasswordEditText"
@@ -193,7 +195,7 @@
 
 
                 <ImageView
-                    android:id="@+id/visibilityButton"
+                    android:id="@+id/passwordVisibilityButton"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:clickable="false"

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smstoemail.GoogleSignIn.SignInWithGmail
+import com.example.smstoemail.MainActivity
 import com.example.smstoemail.MainActivityUtils
 import com.example.smstoemail.NavigationDrawer.HandleNavDrawer
 import com.example.smstoemail.R

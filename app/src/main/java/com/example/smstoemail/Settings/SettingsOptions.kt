@@ -3,6 +3,7 @@ package com.example.smstoemail.Settings
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.CheckBox
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -56,6 +57,26 @@ object SettingsOptions {
 
     }
 
+    fun processForegroundService(context: Context){
+
+        val contextAsAppCompatActivity = context as AppCompatActivity
+        val foregroundServiceCheckboxLayout = contextAsAppCompatActivity.findViewById<RelativeLayout>(R.id.foregroundServiceCheckboxLayout)
+        val foregroundServiceCheckbox = contextAsAppCompatActivity.findViewById<CheckBox>(R.id.foregroundServiceCheckbox)
+
+        val serviceIntent = Intent(context, BackgroundService::class.java)
+
+
+        foregroundServiceCheckbox.isChecked = sharedPrefs.getBoolean("foregroundService", true)
+
+        SettingsUtils.processClickWithHighlight(context, foregroundServiceCheckboxLayout) {
+            foregroundServiceCheckbox.isChecked = !foregroundServiceCheckbox.isChecked
+            sharedPrefs.edit().putBoolean("foregroundService", !sharedPrefs.getBoolean("foregroundService", true)).apply()
+            context.stopService(serviceIntent)
+            context.startService(serviceIntent)
+        }
+
+    }
+
 
     fun processSettingsThemeSwitch(context: Context){
 
@@ -67,14 +88,16 @@ object SettingsOptions {
       //  sharedPrefs.edit().putBoolean("changingTheme", true).apply()
         switchCompat.isChecked = sharedPrefs.getBoolean("isNightMode", true)
 
+       // Log.d("CURRENTLY DARK THEME", sharedPrefs.getBoolean("isNightMode", true).toString())
+
         SettingsUtils.processClickWithHighlight(context, switchLayout) {
 
             if (isAnimating) {
                 return@processClickWithHighlight // Do nothing if animation is ongoing
             }
 
-
             CoroutineScope(Dispatchers.Main).launch {
+
                 if (isAnimating) {
                     return@launch // Do nothing if animation is ongoing
                 }
@@ -85,16 +108,21 @@ object SettingsOptions {
                 //    isAnimating = true
                 switchCompat.animate()
                     .alpha(1f)
-                    .setDuration(200L)
+                    .setDuration(300)
                     .start()
-                delay(300)
+               // delay(150L)
                // SettingsUtils.updateSettingsTheme()
-                MainActivityUtils.updateTheme(context)
+              //  MainActivityUtils.updateTheme(context)
                 //  recreate(context as Activity)
                //    recreate()
-
+                delay(300)
+                MainActivityUtils.updateTheme(context)
+                delay(50L)
                 isAnimating = false
+
             }
+         //   MainActivityUtils.updateTheme(context)
+
 
         }
 
