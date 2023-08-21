@@ -22,7 +22,7 @@ class HandleNavDrawer (private val context: Context) {
     private val appCompatActivity: AppCompatActivity = context as AppCompatActivity
 
     private val mainListData = listOf("Home", "Received SMS", "Configure SMTP", "Settings")
-    private val secondaryListData = listOf("Contact us", "Privacy policy")
+    private val secondaryListData = listOf("Contact us", "Privacy policy", "License")
 
     private var mainListImages = listOf(
         R.drawable.ic_home,
@@ -70,7 +70,8 @@ class HandleNavDrawer (private val context: Context) {
 
             when(selectedItem){
                 "Contact us" -> Utils.showToast(context, "email: smstoemail.smssender@gmail.com")
-                "Privacy policy" -> NavDrawerUtils.showLicenseDialog(context)
+                "Privacy policy" -> NavDrawerUtils.showDialog(context, "privacy_policy.txt", "Privacy Policy")
+                "License" -> NavDrawerUtils.showDialog(context, "LICENSE.txt", "License Information")
             }
         }
 

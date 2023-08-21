@@ -50,6 +50,7 @@
 
             />
 
+
         <include
             layout="@layout/ad_nav_banner"
             />

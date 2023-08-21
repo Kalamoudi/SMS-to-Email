@@ -4,18 +4,22 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.res.AssetManager
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smstoemail.R
 import com.example.smstoemail.Utils
 import com.example.smstoemail.sharedPrefs
+import java.io.BufferedReader
 import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
 
 object NavDrawerUtils {
 
-     fun showLicenseDialog(context: Context) {
+     fun showDialog(context: Context, fileName: String, Title: String) {
         try {
             val assetManager: AssetManager = context.assets // Use applicationContext.assets instead of assets
-            val inputStream = assetManager.open("LICENSE.txt")
+            val inputStream = assetManager.open(fileName)
             val size = inputStream.available()
             val buffer = ByteArray(size)
             inputStream.read(buffer)
@@ -24,7 +28,7 @@ object NavDrawerUtils {
             val licenseContent = String(buffer, Charsets.UTF_8)
 
             val dialogBuilder = AlertDialog.Builder(context,  Utils.getCurrentThemeAsInt())
-                .setTitle("License Information")
+                .setTitle(Title)
                 .setMessage(licenseContent)
                 .setPositiveButton("OK", null)
 
@@ -57,22 +61,6 @@ object NavDrawerUtils {
         }
         return processedList
     }
-
-//    fun readLicenseFile(context:Context): String {
-//        return try {
-//            val inputStream = context.assets.open("LICENSE.txt")
-//            val size = inputStream.available()
-//            val buffer = ByteArray(size)
-//            inputStream.read(buffer)
-//            inputStream.close()
-//
-//            String(buffer, Charsets.UTF_8)
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//            "License information not available."
-//        }
-//    }
-
 
 
 }
