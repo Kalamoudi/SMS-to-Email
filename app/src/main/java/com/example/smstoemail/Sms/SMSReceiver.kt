@@ -3,6 +3,7 @@ package com.example.smstoemail.Sms
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Build
 import android.telephony.SmsMessage
 import android.telephony.SubscriptionInfo
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.recreate
 import com.example.smstoemail.Email.HandleEmail
 import com.example.smstoemail.Utils
+import com.example.smstoemail.sharedPrefs
 import com.example.smstoemail.userEmail
 import java.time.LocalDate
 import java.util.Calendar
@@ -77,6 +79,9 @@ class SMSReceiver : BroadcastReceiver() {
 
             // Call the sendEmail function with all required arguments
             if(Utils.isValidEmail(userEmail)) {
+                if(sharedPrefs.getBoolean("wifiOnly", true) and !Utils.checkIfWifiIsOn(context)){
+                    return
+                }
                 handleEmail = HandleEmail()
                 handleEmail.handleSendEmail(context, userEmail, subject, body!!)
             }

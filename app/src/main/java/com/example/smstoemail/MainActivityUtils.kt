@@ -144,6 +144,10 @@ object MainActivityUtils {
             sharedPrefs.edit().putBoolean("isNightMode", true).apply()
         }
 
+        if(!sharedPrefs.contains("wifiOnly")){
+            sharedPrefs.edit().putBoolean("wifiOnly", false).apply()
+        }
+
         if(sharedPrefs.getBoolean("firstVisit", true)) {
             GlobalScope.launch(Dispatchers.IO) {
                 val database = AppDatabase.getInstance(utilsContext)

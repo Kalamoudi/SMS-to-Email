@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
+import android.net.ConnectivityManager
 import android.text.TextUtils
 import android.util.Log
 import android.util.TypedValue
@@ -280,6 +281,13 @@ object Utils {
                 Log.e("AdMob", "Ad failed to load: ${loadAdError.message}")
             }
         }
+    }
+
+    fun checkIfWifiIsOn(context: Context): Boolean {
+        val connMgr = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork = connMgr.activeNetworkInfo
+        val isConnectedToWifi = activeNetwork?.type == ConnectivityManager.TYPE_WIFI
+        return isConnectedToWifi
     }
 
 }

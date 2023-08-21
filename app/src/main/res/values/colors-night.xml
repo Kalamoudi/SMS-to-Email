@@ -6,12 +6,15 @@
     <!-- Primary colors -->
     <!--    <color name="colorPrimaryDark">#121D65</color>-->
     <color name="colorPrimaryDark">#302F2F</color>
-    <color name="colorPrimaryDarkDark">#10154E</color>
+<!--    <color name="colorPrimaryDarkDark">#10154E</color>-->
+    <color name="colorPrimaryDarkDark">@color/backgroundSecondaryColorDark</color>
     <color name="colorAccentDark">#8E1940</color>
 
     <!-- Other colors -->
 <!--    <color name="backgroundColorDark">#D5222222</color>-->
 <!--    <color name="backgroundColorDark">#303030</color>-->
+<!--    <color name="backgroundColorDark">#59000000</color>-->
+<!--    <color name="backgroundSecondaryColorDark">#232323</color>-->
     <color name="backgroundColorDark">#232323</color>
     <color name="backgroundSecondaryColorDark">#59000000</color>
     <color name="textColorPrimaryDark">#DAFFFFFF</color>

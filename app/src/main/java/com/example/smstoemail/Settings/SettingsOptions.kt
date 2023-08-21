@@ -131,5 +131,20 @@ object SettingsOptions {
 
     }
 
+    fun processWifiOnlyCheckbox(context: Context){
+
+        val contextAsAppCompatActivity = context as AppCompatActivity
+        val wifiOnlyCheckboxLayout = contextAsAppCompatActivity.findViewById<RelativeLayout>(R.id.onlyWifiCheckboxLayout)
+        val wifiOnlyCheckbox = contextAsAppCompatActivity.findViewById<CheckBox>(R.id.onlyWifiCheckbox)
+
+        wifiOnlyCheckbox.isChecked = sharedPrefs.getBoolean("wifiOnly", true)
+
+        SettingsUtils.processClickWithHighlight(context, wifiOnlyCheckboxLayout) {
+            wifiOnlyCheckbox.isChecked = !wifiOnlyCheckbox.isChecked
+            sharedPrefs.edit().putBoolean("wifiOnly", !sharedPrefs.getBoolean("wifiOnly", true)).apply()
+        }
+
+    }
+
 
 }

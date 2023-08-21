@@ -53,6 +53,13 @@
             android:layout_marginTop="10dp"
             />
 
+        <include
+            layout="@layout/only_wifi_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            />
+
     </FrameLayout>
 
 

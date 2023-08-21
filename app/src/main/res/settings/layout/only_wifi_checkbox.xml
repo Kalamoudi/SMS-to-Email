@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingStart="16dp"
     android:gravity="center_vertical"
-    android:id="@+id/checkbox2Layout"
+    android:id="@+id/onlyWifiCheckboxLayout"
     android:background="@drawable/background_normal"
 
     >
@@ -19,7 +19,7 @@
         android:layout_marginStart="8dp"
         android:textSize="16dp"
         android:textColor="?android:textColorPrimary"
-        android:text="@string/settingsCheckbox2"
+        android:text="@string/settingsOnlyWifiCheckbox"
 
 
         />
@@ -28,11 +28,11 @@
         android:id="@android:id/summary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/settingsSummaryMarginEnd"
         android:layout_below="@android:id/title"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="@dimen/settingsSummaryMarginEnd"
         android:textColor="?attr/summaryColor"
-        android:text="@string/settingsCheckbox2Summary"
+        android:text="@string/settingsOnlyWifiCheckboxSummary"
 
         />
 
@@ -49,7 +49,7 @@
         />
 
     <CheckBox
-        android:id="@+id/checkbox2"
+        android:id="@+id/onlyWifiCheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="false"

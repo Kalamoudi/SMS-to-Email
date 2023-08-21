@@ -29,14 +29,14 @@ class HandleEmail {
 
     fun handleSendEmail(context: Context, recipientEmail: String, mailSubject: String, mailBody: String){
 
-        var smtpData = mutableMapOf<String, String>(
-            "host" to "smtp.gmail.com",
-            "port" to "587",
-            "username" to "smstoemail.smssender@gmail.com",
-            "password" to "sztwydqlysvcuinm"
-        )
+//        var smtpData = mutableMapOf<String, String>(
+//            "host" to "smtp.gmail.com",
+//            "port" to "587",
+//            "username" to "smstoemail.smssender@gmail.com",
+//            "password" to "sztwydqlysvcuinm"
+//        )
 
-   //     var smtpData = mutableMapOf<String, String>()
+        var smtpData = mutableMapOf<String, String>()
 
 
         if(smtpDataList.isNotEmpty() && sharedPrefs.getBoolean("useSmtp", true)){
@@ -44,6 +44,7 @@ class HandleEmail {
             smtpData["port"] = smtpDataList[0].port
             smtpData["username"] = smtpDataList[0].username
             smtpData["password"] = smtpDataList[0].password
+            sendEmail(context, recipientEmail, mailSubject, mailBody, smtpData)
         }
 
         val account = GoogleSignIn.getLastSignedInAccount(context)
@@ -56,7 +57,7 @@ class HandleEmail {
 
 
 
-        sendEmail(context, recipientEmail, mailSubject, mailBody, smtpData)
+       // sendEmail(context, recipientEmail, mailSubject, mailBody, smtpData)
 
 
 
