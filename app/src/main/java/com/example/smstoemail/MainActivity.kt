@@ -77,7 +77,7 @@ open class MainActivity : AppCompatActivity() {
         utilsContext = this
 
         // Instantiate the getSharedPreferences with tableName = "preferences
-        sharedPrefs = getSharedPreferences("preferences", MODE_PRIVATE)
+      //  sharedPrefs = getSharedPreferences("preferences", MODE_PRIVATE)
 
 
         // Handles all the sharedPreference logic (always check/edit after changing something to preference)

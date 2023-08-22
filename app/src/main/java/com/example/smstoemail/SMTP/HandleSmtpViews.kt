@@ -123,12 +123,12 @@ class HandleSmtpViews {
 
     private fun accessSmtpFromDb(context: Context, smtpDataList: List<SmtpData>){
 
-        val smtpData = smtpDataList[0]
+        val decryptedSmtpData = SmtpUtils.decryptSmtpData(smtpDataList)
 
-        SMTPHostEdit.setText(smtpData.host)
-        SMTPPortEdit.setText(smtpData.port)
-        SMTPUsernameEdit.setText(smtpData.username)
-        SMTPPasswordEdit.setText(smtpData.password)
+        SMTPHostEdit.setText(decryptedSmtpData.host)
+        SMTPPortEdit.setText(decryptedSmtpData.port)
+        SMTPUsernameEdit.setText(decryptedSmtpData.username)
+        SMTPPasswordEdit.setText(decryptedSmtpData.password)
 
         val textColor = Utils.getColorFromAttribute(context, "summaryColor")
 
@@ -151,7 +151,10 @@ class HandleSmtpViews {
         }
 
 
-        val smtpInSmtpData = SmtpData(0, SMTPHostEdit.text.toString(), SMTPPortEdit.text.toString(),
+//        val smtpInSmtpData = SmtpData(0, SMTPHostEdit.text.toString(), SMTPPortEdit.text.toString(),
+//            SMTPUsernameEdit.text.toString(), SMTPPasswordEdit.text.toString())
+
+        val smtpInSmtpData = SmtpUtils.encryptSmtpData(SMTPHostEdit.text.toString(), SMTPPortEdit.text.toString(),
             SMTPUsernameEdit.text.toString(), SMTPPasswordEdit.text.toString())
 
 

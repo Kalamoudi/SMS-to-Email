@@ -13,7 +13,7 @@ import com.example.smstoemail.Interfaces.RecyclerMessageDao
 import com.example.smstoemail.Interfaces.SmtpDao
 import com.example.smstoemail.TypeConverters.CalendarTypeConverter
 
-@Database(entities = [RecyclerMessage::class, SmtpData::class], version = 7)
+@Database(entities = [RecyclerMessage::class, SmtpData::class], version = 9)
 @TypeConverters(CalendarTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun recyclerMessageDao(): RecyclerMessageDao

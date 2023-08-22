@@ -8,28 +8,23 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.net.ConnectivityManager
-import android.text.TextUtils
+import android.util.Base64
 import android.util.Log
 import android.util.TypedValue
-import android.view.ContextThemeWrapper
 import android.view.View
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
-import com.example.smstoemail.Entity.RecyclerMessage
+import androidx.security.crypto.EncryptedSharedPreferences
 import com.example.smstoemail.Entity.SmtpData
 import com.example.smstoemail.GoogleSignIn.SignInWithGmail
 import com.example.smstoemail.Interfaces.BaseDao
-import com.example.smstoemail.Interfaces.RecyclerMessageDao
 import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Repository.AppDatabase
 import com.example.smstoemail.Services.BackgroundService
 import com.example.smstoemail.Sms.SMSAdapter
-import com.example.smstoemail.Sms.SmsData
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
@@ -37,17 +32,24 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.Calendar
+import java.security.SecureRandom
+import javax.crypto.Cipher
+import javax.crypto.SecretKey
+import javax.crypto.spec.IvParameterSpec
+import javax.crypto.spec.SecretKeySpec
 import javax.mail.internet.AddressException
 import javax.mail.internet.InternetAddress
 
 public lateinit var utilsContext: Context
 public var userEmail = ""
 public lateinit var sharedPrefs: SharedPreferences
+public lateinit var encryptedSharedPrefs: SharedPreferences
 public lateinit var database: AppDatabase
 public lateinit var smtpDataList: List<SmtpData>
 public lateinit var smsAdapter: SMSAdapter
 public lateinit var signInWithGmail: SignInWithGmail
+public val algorithm = "AES"
+public val transformation = "AES/ECB/PKCS5Padding"
 
 
 object TableNames {
@@ -294,4 +296,39 @@ object Utils {
         return isConnectedToWifi
     }
 
+
+    fun getEncryptionKey(): SecretKey{
+        val encryptionKeyString = encryptedSharedPrefs.getString("encryptionKey", null)
+
+        val encryptionKeyBytes = Base64.decode(encryptionKeyString, Base64.DEFAULT)
+
+        // Use the encryptionKey for decryption
+        return SecretKeySpec(encryptionKeyBytes, algorithm)
+    }
+
+    fun encryptData(data: ByteArray, key: SecretKey?): ByteArray {
+
+        if (key == null) {
+            // Handle the case when key is not available
+            throw IllegalArgumentException("Encryption key is null")
+        }
+
+        val cipher = Cipher.getInstance(transformation)
+        cipher.init(Cipher.ENCRYPT_MODE, key)
+
+        return cipher.doFinal(data)
+    }
+
+    fun decryptData(encryptedData: ByteArray, key: SecretKey?): ByteArray {
+
+        if (key == null) {
+            // Handle the case when key is not available
+            throw IllegalArgumentException("Encryption key is null")
+        }
+
+        val cipher = Cipher.getInstance(transformation)
+        cipher.init(Cipher.DECRYPT_MODE, key)
+
+        return cipher.doFinal(encryptedData)
+    }
 }

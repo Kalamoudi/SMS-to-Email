@@ -161,5 +161,8 @@ dependencies {
     // Preference Dependency
     implementation 'androidx.preference:preference-ktx:1.2.0'
 
+    // Data Encryption Dependency
+    implementation "androidx.security:security-crypto:1.1.0-alpha03"
+
 
 }

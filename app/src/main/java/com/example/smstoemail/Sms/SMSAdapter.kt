@@ -20,6 +20,7 @@ class SMSAdapter(showAmount: Int = 100) : RecyclerView.Adapter<SMSAdapter.SMSVie
   //  private val smsList = mutableListOf<SmsData>()
     private val smsList = LinkedList<SmsData>()
     private var showAmount: Int = showAmount
+    private val encryptionKey = Utils.getEncryptionKey()
 
 
     fun addSms(smsData: SmsData) {
@@ -27,8 +28,10 @@ class SMSAdapter(showAmount: Int = 100) : RecyclerView.Adapter<SMSAdapter.SMSVie
 
         notifyItemInserted(0)
 
-        val smsDataInRecyclerMessage = RecyclerMessage(0, smsData.smsStrings.sender, smsData.smsStrings.recipient,
-            smsData.smsStrings.messageBody, smsData.smsStrings.calendar)
+//        val smsDataInRecyclerMessage = RecyclerMessage(0, smsData.smsStrings.sender, smsData.smsStrings.recipient,
+//            smsData.smsStrings.messageBody, smsData.smsStrings.calendar)
+
+        val smsDataInRecyclerMessage = encryptSmsData(smsData)
 
         // saveNewItem needs to be called from a suspend function or courotine since it's Async task
         CoroutineScope(Dispatchers.IO).launch {
@@ -47,9 +50,10 @@ class SMSAdapter(showAmount: Int = 100) : RecyclerView.Adapter<SMSAdapter.SMSVie
         for(RecyclerMessage in RecyclerMessages){
          //   Log.d("dataFound", "Found some data yo")
            // val smsData = SmsData(RecyclerMessage.sender, RecyclerMessage.recipient, RecyclerMessage.messageBody)
-            val smsData = SmsData(SmsStrings(RecyclerMessage.sender, RecyclerMessage.recipient,
-                                            RecyclerMessage.messageBody, RecyclerMessage.calendar)
-            )
+//            val smsData = SmsData(SmsStrings(RecyclerMessage.sender, RecyclerMessage.recipient,
+//                                            RecyclerMessage.messageBody, RecyclerMessage.calendar)
+//            )
+            val smsData = decryptSmsData(RecyclerMessage)
             fetchedSmsList.add(smsData)
         }
         smsList.clear()
@@ -91,4 +95,31 @@ class SMSAdapter(showAmount: Int = 100) : RecyclerView.Adapter<SMSAdapter.SMSVie
         }
 
     }
+
+    private fun encryptSmsData(smsData: SmsData): RecyclerMessage{
+        val smsDataInRecyclerMessage = RecyclerMessage(
+            0,
+            Utils.encryptData(smsData.smsStrings.sender.toByteArray(), encryptionKey),
+            Utils.encryptData(smsData.smsStrings.recipient.toByteArray(), encryptionKey),
+            Utils.encryptData(smsData.smsStrings.messageBody.toByteArray(), encryptionKey),
+            smsData.smsStrings.calendar
+        )
+        return smsDataInRecyclerMessage
+
+    }
+
+    private fun decryptSmsData(recyclerMessage: RecyclerMessage): SmsData{
+        val smsData = SmsData(
+            SmsStrings(
+                Utils.decryptData(recyclerMessage.encryptedSenderNumber, encryptionKey).toString(Charsets.UTF_8),
+                Utils.decryptData(recyclerMessage.encryptedRecipientNumber, encryptionKey).toString(Charsets.UTF_8),
+                Utils.decryptData(recyclerMessage.encryptedMessageBody, encryptionKey).toString(Charsets.UTF_8),
+                recyclerMessage.calendar
+            )
+        )
+        return smsData
+
+    }
+
+
 }

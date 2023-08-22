@@ -6,6 +6,7 @@ import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.example.smstoemail.Smtp.SmtpUtils
 import com.example.smstoemail.sharedPrefs
 import com.example.smstoemail.smtpDataList
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -38,12 +39,14 @@ class HandleEmail {
 
         var smtpData = mutableMapOf<String, String>()
 
+        val decryotedSmtpDataList = SmtpUtils.decryptSmtpData(smtpDataList)
+
 
         if(smtpDataList.isNotEmpty() && sharedPrefs.getBoolean("useSmtp", true)){
-            smtpData["host"] = smtpDataList[0].host
-            smtpData["port"] = smtpDataList[0].port
-            smtpData["username"] = smtpDataList[0].username
-            smtpData["password"] = smtpDataList[0].password
+            smtpData["host"] = decryotedSmtpDataList.host
+            smtpData["port"] = decryotedSmtpDataList.port
+            smtpData["username"] = decryotedSmtpDataList.username
+            smtpData["password"] = decryotedSmtpDataList.password
             sendEmail(context, recipientEmail, mailSubject, mailBody, smtpData)
         }
 
