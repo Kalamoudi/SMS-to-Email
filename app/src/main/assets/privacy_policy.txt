@@ -1,6 +1,6 @@
 Privacy Policy
 
-Last Updated: August 21, 2023
+Last Updated: August 22, 2023
 
 Introduction:
 Welcome to "SMS to Email," developed by Khalid Alamoudi ("the Developer"). This privacy policy outlines how the app "SMS to Email" ("the App") collects, uses, and safeguards user data. By using the App, you consent to the practices described below.
@@ -27,7 +27,7 @@ The collected data is used solely for the following purposes:
 
 4. AdMob Ads: AdMob displays advertisements to users. Please note that ad data collection is managed by Google and not the Developer. Refer to Google's privacy policy for more information.
 
-5. Room Database Storage: The App may store SMS message data in a local database managed by the Room Persistence Library. The data is structured and stored on the user's device and is not accessible by the Developer beyond the immediate processing and sending of SMS messages.
+5. Room Database Storage: The App may store SMS message data in a local database managed by the Room Persistence Library. The data is structured and stored on the user's device and is not accessible by the Developer beyond the immediate processing and sending of SMS messages. The Developer further enhances the security of this data by implementing encryption measures.
 
 User Consent:
 By using the App, you grant permission for the App to access SMS messages, phone numbers (if contacts permission is granted), and use the data solely for the purposes outlined in this privacy policy.
@@ -43,6 +43,9 @@ The App requires the following permissions:
 Data Retention:
 The App temporarily stores SMS message data in local cached storage for user viewing purposes. The data is not retained by the Developer and is deleted after use. The Developer does not have access to or retain the data once the email is sent.
 
+Security Measures:
+The Developer implements robust security measures to protect user data. The App uses encryption to safeguard the data processed and stored within the local database.
+
 User Rights:
 You have the right to:
 - Revoke permissions: You can modify app permissions through your device settings.
@@ -52,6 +55,6 @@ Changes to the Privacy Policy:
 The Developer reserves the right to update this privacy policy as needed. Users will be notified of any changes within the App.
 
 Contact Information:
-For questions or concerns regarding this privacy policy or the App's data practices, you can contact the Developer at [Your Contact Information].
+For questions or concerns regarding this privacy policy or the App's data practices, you can contact the Developer at smstoemail.smssender@gmail.com.
 
-This privacy policy is effective as of August 21, 2023.
+This privacy policy is effective as of August 22, 2023.
