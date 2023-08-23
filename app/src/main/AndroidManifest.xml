@@ -39,6 +39,13 @@
             android:value="ca-app-pub-6845946406215749~3650304773"/>
 
         <activity
+            android:name=".Advertisement.AppOpenAdActivity"
+            android:exported="true"
+            >
+
+        </activity>
+
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             >

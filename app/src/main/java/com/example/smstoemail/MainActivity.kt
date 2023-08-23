@@ -3,6 +3,7 @@ package com.example.smstoemail
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings.Global
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -10,6 +11,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.smstoemail.Advertisement.AppOpenAdActivity
 import com.example.smstoemail.GoogleSignIn.SignInWithGmail
 import com.example.smstoemail.NavigationDrawer.HandleNavDrawer
 import com.example.smstoemail.Pages.HandleMainPageViews
@@ -33,7 +35,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -76,6 +80,10 @@ open class MainActivity : AppCompatActivity() {
 
         utilsContext = this
 
+
+
+
+
         // Instantiate the getSharedPreferences with tableName = "preferences
       //  sharedPrefs = getSharedPreferences("preferences", MODE_PRIVATE)
 
@@ -110,7 +118,6 @@ open class MainActivity : AppCompatActivity() {
         Utils.showAd(this, findViewById(R.id.adViewSmtpBanner))
 
 
-   //     MainActivityUtils.addAdvertisement(this)
 
 
         // Starts the BackgroundService
@@ -204,6 +211,7 @@ open class MainActivity : AppCompatActivity() {
         // Save a flag to SharedPreferences indicating the app was force-stopped
         sharedPrefs.edit().putBoolean("firstVisit", true).apply()
         sharedPrefs.edit().putBoolean("save", true).apply()
+        sharedPrefs.edit().putBoolean("openAppOpenAd", true).apply()
 
 //        val sharedPreferences = getSharedPreferences("preferences", Context.MODE_PRIVATE)
 //        val editor = sharedPreferences.edit()
@@ -215,7 +223,6 @@ open class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-       // showAppOpenAd()
 
         // Re-register onBackPressed callback to ensure it works after coming back to the app
         val callback = object : OnBackPressedCallback(true) {
@@ -241,31 +248,38 @@ open class MainActivity : AppCompatActivity() {
 
     override fun onStart(){
         super.onStart()
-        //showAppOpenAd()
+        if(sharedPrefs.getBoolean("openAppOpenAd", true) and !sharedPrefs.getBoolean("advertisementOff", true)){
+            CoroutineScope(Dispatchers.Main).launch {
+                    loadAppOpenAd()
+                    delay(1000L)
+                    showAppOpenAd()
+                sharedPrefs.edit().putBoolean("openAppOpenAd", false).apply()
+                }
+            }
     }
 
 
-//    private fun loadAppOpenAd() {
-//        // Create an instance of AppOpenAd.
-//        AppOpenAd.load(
-//            this,
-//            getString(R.string.admob_app_open_test_id),
-//            AdRequest.Builder().build(),
-//            AppOpenAd.APP_OPEN_AD_ORIENTATION_PORTRAIT,
-//            object : AppOpenAd.AppOpenAdLoadCallback() {
-//                override fun onAdLoaded(ad: AppOpenAd) {
-//                    appOpenAd = ad
-//                }
-//
-//                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-//                    // Handle ad load error.
-//                }
-//            }
-//        )
-//    }
-//    fun showAppOpenAd() {
-//        appOpenAd?.show(this)
-//    }
+    private fun loadAppOpenAd() {
+        // Create an instance of AppOpenAd.
+        AppOpenAd.load(
+            this,
+            getString(R.string.admob_app_open_test_id),
+            AdRequest.Builder().build(),
+            AppOpenAd.APP_OPEN_AD_ORIENTATION_PORTRAIT,
+            object : AppOpenAd.AppOpenAdLoadCallback() {
+                override fun onAdLoaded(ad: AppOpenAd) {
+                    appOpenAd = ad
+                }
+
+                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                    // Handle ad load error.
+                }
+            }
+        )
+    }
+    fun showAppOpenAd() {
+        appOpenAd?.show(this)
+    }
 
 }
 

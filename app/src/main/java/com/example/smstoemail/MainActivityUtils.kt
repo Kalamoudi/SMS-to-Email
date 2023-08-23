@@ -159,6 +159,10 @@ object MainActivityUtils {
             sharedPrefs.edit().putBoolean("termsAgreement", false).apply()
         }
 
+        if(!sharedPrefs.contains("openAppOpenAd")){
+            sharedPrefs.edit().putBoolean("openAppOpenAd", true).apply()
+        }
+
         if(sharedPrefs.getBoolean("firstVisit", true)) {
             GlobalScope.launch(Dispatchers.IO) {
                 val database = AppDatabase.getInstance(context)

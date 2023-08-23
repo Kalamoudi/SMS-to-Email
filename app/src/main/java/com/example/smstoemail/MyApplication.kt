@@ -3,8 +3,10 @@ package com.example.smstoemail
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import android.util.Base64
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.security.crypto.EncryptedSharedPreferences
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
@@ -16,6 +18,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.security.crypto.MasterKeys
+import com.example.smstoemail.Advertisement.AppOpenAdActivity
 import com.example.smstoemail.Interfaces.smsFilterRecyclerMessageDao
 import com.example.smstoemail.Permissions.CheckPermissions
 import com.example.smstoemail.Repository.AppDatabase
@@ -35,9 +38,11 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-
+//        val intent = Intent(this, AppOpenAdActivity::class.java)
+//        startActivity(intent)
 
         sharedPrefs = getSharedPreferences("preferences", MODE_PRIVATE)
+
         val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 
         encryptedSharedPrefs = EncryptedSharedPreferences.create(
@@ -62,6 +67,7 @@ class MyApplication : Application() {
 
         sharedPrefs.edit().putBoolean("advertisementOff", false).apply()
         MainActivityUtils.handleSharedPreferencesOnInitialization(this)
+
 
 
         MainActivityUtils.startBackgroundService(this)
