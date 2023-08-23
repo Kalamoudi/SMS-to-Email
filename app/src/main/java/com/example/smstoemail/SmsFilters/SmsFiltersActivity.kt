@@ -49,7 +49,6 @@ class SmsFiltersActivity  : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         MainActivityUtils.initializeTheme(this)
 
         setContentView(R.layout.activity_sms_filters)
@@ -100,7 +99,7 @@ class SmsFiltersActivity  : AppCompatActivity(){
         addButton.setOnClickListener {
             val newFilter = filterEditText.text.toString()
             if (newFilter.isNotEmpty()) {
-                smsFilterAdapter.addSmsFilter(SmsFilter(newFilter))
+                smsFilterAdapter.addSmsFilter(this, SmsFilter(newFilter))
                 filterEditText.text.clear()
             }
         }

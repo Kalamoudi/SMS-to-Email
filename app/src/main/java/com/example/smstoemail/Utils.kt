@@ -53,6 +53,7 @@ public val algorithm = "AES"
 public val transformation = "AES/ECB/PKCS5Padding"
 public lateinit var smsFilterAdapter: SmsFiltersAdapter
 public const val freeVersion = true
+public var smsFilterCapacity = 1
 
 
 object TableNames {
@@ -333,5 +334,10 @@ object Utils {
         cipher.init(Cipher.DECRYPT_MODE, key)
 
         return cipher.doFinal(encryptedData)
+    }
+
+    fun premium(){
+        sharedPrefs.edit().putBoolean("advertisementOff", true).apply()
+        smsFilterCapacity = 50000
     }
 }

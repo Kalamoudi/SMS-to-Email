@@ -1,5 +1,6 @@
 package com.example.smstoemail.SmsFilters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,19 +16,26 @@ import com.example.smstoemail.Interfaces.smsFilterRecyclerMessageDao
 import com.example.smstoemail.R
 import com.example.smstoemail.Sms.SmsData
 import com.example.smstoemail.Utils
+import com.example.smstoemail.utilsContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.LinkedList
 
-class SmsFiltersAdapter() : RecyclerView.Adapter<SmsFiltersAdapter.SmsFilterViewHolder>() {
+class SmsFiltersAdapter(capacity: Int) : RecyclerView.Adapter<SmsFiltersAdapter.SmsFilterViewHolder>() {
 
-
+    private val capacity = capacity
     private val smsFilterList = mutableListOf<SmsFilter>()
     private val smsFilterSet = mutableSetOf<SmsFilter>()
 
-    fun addSmsFilter(smsFilter: SmsFilter) {
+    fun addSmsFilter(context: Context, smsFilter: SmsFilter) {
         if(smsFilterSet.contains(SmsFilter(smsFilter.filter.lowercase()))){
+            //Utils.showToast(utilsContext, "Buy Premium Version to add more filters")
+            return
+        }
+
+        if(smsFilterSet.isNotEmpty() and (smsFilterSet.size == capacity)){
+            SmsFilterUtils.premiumPromptDialog(context)
             return
         }
         smsFilterList.add(SmsFilter(smsFilter.filter.lowercase()))

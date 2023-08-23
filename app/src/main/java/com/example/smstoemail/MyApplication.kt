@@ -62,7 +62,9 @@ class MyApplication : Application() {
         // initialize filter Adapter
 
 
-        smsFilterAdapter = SmsFiltersAdapter()
+        Utils.premium()
+
+        smsFilterAdapter = SmsFiltersAdapter(smsFilterCapacity)
         initializeSmsFilterRecyclerMessagesDao(this)
 
         sharedPrefs.edit().putBoolean("advertisementOff", false).apply()
