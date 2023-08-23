@@ -3,5 +3,9 @@
 
     <string name="addFilterHeader">Add Filters</string>
 
+    <string name="smsFilterAddFilterButtonText">Add Filters</string>
+
+    <string name="smsFilterEditTextHint">Enter filter criteria</string>
+
 
 </resources>

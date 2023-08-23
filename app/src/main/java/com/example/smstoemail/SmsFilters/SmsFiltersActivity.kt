@@ -3,6 +3,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.widget.Button
 import android.widget.EditText
 import android.widget.GridLayout
@@ -86,6 +87,15 @@ class SmsFiltersActivity  : AppCompatActivity(){
         val addButton = findViewById<Button>(R.id.smsFiltersAddButton)
         val filterEditText = findViewById<EditText>(R.id.smsFiltersEditText)
 
+        // Pressing Enter will automatically perform add button
+        filterEditText.setOnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                // Simulate button click
+                addButton.performClick()
+                return@setOnKeyListener true
+            }
+            return@setOnKeyListener false
+        }
 
         addButton.setOnClickListener {
             val newFilter = filterEditText.text.toString()
