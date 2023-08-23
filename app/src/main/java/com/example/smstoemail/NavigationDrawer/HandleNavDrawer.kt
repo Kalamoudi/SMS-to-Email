@@ -29,7 +29,7 @@ class HandleNavDrawer (private val context: Context) {
         R.drawable.ic_home,
         R.drawable.sms_40px,
         R.drawable.forward_to_inbox_40px,
-        R.drawable.ic_home,
+        R.drawable.library_add_40px,
         R.drawable.ic_settings
     )
 

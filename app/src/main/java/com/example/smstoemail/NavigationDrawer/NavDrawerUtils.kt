@@ -56,7 +56,7 @@ object NavDrawerUtils {
                 R.drawable.ic_home_filled,
                 R.drawable.sms_40px_filled,
                 R.drawable.forward_to_inbox_40px_filled,
-                R.drawable.ic_home_filled,
+                R.drawable.library_add_40px_filled,
                 R.drawable.ic_settings_filled,
             )
         }
