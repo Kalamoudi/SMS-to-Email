@@ -81,9 +81,9 @@ open class MainActivity : AppCompatActivity() {
 
 
         // Handles all the sharedPreference logic (always check/edit after changing something to preference)
-        MainActivityUtils.handleSharedPreferencesOnInitialization(this)
+     //   MainActivityUtils.handleSharedPreferencesOnInitialization(this)
 
-        sharedPrefs.edit().putBoolean("advertisementOff", false).apply()
+     //   sharedPrefs.edit().putBoolean("advertisementOff", false).apply()
 
         // Set the theme of the app based on isNightMode trigger
         MainActivityUtils.initializeTheme(this)
@@ -92,17 +92,6 @@ open class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-//        CoroutineScope(Dispatchers.Main).launch {
-//
-//            if(!sharedPrefs.getBoolean("termsAgreement", true)){
-//                MainActivityUtils.showUserAgreementDialog(utilsContext)
-//            }
-//            else{
-//                checkPermissions = CheckPermissions()
-//                checkPermissions.handlePermissions(utilsContext)
-//            }
-//
-//        }
         // Check for agreement and permissions
         checkPermissions = CheckPermissions()
         if(!sharedPrefs.getBoolean("termsAgreement", true)){
@@ -118,14 +107,14 @@ open class MainActivity : AppCompatActivity() {
 
 
         // Show main page bottom ad
-        Utils.showAd(this, findViewById(R.id.adViewMediumRectangle))
+        Utils.showAd(this, findViewById(R.id.adViewSmtpBanner))
 
 
    //     MainActivityUtils.addAdvertisement(this)
 
 
         // Starts the BackgroundService
-        MainActivityUtils.startBackgroundService(this)
+       // MainActivityUtils.startBackgroundService(this)
 
         // Activate SignIn with google service
         signInWithGmail = SignInWithGmail()

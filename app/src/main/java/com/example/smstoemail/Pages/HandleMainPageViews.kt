@@ -109,7 +109,7 @@ class HandleMainPageViews {
       //  editEmailButton.visibility = View.VISIBLE
         addEmailButton.text = "Edit"
 
-        val adView: AdView = (context as AppCompatActivity).findViewById(R.id.adViewMediumRectangle)
+        val adView: AdView = (context as AppCompatActivity).findViewById(R.id.adViewSmtpBanner)
         adView.visibility = View.VISIBLE
        // smsTextHeader.visibility = View.VISIBLE
        // smsRecyclerView.visibility = View.VISIBLE
@@ -126,7 +126,7 @@ class HandleMainPageViews {
         smsRecyclerView.visibility = View.INVISIBLE
         addEmailButton.text = "Submit"
 
-        val adView: AdView = (context as AppCompatActivity).findViewById(R.id.adViewMediumRectangle)
+        val adView: AdView = (context as AppCompatActivity).findViewById(R.id.adViewSmtpBanner)
         adView.visibility = View.INVISIBLE
         //   addEmailText.setBackgroundResource(R.drawable.edittext_normal_bottom_line)
 

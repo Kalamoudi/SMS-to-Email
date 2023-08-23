@@ -11,14 +11,31 @@
     >
 
     <RelativeLayout
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:id="@+id/addSmsFilterLayout"
 
 
         >
+
         <TextView
+            android:id="@+id/smsFilterDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/smsFilterDescription"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="15sp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+
+            />
+
+        <TextView
+
             android:id="@+id/addFiltersHeader"
             android:layout_width="match_parent"
             android:layout_height="35dp"
@@ -27,7 +44,8 @@
             android:layout_marginTop="15dp"
             android:text="@string/addFilterHeader"
             android:textColor="?android:textColorPrimary"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            android:layout_below="@+id/smsFilterDescription"
 
             />
 
@@ -51,7 +69,7 @@
         <Button
             android:id="@+id/smsFiltersAddButton"
             android:layout_width="110dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_marginTop="15dp"
             android:gravity="center"
             android:layout_centerHorizontal="true"
@@ -79,9 +97,29 @@
         android:layout_below="@+id/addSmsFilterLayout"
         android:outlineProvider="bounds"
         android:elevation="4dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
 
 
         />
+
+    <Button
+        android:id="@+id/smsFilterClearAllFiltersButton"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/smsFilterClearAllFiltersButton"
+        android:textColor="?attr/textHeaderColorPrimary"
+        android:backgroundTint="?android:colorPrimary"
+        android:layout_below="@+id/smsFiltersRecyclerView"
+        android:textSize="14sp"
+
+
+        />
+
 
 
 <!--    <RecyclerV-->

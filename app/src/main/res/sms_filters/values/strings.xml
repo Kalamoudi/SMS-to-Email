@@ -7,5 +7,11 @@
 
     <string name="smsFilterEditTextHint">Enter filter criteria</string>
 
+    <string name="smsFilterClearAllFiltersButton">Clear all filters</string>
+
+    <string name="smsFilterDescription">When you add filters, only SMS messages containing the specified words will be forwarded to your email. If you wish to forward all SMS messages, ensure that you clear all filters.</string>
+
+
+
 
 </resources>

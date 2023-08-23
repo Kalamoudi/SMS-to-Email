@@ -161,7 +161,7 @@ object MainActivityUtils {
 
         if(sharedPrefs.getBoolean("firstVisit", true)) {
             GlobalScope.launch(Dispatchers.IO) {
-                val database = AppDatabase.getInstance(utilsContext)
+                val database = AppDatabase.getInstance(context)
                 smtpDao = database.smtpDao()
                 smtpDataList = smtpDao.getAllItems()
                 // Use the 'items' in the UI if needed (e.g., update the UI with the data)

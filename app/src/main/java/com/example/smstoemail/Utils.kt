@@ -52,6 +52,7 @@ public lateinit var signInWithGmail: SignInWithGmail
 public val algorithm = "AES"
 public val transformation = "AES/ECB/PKCS5Padding"
 public lateinit var smsFilterAdapter: SmsFiltersAdapter
+public const val freeVersion = true
 
 
 object TableNames {

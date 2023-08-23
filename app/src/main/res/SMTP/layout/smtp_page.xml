@@ -13,7 +13,7 @@
     <RelativeLayout
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="wrap_content"
         android:outlineProvider="bounds"
 
         >
@@ -29,34 +29,25 @@
            android:textSize="20sp"
 
            />
-        <include
 
-            android:layout_marginTop="15dp"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/smtpForm"
-            layout="@layout/smtp_form"
-            android:layout_below="@+id/activateSmtpText"
-            />
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activateSmtpText"
+            >
+            <include
+
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/smtpForm"
+                layout="@layout/smtp_form"
+                android:layout_below="@+id/activateSmtpText"
+                />
+
+        </androidx.core.widget.NestedScrollView>
 
     </RelativeLayout>
 
-    <!-- Placeholder for ad (advertisement) -->
-    <include
-        android:id="@+id/adViewInSmtp"
-        layout="@layout/ad_smtp_banner"
-        />
-<!--    <RelativeLayout-->
-<!--        android:id="@+id/adViewInSmtpLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:layout_below="@id/smtpForm"-->
-<!--        >-->
-<!--        <include-->
-<!--            android:id="@+id/adViewInSmtp"-->
-<!--            layout="@layout/ad_smtp_banner"-->
-<!--            />-->
-
-<!--    </RelativeLayout>-->
 
 </RelativeLayout>

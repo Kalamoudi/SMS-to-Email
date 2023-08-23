@@ -24,12 +24,14 @@ class SmsFiltersAdapter() : RecyclerView.Adapter<SmsFiltersAdapter.SmsFilterView
 
 
     private val smsFilterList = mutableListOf<SmsFilter>()
+    private val smsFilterSet = mutableSetOf<SmsFilter>()
 
     fun addSmsFilter(smsFilter: SmsFilter) {
-        if(smsFilterList.contains(SmsFilter(smsFilter.filter.lowercase()))){
+        if(smsFilterSet.contains(SmsFilter(smsFilter.filter.lowercase()))){
             return
         }
         smsFilterList.add(SmsFilter(smsFilter.filter.lowercase()))
+        smsFilterSet.add(SmsFilter(smsFilter.filter.lowercase()))
 
         notifyItemInserted(smsFilterList.size - 1)
 
@@ -61,12 +63,16 @@ class SmsFiltersAdapter() : RecyclerView.Adapter<SmsFiltersAdapter.SmsFilterView
             fetchedSmsList.add(smsFilter)
         }
         smsFilterList.clear()
+        smsFilterSet.clear()
 
         for(smsFilter in fetchedSmsList){
             smsFilterList.add(smsFilter)
+            smsFilterSet.add(smsFilter)
         }
         notifyDataSetChanged()
     }
+
+
 
     fun removeSmsFilter(smsFilter: SmsFilter) {
       //  val removeElement = smsFilterList.indexOf(smsFilter)
@@ -74,23 +80,33 @@ class SmsFiltersAdapter() : RecyclerView.Adapter<SmsFiltersAdapter.SmsFilterView
       //  smsFilterList.removeLast()
         val index = smsFilterList.indexOf(smsFilter)
         smsFilterList.removeAt(index)
+        smsFilterSet.remove(smsFilter)
 
 
         notifyItemRemoved(index)
 
 
 
-        // saveNewItem needs to be called from a suspend function or coroutine since it's Async task
+        // delete smsFilter from room database
         CoroutineScope(Dispatchers.IO).launch {
-            //Utils.saveNewItem(smsDataInRecyclerMessage)
             smsFilterRecyclerMessageDao.delete(smsFilterRecyclerMessageDao.getSmsFilter(smsFilter.filter))
-            //  Utils.saveNewItem(smsFilterInRecyclerMessage, smsFilterRecyclerMessageDao)
         }
         //Log.d("SMSAdapter", "SMS added to the list")
         notifyDataSetChanged()
         //notifyItemChanged(0)
     }
 
+
+    fun clearAllFilters(){
+
+        CoroutineScope(Dispatchers.IO).launch {
+            smsFilterRecyclerMessageDao.deleteAllSmsFilters()
+            smsFilterList.clear()
+            smsFilterSet.clear()
+        }
+        notifyDataSetChanged()
+
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SmsFilterViewHolder {

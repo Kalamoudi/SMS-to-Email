@@ -54,7 +54,7 @@ class SmsFiltersActivity  : AppCompatActivity(){
 
         setContentView(R.layout.activity_sms_filters)
 
-       // Utils.showAd(this, findViewById(R.id.adViewInSmtp))
+        Utils.showAd(this, findViewById(R.id.adViewSmtpBanner))
 
         //========= Tool bar functionalities ================
         // Process and handles navigation drawer logic
@@ -103,6 +103,15 @@ class SmsFiltersActivity  : AppCompatActivity(){
                 smsFilterAdapter.addSmsFilter(SmsFilter(newFilter))
                 filterEditText.text.clear()
             }
+        }
+
+        val clearAllFilters: Button = findViewById(R.id.smsFilterClearAllFiltersButton)
+
+        clearAllFilters.setOnClickListener {
+
+            smsFilterAdapter.clearAllFilters()
+
+
         }
 
 

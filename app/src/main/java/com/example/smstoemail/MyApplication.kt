@@ -17,7 +17,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.security.crypto.MasterKeys
 import com.example.smstoemail.Interfaces.smsFilterRecyclerMessageDao
+import com.example.smstoemail.Permissions.CheckPermissions
 import com.example.smstoemail.Repository.AppDatabase
+import com.example.smstoemail.SmsFilters.SmsFilter
 import com.example.smstoemail.SmsFilters.SmsFiltersAdapter
 import kotlinx.coroutines.GlobalScope
 import okhttp3.Dispatcher
@@ -27,10 +29,13 @@ import javax.crypto.SecretKey
 class MyApplication : Application() {
 
     private var appOpenAd: AppOpenAd? = null // Initialize with null
+    private lateinit var checkPermissions: CheckPermissions
 
 
     override fun onCreate() {
         super.onCreate()
+
+
 
         sharedPrefs = getSharedPreferences("preferences", MODE_PRIVATE)
         val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
@@ -50,8 +55,19 @@ class MyApplication : Application() {
         }
 
         // initialize filter Adapter
+
+
         smsFilterAdapter = SmsFiltersAdapter()
         initializeSmsFilterRecyclerMessagesDao(this)
+
+        sharedPrefs.edit().putBoolean("advertisementOff", false).apply()
+        MainActivityUtils.handleSharedPreferencesOnInitialization(this)
+
+
+        MainActivityUtils.startBackgroundService(this)
+
+
+
 
     }
 

@@ -20,5 +20,9 @@ interface SmsFilterRecyclerMessageDao : BaseDao<SmsFilterRecyclerMessage> {
     @Query("SELECT * FROM " + tableName + " WHERE " + columnName + " = :filter LIMIT 1")
     fun getSmsFilter(filter: String): SmsFilterRecyclerMessage
 
+    @Query("DELETE FROM " + tableName)
+    fun deleteAllSmsFilters()
+
+
 
 }
