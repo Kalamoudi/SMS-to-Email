@@ -6,13 +6,20 @@ import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.compose.ui.text.toLowerCase
+import com.example.smstoemail.Interfaces.smsFilterRecyclerMessageDao
 import com.example.smstoemail.Smtp.SmtpUtils
 import com.example.smstoemail.sharedPrefs
+import com.example.smstoemail.smsAdapter
+import com.example.smstoemail.smsFilterAdapter
 import com.example.smstoemail.smtpDataList
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.android.awaitFrame
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -37,16 +44,31 @@ class HandleEmail {
 //            "password" to "sztwydqlysvcuinm"
 //        )
 
-        var smtpData = mutableMapOf<String, String>()
+        var sendMessage: Boolean = true
+        val smsFilterList = smsFilterAdapter.getSmsFilterList()
+        if(smsFilterList.isNotEmpty()){
+            sendMessage = false
+            for(smsFilter in smsFilterList){
+                if(mailBody.lowercase().contains(smsFilter.filter)){
+                    sendMessage = true
+                }
+            }
+        }
 
-        val decryotedSmtpDataList = SmtpUtils.decryptSmtpData(smtpDataList)
+
+        if(!sendMessage){
+            return
+        }
+
 
 
         if(smtpDataList.isNotEmpty() && sharedPrefs.getBoolean("useSmtp", true)){
-            smtpData["host"] = decryotedSmtpDataList.host
-            smtpData["port"] = decryotedSmtpDataList.port
-            smtpData["username"] = decryotedSmtpDataList.username
-            smtpData["password"] = decryotedSmtpDataList.password
+            var smtpData = mutableMapOf<String, String>()
+            val decryptedSmtpDataList = SmtpUtils.decryptSmtpData(smtpDataList)
+            smtpData["host"] = decryptedSmtpDataList.host
+            smtpData["port"] = decryptedSmtpDataList.port
+            smtpData["username"] = decryptedSmtpDataList.username
+            smtpData["password"] = decryptedSmtpDataList.password
             sendEmail(context, recipientEmail, mailSubject, mailBody, smtpData)
         }
 

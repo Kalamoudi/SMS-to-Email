@@ -11,6 +11,7 @@ import com.example.smstoemail.MainActivityUtils
 import com.example.smstoemail.R
 import com.example.smstoemail.Smtp.SmtpActivity
 import com.example.smstoemail.Settings.SettingsActivity
+import com.example.smstoemail.SmsFilters.SmsFiltersActivity
 import com.example.smstoemail.Utils
 import com.example.smstoemail.ViewMessages.ViewMessagesActivity
 import com.example.smstoemail.sharedPrefs
@@ -21,13 +22,14 @@ class HandleNavDrawer (private val context: Context) {
 
     private val appCompatActivity: AppCompatActivity = context as AppCompatActivity
 
-    private val mainListData = listOf("Home", "Received SMS", "Configure SMTP", "Settings")
+    private val mainListData = listOf("Home", "Received SMS", "Configure SMTP", "SMS Filters", "Settings")
     private val secondaryListData = listOf("Contact Us", "Privacy Policy", "License")
 
     private var mainListImages = listOf(
         R.drawable.ic_home,
         R.drawable.sms_40px,
         R.drawable.forward_to_inbox_40px,
+        R.drawable.ic_home,
         R.drawable.ic_settings
     )
 
@@ -58,6 +60,7 @@ class HandleNavDrawer (private val context: Context) {
                 "Home" -> goBackToMainPage(context)
                 "Received SMS" -> openViewMessagesPage(context)
                 "Configure SMTP" -> openSmtpPage(context)
+                "SMS Filters" -> openSmsFiltersPage(context)
                 "Settings" -> openSettingsPage(context)
             }
         }
@@ -113,6 +116,19 @@ class HandleNavDrawer (private val context: Context) {
     private fun openViewMessagesPage(context: Context){
         val intent = Intent(context, ViewMessagesActivity::class.java)
         if(context::class.java == ViewMessagesActivity::class.java){
+            return
+        }
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        MainActivityUtils.closeNavigationDrawer(context)
+        context.startActivity(intent)
+        (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_none)
+
+    }
+
+    private fun openSmsFiltersPage(context: Context){
+        val intent = Intent(context, SmsFiltersActivity::class.java)
+        if(context::class.java == SmsFiltersActivity::class.java){
             return
         }
 

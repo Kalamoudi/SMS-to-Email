@@ -2,6 +2,7 @@ package com.example.smstoemail
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import android.util.Base64
 import android.util.Log
 import androidx.security.crypto.EncryptedSharedPreferences
@@ -15,6 +16,10 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.security.crypto.MasterKeys
+import com.example.smstoemail.Interfaces.smsFilterRecyclerMessageDao
+import com.example.smstoemail.Repository.AppDatabase
+import com.example.smstoemail.SmsFilters.SmsFiltersAdapter
+import kotlinx.coroutines.GlobalScope
 import okhttp3.Dispatcher
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
@@ -44,6 +49,10 @@ class MyApplication : Application() {
             encryptedSharedPrefs.edit().putString("encryptionKey", encryptionKeyString).apply()
         }
 
+        // initialize filter Adapter
+        smsFilterAdapter = SmsFiltersAdapter()
+        initializeSmsFilterRecyclerMessagesDao(this)
+
     }
 
     private fun loadAppOpenAd() {
@@ -72,6 +81,16 @@ class MyApplication : Application() {
         val keyGenerator = KeyGenerator.getInstance(algorithm)
         keyGenerator.init(256) // Key size in bits
         return keyGenerator.generateKey()
+    }
+
+    private fun initializeSmsFilterRecyclerMessagesDao(context: Context){
+        GlobalScope.launch(Dispatchers.IO) {
+            val database = AppDatabase.getInstance(context)
+            smsFilterRecyclerMessageDao = database.smsFilterRecyclerMessageDao()
+            val smsFilterRecyclerMessages = smsFilterRecyclerMessageDao.getAllItems()
+            smsFilterAdapter.updateSmsFilterList(smsFilterRecyclerMessages)
+            // Use the 'items' in the UI if needed (e.g., update the UI with the data)
+        }
     }
 
 

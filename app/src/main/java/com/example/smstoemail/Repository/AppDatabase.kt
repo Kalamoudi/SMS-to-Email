@@ -8,16 +8,19 @@ import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.smstoemail.Entity.RecyclerMessage
+import com.example.smstoemail.Entity.SmsFilterRecyclerMessage
 import com.example.smstoemail.Entity.SmtpData
 import com.example.smstoemail.Interfaces.RecyclerMessageDao
+import com.example.smstoemail.Interfaces.SmsFilterRecyclerMessageDao
 import com.example.smstoemail.Interfaces.SmtpDao
 import com.example.smstoemail.TypeConverters.CalendarTypeConverter
 
-@Database(entities = [RecyclerMessage::class, SmtpData::class], version = 9)
+@Database(entities = [RecyclerMessage::class, SmtpData::class, SmsFilterRecyclerMessage::class], version = 10)
 @TypeConverters(CalendarTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun recyclerMessageDao(): RecyclerMessageDao
     abstract fun smtpDao(): SmtpDao
+    abstract fun smsFilterRecyclerMessageDao(): SmsFilterRecyclerMessageDao
 
     companion object {
         @Volatile

@@ -85,6 +85,13 @@
             <!-- Add activity attributes here if needed -->
         </activity>
 
+        <activity
+            android:name=".SmsFilters.SmsFiltersActivity"
+            android:label="SMS Filters"
+            android:parentActivityName=".MainActivity"
+
+            />
+
         <service
             android:name=".Services.BackgroundService"
             android:enabled="true"

@@ -25,6 +25,7 @@ import com.example.smstoemail.Pages.HandleMainPageViews
 import com.example.smstoemail.Repository.AppDatabase
 import com.example.smstoemail.Services.BackgroundService
 import com.example.smstoemail.Sms.SMSAdapter
+import com.example.smstoemail.SmsFilters.SmsFiltersAdapter
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
@@ -50,6 +51,7 @@ public lateinit var smsAdapter: SMSAdapter
 public lateinit var signInWithGmail: SignInWithGmail
 public val algorithm = "AES"
 public val transformation = "AES/ECB/PKCS5Padding"
+public lateinit var smsFilterAdapter: SmsFiltersAdapter
 
 
 object TableNames {
