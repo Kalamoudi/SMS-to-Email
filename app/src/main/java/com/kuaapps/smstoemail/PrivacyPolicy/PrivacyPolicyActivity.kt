@@ -30,7 +30,7 @@ class PrivacyPolicyActivity : AppCompatActivity() {
 //            webView.settings.forceDark = WebSettings.FORCE_DARK_ON
 //            webView.settings.javaScriptEnabled = true
 //
-//        }
+//        }-
 
         webView.loadUrl("file:///android_asset/privacy_policy.txt")
     }
