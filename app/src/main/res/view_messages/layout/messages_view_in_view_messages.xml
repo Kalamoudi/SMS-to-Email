@@ -7,9 +7,8 @@
     xmlns:tools="http://schemas.android.com/tools"
 
     android:id="@+id/smsRecyclerViewInViewMessages"
-    android:layout_width="380dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="244dp"
     android:gravity="center"
     android:textColor="?android:textColorPrimary"
     android:visibility="visible"

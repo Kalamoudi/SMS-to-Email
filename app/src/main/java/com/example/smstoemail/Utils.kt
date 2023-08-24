@@ -13,10 +13,12 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.EditText
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import androidx.core.widget.NestedScrollView
 import androidx.security.crypto.EncryptedSharedPreferences
 import com.example.smstoemail.Entity.SmtpData
 import com.example.smstoemail.GoogleSignIn.SignInWithGmail
@@ -339,5 +341,25 @@ object Utils {
     fun premium(){
         sharedPrefs.edit().putBoolean("advertisementOff", true).apply()
         smsFilterCapacity = 50000
+    }
+
+    fun addBottomMarginForAd(context: Context, layout: RelativeLayout, adHeight: Int) {
+        if (!sharedPrefs.getBoolean("advertisementOff", true)) {
+
+            val layoutParams = layout.layoutParams as RelativeLayout.LayoutParams
+
+            layoutParams.bottomMargin = context.resources.getDimensionPixelSize(adHeight)
+            layout.layoutParams = layoutParams
+
+        }
+    }
+
+    fun addBottomMarginForAd(context: Context, layout: NestedScrollView, adHeight: Int) {
+        if (!sharedPrefs.getBoolean("advertisementOff", true)) {
+            val layoutParams = layout.layoutParams as RelativeLayout.LayoutParams
+
+            layoutParams.bottomMargin = context.resources.getDimensionPixelSize(adHeight)
+            layout.layoutParams = layoutParams
+        }
     }
 }

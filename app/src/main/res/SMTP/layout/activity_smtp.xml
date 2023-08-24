@@ -32,15 +32,21 @@
 
         <!-- main content layout-->
 
-
-        <include
-            layout="@layout/smtp_page"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:visibility="visible"
+            android:layout_height="wrap_content"
+            android:id="@+id/smtpPage"
             android:layout_below="@+id/mainToolbar"
+            >
+            <include
+                layout="@layout/smtp_page"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:visibility="visible"
 
-            />
+
+                />
+        </androidx.core.widget.NestedScrollView>
 
 
         <include

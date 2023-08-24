@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smstoemail.GoogleSignIn.SignInWithGmail
@@ -54,6 +55,9 @@ class SmsFiltersActivity  : AppCompatActivity(){
         setContentView(R.layout.activity_sms_filters)
 
         Utils.showAd(this, findViewById(R.id.adViewSmtpBanner))
+
+        Utils.addBottomMarginForAd(this, findViewById<NestedScrollView>(R.id.smsFilterPage),
+            R.dimen.viewMessagesPageRelativeLayoutMarginBottom)
 
         //========= Tool bar functionalities ================
         // Process and handles navigation drawer logic
@@ -107,11 +111,11 @@ class SmsFiltersActivity  : AppCompatActivity(){
         val clearAllFilters: Button = findViewById(R.id.smsFilterClearAllFiltersButton)
 
         clearAllFilters.setOnClickListener {
-
             smsFilterAdapter.clearAllFilters()
 
-
         }
+
+
 
 
     }

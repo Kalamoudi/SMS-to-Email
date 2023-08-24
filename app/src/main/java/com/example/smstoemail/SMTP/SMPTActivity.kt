@@ -3,7 +3,9 @@ package com.example.smstoemail.Smtp
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import com.example.smstoemail.GoogleSignIn.SignInWithGmail
 import com.example.smstoemail.MainActivity
 import com.example.smstoemail.MainActivityUtils
@@ -28,6 +30,9 @@ class SmtpActivity : AppCompatActivity(){
 
         //SmtpUtils.addAdvertisement(this)
         Utils.showAd(this, findViewById(R.id.adViewInSmtp))
+
+        Utils.addBottomMarginForAd(this, findViewById<NestedScrollView>(R.id.smtpPage),
+            R.dimen.viewMessagesPageRelativeLayoutMarginBottom)
 
         //========= Tool bar functionalities ================
         // Process and handles navigation drawer logic

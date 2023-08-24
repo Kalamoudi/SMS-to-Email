@@ -21,23 +21,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
+
         >
 
         <!-- toolbar layout -->
         <include
-
+            android:id="@+id/mainToolbar"
             layout="@layout/toolbar"
 
             />
 
         <include
 
+            android:id="@+id/viewMessagesPage"
             layout="@layout/view_messages_page"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
+            android:layout_below="@+id/mainToolbar"
 
 
+            />
+
+        <include
+            android:id="@+id/adViewInViewMessages"
+            layout="@layout/ad_view_messages_banner"
             />
 
         <include

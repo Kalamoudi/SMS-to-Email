@@ -120,24 +120,4 @@
 
         />
 
-
-
-<!--    <RecyclerV-->
-<!--        android:id="@+id/smsFiltersGridLayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:columnCount="1"-->
-<!--        android:rowCount="1"-->
-<!--        android:layout_marginTop="16dp"-->
-
-
-<!--        >-->
-
-<!--        &lt;!&ndash; Rest of your layout content &ndash;&gt;-->
-
-<!--    </RecyclerV>-->
-
-
-
-
 </RelativeLayout>

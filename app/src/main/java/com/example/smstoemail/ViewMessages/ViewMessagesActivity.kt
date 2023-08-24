@@ -5,8 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginBottom
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smstoemail.GoogleSignIn.SignInWithGmail
@@ -17,7 +20,9 @@ import com.example.smstoemail.R
 import com.example.smstoemail.Settings.SettingsFragment
 import com.example.smstoemail.Utils
 import com.example.smstoemail.Utils.RC_SIGN_IN
+import com.example.smstoemail.sharedPrefs
 import com.example.smstoemail.smsAdapter
+import com.google.android.gms.ads.AdView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 
 class ViewMessagesActivity : AppCompatActivity() {
@@ -33,6 +38,7 @@ class ViewMessagesActivity : AppCompatActivity() {
         MainActivityUtils.updateTheme(this)
 
         setContentView(R.layout.view_messages_activity)
+
 
         Utils.showAd(this, findViewById(R.id.adViewInViewMessages))
 
@@ -54,6 +60,8 @@ class ViewMessagesActivity : AppCompatActivity() {
         smsRecyclerView.adapter = smsAdapter
         smsRecyclerView.layoutManager = LinearLayoutManager(this)
 
+        Utils.addBottomMarginForAd(this, findViewById<RelativeLayout>(R.id.viewMessagesPage),
+            R.dimen.viewMessagesPageRelativeLayoutMarginBottom)
 
     }
 
