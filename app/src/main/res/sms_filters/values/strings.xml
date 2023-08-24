@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="addFilterHeader">Add Filters</string>
+    <string name="addFilterHeader">Add Filter</string>
 
     <string name="smsFilterAddFilterButtonText">Add Filters</string>
 

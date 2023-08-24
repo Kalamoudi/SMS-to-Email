@@ -54,10 +54,9 @@ class SmsFiltersActivity  : AppCompatActivity(){
 
         setContentView(R.layout.activity_sms_filters)
 
-        Utils.showAd(this, findViewById(R.id.adViewSmtpBanner))
+      //  Utils.showAd(this, findViewById(R.id.adViewSmtpBanner))
 
-        Utils.addBottomMarginForAd(this, findViewById<NestedScrollView>(R.id.smsFilterPage),
-            R.dimen.viewMessagesPageRelativeLayoutMarginBottom)
+     //   Utils.addBottomMarginForAd(this, findViewById<NestedScrollView>(R.id.smsFilterPage), R.dimen.viewMessagesPageRelativeLayoutMarginBottom)
 
         //========= Tool bar functionalities ================
         // Process and handles navigation drawer logic
@@ -101,7 +100,8 @@ class SmsFiltersActivity  : AppCompatActivity(){
         }
 
         addButton.setOnClickListener {
-            val newFilter = filterEditText.text.toString()
+            var newFilter = filterEditText.text.toString()
+            newFilter = newFilter.trim()
             if (newFilter.isNotEmpty()) {
                 smsFilterAdapter.addSmsFilter(this, SmsFilter(newFilter))
                 filterEditText.text.clear()

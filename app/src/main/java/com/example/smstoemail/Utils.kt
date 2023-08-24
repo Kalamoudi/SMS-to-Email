@@ -55,7 +55,7 @@ public val algorithm = "AES"
 public val transformation = "AES/ECB/PKCS5Padding"
 public lateinit var smsFilterAdapter: SmsFiltersAdapter
 public const val freeVersion = true
-public var smsFilterCapacity = 1
+public var smsFilterCapacity = 2
 
 
 object TableNames {
