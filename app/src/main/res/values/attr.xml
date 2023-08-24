@@ -14,6 +14,7 @@
     <attr name="settingsSelectorColor" format="color"/>
     <attr name="settingsSwitchButtonColor" format="color"/>
     <attr name="summaryColor" format="color"/>
+    <attr name="windowBackground" format="color"/>
 
     <attr name="transparent" format="color"/>
 

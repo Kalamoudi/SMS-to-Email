@@ -21,11 +21,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.smstoemail'
+    namespace 'com.kuaapps.smstoemail'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.smstoemail"
+        applicationId "com.kuaapps.smstoemail"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -56,6 +56,7 @@ android {
     }
     buildFeatures {
         compose true
+        viewBinding true
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.3.2'
@@ -79,7 +80,7 @@ android {
         main {
             res {
                 srcDirs 'src\\main\\res\\navigation_drawer',
-                        'src\\main\\res', 'src\\main\\res\\settings', 'src\\main\\res\\SMTP', 'src\\main\\res\\google_sign_in', 'src\\main\\res\\view_messages', 'src\\main\\res\\advertisement', 'src\\main\\res\\sms_filters'
+                        'src\\main\\res', 'src\\main\\res\\settings', 'src\\main\\res\\SMTP', 'src\\main\\res\\google_sign_in', 'src\\main\\res\\view_messages', 'src\\main\\res\\advertisement', 'src\\main\\res\\sms_filters', 'src\\main\\res\\privacy_policy'
             }
         }
     }
@@ -99,6 +100,8 @@ dependencies {
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.compose.material3:material3'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

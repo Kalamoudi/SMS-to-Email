@@ -7,7 +7,7 @@
     android:layout_centerHorizontal="true"
     android:layout_alignParentBottom="true"
     ads:adSize="SMART_BANNER"
-    ads:adUnitId="@string/admob_banner_ad_test_id"
+    ads:adUnitId="@string/admob_nav_banner_ad_unit_id"
     xmlns:android="http://schemas.android.com/apk/res/android"
 
     />
