@@ -9,64 +9,71 @@
     >
 
     <include
-
+        android:id="@+id/settingsToolbar"
         layout="@layout/settings_toolbar"
 
         />
 
 
-
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/settings_container"
-
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/settingsLayout"
+        android:layout_height="wrap_content"
+        android:id="@+id/settingsPage"
+        android:layout_below="@id/settingsToolbar"
+
         >
+        <FrameLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/settingsFrameLayout"
 
-        <include
-            layout="@layout/checkbox1"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="10dp"
-            />
-        <include
-            layout="@layout/foreground_service_checkbox"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="10dp"
-            />
-        <include
-            layout="@layout/switch1"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="180dp"
-            />
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            >
 
-        <include
-            layout="@layout/checkbox2"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="10dp"
+            <include
+                layout="@layout/checkbox1"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                />
+            <include
+                layout="@layout/foreground_service_checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                />
+            <include
+                layout="@layout/switch1"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="180dp"
+                />
 
-            />
+            <include
+                layout="@layout/checkbox2"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
 
-        <include
-            layout="@layout/gmail_checkbox"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="10dp"
-            />
+                />
 
-        <include
-            layout="@layout/only_wifi_checkbox"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="10dp"
-            />
+            <include
+                layout="@layout/gmail_checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                />
 
-    </FrameLayout>
+            <include
+                layout="@layout/only_wifi_checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                />
+
+        </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
     <include

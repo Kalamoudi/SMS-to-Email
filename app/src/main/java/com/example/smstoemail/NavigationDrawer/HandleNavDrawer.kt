@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.smstoemail.MainActivity
 import com.example.smstoemail.MainActivityUtils
@@ -47,6 +48,12 @@ class HandleNavDrawer (private val context: Context) {
 
       //  NavDrawerUtils.addAdvertisement(context)
         Utils.showAd(context, (context as AppCompatActivity).findViewById(R.id.adViewNavBanner))
+
+        Utils.addBottomMarginForAd(
+            context,
+            (context as AppCompatActivity).findViewById<NestedScrollView>(R.id.navDrawerListsScrollView),
+            R.dimen.viewMessagesPageRelativeLayoutMarginBottom
+        )
 
 
         mainListImages = NavDrawerUtils.changeListToNight(mainListImages)

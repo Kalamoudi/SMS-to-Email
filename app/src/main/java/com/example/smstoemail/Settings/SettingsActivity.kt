@@ -24,6 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import androidx.core.app.ActivityCompat.recreate
+import androidx.core.widget.NestedScrollView
 import com.example.smstoemail.Utils
 
 
@@ -46,9 +47,13 @@ class SettingsActivity : AppCompatActivity() {
 
         Utils.showAd(this, findViewById(R.id.adViewInSettings))
 
+        Utils.addBottomMarginForAd(this, findViewById<NestedScrollView>(R.id.settingsPage),
+                R.dimen.viewMessagesPageRelativeLayoutMarginBottom)
+
 
         val backButton = findViewById<Button>(R.id.settingsBackButton)
         val backButtonLayout = findViewById<RelativeLayout>(R.id.settingsBackButtonView)
+
 
         backButtonLayout.setOnClickListener{
             finish()
@@ -64,7 +69,7 @@ class SettingsActivity : AppCompatActivity() {
 //                .commit()
 //        }
 
-        var frameLayout = findViewById<FrameLayout>(R.id.settings_container)
+        var frameLayout = findViewById<FrameLayout>(R.id.settingsFrameLayout)
         setsTopMarginForAllFramelayoutElements(frameLayout)
 
         SettingsOptions.processBackgroundCheckbox(this)
@@ -80,7 +85,7 @@ class SettingsActivity : AppCompatActivity() {
     fun setsTopMarginForAllFramelayoutElements(frameLayout: FrameLayout){
 
         // insitialize values in xml dp
-        var initialMargin = (90 * resources.displayMetrics.density).toInt()
+        var initialMargin = 0
         val frameHeight = (75 * resources.displayMetrics.density).toInt()
 
         var index = 0

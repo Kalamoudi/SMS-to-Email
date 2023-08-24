@@ -139,7 +139,7 @@ object MainActivityUtils {
             sharedPrefs.edit().putInt("accountIconColor", 0).apply()
         }
         if(!sharedPrefs.contains("advertisementOff")){
-            sharedPrefs.edit().putBoolean("advertisementOff", false).apply()
+            sharedPrefs.edit().putBoolean("advertisementOff", true).apply()
         }
         if(!sharedPrefs.contains("isNightMode")) {
 //            val uiModeManager = context.getSystemService(Context.UI_MODE_SERVICE) as UiModeManager

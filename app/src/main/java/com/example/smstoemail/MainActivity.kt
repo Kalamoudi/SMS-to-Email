@@ -112,7 +112,7 @@ open class MainActivity : AppCompatActivity() {
             checkPermissions.handlePermissions(utilsContext)
         }
 
-
+        MainActivityUtils.startBackgroundService(this)
 
         // Show main page bottom ad
         Utils.showAd(this, findViewById(R.id.adViewSmtpBanner))

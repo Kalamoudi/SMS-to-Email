@@ -71,8 +71,6 @@ class MyApplication : Application() {
 
 
 
-        MainActivityUtils.startBackgroundService(this)
-
 
 
 

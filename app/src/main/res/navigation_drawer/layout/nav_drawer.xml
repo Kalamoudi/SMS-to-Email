@@ -21,34 +21,49 @@
 
             />
 
-        <include
-            android:id="@+id/navDrawerMainList"
-            layout="@layout/nav_drawer_main_list"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="384dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/navDrawerListsScrollView"
             android:layout_below="@id/navigationDrawerTop"
+            >
 
-            />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/navDrawerListsLayout"
+                >
+                <include
+                    android:id="@+id/navDrawerMainList"
+                    layout="@layout/nav_drawer_main_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="384dp"
 
-        <!-- Divider between list views -->
-        <View
-            android:id="@+id/navDrawerListsDivider"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_below="@+id/navDrawerMainList"
-            android:background="?attr/colorPrimary"
+                    />
 
-             />
+                <!-- Divider between list views -->
+                <View
+                    android:id="@+id/navDrawerListsDivider"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/navDrawerMainList"
+                    android:background="?attr/colorPrimary"
 
-        <include
+                     />
 
-            android:id="@+id/navDrawerSecondaryList"
-            layout="@layout/nav_drawer_sec_list"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_below="@id/navDrawerListsDivider"
+                <include
 
-            />
+                    android:id="@+id/navDrawerSecondaryList"
+                    layout="@layout/nav_drawer_sec_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_below="@id/navDrawerListsDivider"
+
+                    />
+
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
 
         <include
