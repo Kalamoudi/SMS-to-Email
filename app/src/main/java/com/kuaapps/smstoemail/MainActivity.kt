@@ -63,6 +63,8 @@ open class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        MainActivityUtils.initializeTheme(this)
         super.onCreate(savedInstanceState)
 
 
@@ -71,18 +73,8 @@ open class MainActivity : AppCompatActivity() {
 
 
 
-
-        // Instantiate the getSharedPreferences with tableName = "preferences
-      //  sharedPrefs = getSharedPreferences("preferences", MODE_PRIVATE)
-
-
-        // Handles all the sharedPreference logic (always check/edit after changing something to preference)
-     //   MainActivityUtils.handleSharedPreferencesOnInitialization(this)
-
-     //   sharedPrefs.edit().putBoolean("advertisementOff", false).apply()
-
         // Set the theme of the app based on isNightMode trigger
-        MainActivityUtils.initializeTheme(this)
+      //  MainActivityUtils.initializeTheme(this)
 
 
         setContentView(R.layout.activity_main)

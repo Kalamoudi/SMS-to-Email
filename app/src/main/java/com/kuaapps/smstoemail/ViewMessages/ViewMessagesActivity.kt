@@ -23,12 +23,12 @@ class ViewMessagesActivity : AppCompatActivity() {
     private lateinit var smsRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        MainActivityUtils.initializeTheme(this)
         super.onCreate(savedInstanceState)
 
 
-        MainActivityUtils.updateTheme(this)
 
-        setContentView(R.layout.view_messages_activity)
+        setContentView(R.layout.activity_view_messages)
 
 
         Utils.showAd(this, findViewById(R.id.adViewInViewMessages))

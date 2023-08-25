@@ -18,14 +18,14 @@ class SettingsActivity : AppCompatActivity() {
 
     private lateinit var settingsFragment: SettingsFragment
     private var isAnimating = false
+    private lateinit var backButtonLayout: RelativeLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        MainActivityUtils.initializeTheme(this)
         super.onCreate(savedInstanceState)
 
 
-
-        MainActivityUtils.updateTheme(this)
 
 
 
@@ -38,7 +38,7 @@ class SettingsActivity : AppCompatActivity() {
 
 
         val backButton = findViewById<Button>(R.id.settingsBackButton)
-        val backButtonLayout = findViewById<RelativeLayout>(R.id.settingsBackButtonView)
+        backButtonLayout = findViewById<RelativeLayout>(R.id.settingsBackButtonView)
 
 
         backButtonLayout.setOnClickListener{
@@ -92,6 +92,7 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
+        //backButtonLayout.performClick()
         finish()
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
 

@@ -16,25 +16,25 @@ import com.kuaapps.smstoemail.sharedPrefs
 class PrivacyPolicyActivity : AppCompatActivity() {
 
 
-    @RequiresApi(Build.VERSION_CODES.Q)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        MainActivityUtils.initializeTheme(this)
-        setContentView(R.layout.activity_privacy_policy)
-
-        val webView: WebView = findViewById(R.id.privacyPolicyWebView)
-
-//        if (sharedPrefs.getBoolean("isNightMode", true)) {
-//            webView.setBackgroundColor(resources.getColor(android.R.color.background_dark))
-//            webView.settings.forceDark = WebSettings.FORCE_DARK_ON
-//            webView.settings.javaScriptEnabled = true
+//    @RequiresApi(Build.VERSION_CODES.Q)
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
 //
-//        }-
-
-        webView.loadUrl("file:///android_asset/privacy_policy.txt")
-    }
-
+//        MainActivityUtils.initializeTheme(this)
+//        setContentView(R.layout.activity_privacy_policy)
+//
+//        val webView: WebView = findViewById(R.id.privacyPolicyWebView)
+//
+////        if (sharedPrefs.getBoolean("isNightMode", true)) {
+////            webView.setBackgroundColor(resources.getColor(android.R.color.background_dark))
+////            webView.settings.forceDark = WebSettings.FORCE_DARK_ON
+////            webView.settings.javaScriptEnabled = true
+////
+////        }-
+//
+//        webView.loadUrl("file:///android_asset/privacy_policy.txt")
+//    }
+//
 
 
 }

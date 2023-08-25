@@ -3,9 +3,14 @@ package com.kuaapps.smstoemail.NavigationDrawer
 
 import android.content.Context
 import android.content.Intent
+import android.view.View
 import android.widget.ListView
+import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.kuaapps.smstoemail.MainActivity
 import com.kuaapps.smstoemail.MainActivityUtils
 import com.kuaapps.smstoemail.PrivacyPolicy.PrivacyPolicyActivity
@@ -15,6 +20,7 @@ import com.kuaapps.smstoemail.Settings.SettingsActivity
 import com.kuaapps.smstoemail.SmsFilters.SmsFiltersActivity
 import com.kuaapps.smstoemail.Utils
 import com.kuaapps.smstoemail.ViewMessages.ViewMessagesActivity
+import org.w3c.dom.Text
 
 
 class HandleNavDrawer (private val context: Context) {
@@ -24,6 +30,7 @@ class HandleNavDrawer (private val context: Context) {
 
     private val mainListData = listOf("Home", "Received SMS", "Configure SMTP", "SMS Filters", "Settings")
     private val secondaryListData = listOf("Contact Us", "Privacy Policy", "License")
+    private lateinit var drawerLayout: DrawerLayout
 
     private var mainListImages = listOf(
         R.drawable.ic_home,
@@ -45,6 +52,24 @@ class HandleNavDrawer (private val context: Context) {
 
     fun handleNavDrawer() {
 
+       // val navHeader: RelativeLayout = (context as AppCompatActivity).findViewById(R.id.navDrawerHeader)
+
+//        val account = GoogleSignIn.getLastSignedInAccount(context)
+//
+//        if(account != null){
+//            val navHeaderAccountInfo: RelativeLayout = (context as AppCompatActivity).findViewById(R.id.navDrawerHeaderAccountInfo)
+//            val navHeaderFullName: TextView = (context as AppCompatActivity).findViewById(R.id.navDrawerHeaderFullName)
+//            val navHeaderEmail: TextView = (context as AppCompatActivity).findViewById(R.id.navDrawerHeaderEmail)
+//
+//            navHeaderFullName.text = account.displayName.toString()
+//            navHeaderEmail.text = account.email.toString()
+//            navHeaderAccountInfo.visibility = View.VISIBLE
+//
+//        }
+
+
+
+        drawerLayout = (context as AppCompatActivity).findViewById(R.id.drawerLayout)
       //  NavDrawerUtils.addAdvertisement(context)
         Utils.showAd(context, (context as AppCompatActivity).findViewById(R.id.adViewNavBanner))
 
@@ -79,8 +104,8 @@ class HandleNavDrawer (private val context: Context) {
 
             when(selectedItem){
                 "Contact Us" -> Utils.showToast(context, "email: smstoemail.smssender@gmail.com")
-               // "Privacy Policy" -> NavDrawerUtils.showDialog(context, "privacy_policy.txt", "Privacy Policy")
-                "Privacy Policy" -> openPrivacyPolicyPage(context)
+                "Privacy Policy" -> NavDrawerUtils.showDialog(context, "privacy_policy.txt", "Privacy Policy")
+               // "Privacy Policy" -> openPrivacyPolicyPage(context)
                 "License" -> NavDrawerUtils.showDialog(
                     context,
                     "LICENSE.txt",
@@ -102,6 +127,7 @@ class HandleNavDrawer (private val context: Context) {
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         context.startActivity(intent)
         (context as AppCompatActivity).overridePendingTransition(R.anim.slide_none, R.anim.slide_none)
+      //  drawerLayout.closeDrawers()
     }
 
     private fun openSettingsPage(context: Context) {
@@ -110,6 +136,7 @@ class HandleNavDrawer (private val context: Context) {
         context.startActivity(intent)
        // (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_none)
+
     }
 
     private fun openSmtpPage(context: Context){
@@ -122,6 +149,7 @@ class HandleNavDrawer (private val context: Context) {
         MainActivityUtils.closeNavigationDrawer(context)
         context.startActivity(intent)
         (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_none)
+      //  drawerLayout.closeDrawers()
     }
 
     private fun openViewMessagesPage(context: Context){
@@ -134,6 +162,7 @@ class HandleNavDrawer (private val context: Context) {
         MainActivityUtils.closeNavigationDrawer(context)
         context.startActivity(intent)
         (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_none)
+     //   drawerLayout.closeDrawers()
 
     }
 
@@ -147,6 +176,7 @@ class HandleNavDrawer (private val context: Context) {
         MainActivityUtils.closeNavigationDrawer(context)
         context.startActivity(intent)
         (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_none)
+      //  drawerLayout.closeDrawers()
 
     }
 

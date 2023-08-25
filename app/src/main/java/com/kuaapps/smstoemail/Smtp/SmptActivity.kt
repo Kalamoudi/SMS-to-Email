@@ -18,10 +18,10 @@ class SmtpActivity : AppCompatActivity(){
     private lateinit var handleSMTPViews: HandleSmtpViews
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        MainActivityUtils.initializeTheme(this)
         super.onCreate(savedInstanceState)
 
 
-        MainActivityUtils.initializeTheme(this)
 
         setContentView(R.layout.activity_smtp)
 

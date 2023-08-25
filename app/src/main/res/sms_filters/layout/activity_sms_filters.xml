@@ -13,7 +13,6 @@
 
     android:visibility="visible"
     tools:visibility="visible"
-    android:background="?attr/windowBackground"
 
     >
 
