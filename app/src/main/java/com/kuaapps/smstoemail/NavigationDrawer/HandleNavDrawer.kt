@@ -103,7 +103,8 @@ class HandleNavDrawer (private val context: Context) {
             val selectedItem = parent.getItemAtPosition(position) as String
 
             when(selectedItem){
-                "Contact Us" -> Utils.showToast(context, "email: smstoemail.smssender@gmail.com")
+               // "Contact Us" -> Utils.showToast(context, "email: smstoemail.smssender@gmail.com")
+                "Contact Us" -> NavDrawerUtils.showDialog(context, "contact_us.txt", "Contact Us")
                 "Privacy Policy" -> NavDrawerUtils.showDialog(context, "privacy_policy.txt", "Privacy Policy")
                // "Privacy Policy" -> openPrivacyPolicyPage(context)
                 "License" -> NavDrawerUtils.showDialog(

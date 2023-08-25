@@ -3,6 +3,7 @@ package com.kuaapps.smstoemail
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -230,7 +231,7 @@ object Utils {
     fun getColorFromAttribute(context: Context, attributeName: String): Int{
 
         val attributeId = context.resources.getIdentifier(attributeName,
-            "attr", "com.example.smstoemail")
+            "attr", "com.kuaapps.smstoemail")
         val typedValue = TypedValue()
         context.theme.resolveAttribute(attributeId, typedValue, true)
         val backgroundColor = typedValue.data
@@ -359,5 +360,19 @@ object Utils {
             layoutParams.bottomMargin = context.resources.getDimensionPixelSize(adHeight)
             layout.layoutParams = layoutParams
         }
+    }
+
+    fun showDialog(context: Context, title: String, message: String){
+        var themeInt = R.style.CustomAlertDialogThemeDark
+        if(!sharedPrefs.getBoolean("isNightMode", true)){
+            themeInt = R.style.CustomAlertDialogThemeLight
+        }
+        val dialogBuilder = AlertDialog.Builder(context, themeInt)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("OK", null)
+
+        val dialog = dialogBuilder.create()
+        dialog.show()
     }
 }
