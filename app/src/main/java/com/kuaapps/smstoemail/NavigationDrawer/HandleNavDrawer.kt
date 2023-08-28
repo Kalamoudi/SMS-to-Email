@@ -48,30 +48,31 @@ class HandleNavDrawer (private val context: Context) {
     private val secondaryListView: ListView =
         appCompatActivity.findViewById<ListView>(R.id.navDrawerSecondaryList)
 
+    private val navHeader: RelativeLayout = (context as AppCompatActivity).findViewById(R.id.navigationDrawerTop)
+
 
 
     fun handleNavDrawer() {
 
-       // val navHeader: RelativeLayout = (context as AppCompatActivity).findViewById(R.id.navDrawerHeader)
 
-//        val account = GoogleSignIn.getLastSignedInAccount(context)
-//
-//        if(account != null){
-//            val navHeaderAccountInfo: RelativeLayout = (context as AppCompatActivity).findViewById(R.id.navDrawerHeaderAccountInfo)
-//            val navHeaderFullName: TextView = (context as AppCompatActivity).findViewById(R.id.navDrawerHeaderFullName)
-//            val navHeaderEmail: TextView = (context as AppCompatActivity).findViewById(R.id.navDrawerHeaderEmail)
-//
-//            navHeaderFullName.text = account.displayName.toString()
-//            navHeaderEmail.text = account.email.toString()
-//            navHeaderAccountInfo.visibility = View.VISIBLE
-//
-//        }
+        val account = GoogleSignIn.getLastSignedInAccount(context)
+
+        if(account != null){
+            val navHeaderAccountInfo: RelativeLayout = (context as AppCompatActivity).findViewById(R.id.navDrawerHeaderAccountInfo)
+            val navHeaderFullName: TextView = (context as AppCompatActivity).findViewById(R.id.navDrawerHeaderFullName)
+            val navHeaderEmail: TextView = (context as AppCompatActivity).findViewById(R.id.navDrawerHeaderEmail)
+
+            navHeaderFullName.text = account.displayName.toString()
+            navHeaderEmail.text = account.email.toString()
+            navHeaderAccountInfo.visibility = View.VISIBLE
+
+        }
 
 
 
         drawerLayout = (context as AppCompatActivity).findViewById(R.id.drawerLayout)
       //  NavDrawerUtils.addAdvertisement(context)
-        Utils.showAd(context, (context as AppCompatActivity).findViewById(R.id.adViewNavBanner))
+        Utils.showAd(context, context.findViewById(R.id.adViewNavBanner))
 
         Utils.addBottomMarginForAd(
             context,

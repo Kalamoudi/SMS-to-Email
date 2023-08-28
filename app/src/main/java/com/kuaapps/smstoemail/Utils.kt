@@ -13,6 +13,7 @@ import android.util.Base64
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.Toast
@@ -355,7 +356,7 @@ object Utils {
 
     fun addBottomMarginForAd(context: Context, layout: NestedScrollView, adHeight: Int) {
         if (!sharedPrefs.getBoolean("advertisementOff", true)) {
-            val layoutParams = layout.layoutParams as RelativeLayout.LayoutParams
+            val layoutParams = layout.layoutParams as ViewGroup.MarginLayoutParams
 
             layoutParams.bottomMargin = context.resources.getDimensionPixelSize(adHeight)
             layout.layoutParams = layoutParams

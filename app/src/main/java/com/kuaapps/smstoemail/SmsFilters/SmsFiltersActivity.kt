@@ -7,7 +7,9 @@ import android.view.KeyEvent
 import android.widget.Button
 import android.widget.EditText
 import android.widget.GridLayout
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
 import com.kuaapps.smstoemail.Interfaces.smsFilterRecyclerMessageDao
 import com.kuaapps.smstoemail.MainActivityUtils
@@ -42,9 +44,9 @@ class SmsFiltersActivity  : AppCompatActivity(){
 
         setContentView(R.layout.activity_sms_filters)
 
-      //  Utils.showAd(this, findViewById(R.id.adViewSmtpBanner))
-
-     //   Utils.addBottomMarginForAd(this, findViewById<NestedScrollView>(R.id.smsFilterPage), R.dimen.viewMessagesPageRelativeLayoutMarginBottom)
+//        Utils.showAd(this, findViewById(R.id.adViewInSmsFilter))
+//        Utils.addBottomMarginForAd(this, findViewById<NestedScrollView>(R.id.smsFilterPage),
+//            R.dimen.viewMessagesPageRelativeLayoutMarginBottom)
 
         //========= Tool bar functionalities ================
         // Process and handles navigation drawer logic
@@ -102,6 +104,7 @@ class SmsFiltersActivity  : AppCompatActivity(){
             smsFilterAdapter.clearAllFilters()
 
         }
+
 
 
 

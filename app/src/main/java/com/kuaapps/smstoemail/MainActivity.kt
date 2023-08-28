@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.RelativeLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -127,6 +128,10 @@ open class MainActivity : AppCompatActivity() {
         handleMainPageView.handleViews(this)
 
 
+
+        Utils.addBottomMarginForAd(this, findViewById<RelativeLayout>(R.id.mainPage),
+            R.dimen.viewMessagesPageRelativeLayoutMarginBottom)
+
     }
 
 
@@ -231,7 +236,7 @@ open class MainActivity : AppCompatActivity() {
         if(sharedPrefs.getBoolean("openAppOpenAd", true) and !sharedPrefs.getBoolean("advertisementOff", true)){
             CoroutineScope(Dispatchers.Main).launch {
                     loadAppOpenAd()
-                    delay(1000L)
+                    delay(1200L)
                     showAppOpenAd()
                 sharedPrefs.edit().putBoolean("openAppOpenAd", false).apply()
                 }

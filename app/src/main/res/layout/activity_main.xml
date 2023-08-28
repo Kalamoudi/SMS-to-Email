@@ -35,6 +35,13 @@
             />
 
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mainPage"
+
+            >
+
         <!-- main content layout-->
         <include
             layout="@layout/main_page"
@@ -49,8 +56,17 @@
             layout="@layout/sign_out_tabs"
             />
 
+        </RelativeLayout>
+
+
+        <include
+
+            layout="@layout/ad_smtp_banner"
+            />
+
 
     </RelativeLayout>
+
 
 
 

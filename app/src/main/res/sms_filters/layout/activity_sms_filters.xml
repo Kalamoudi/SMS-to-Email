@@ -55,8 +55,8 @@
         </androidx.core.widget.NestedScrollView>
 
         <include
+            android:id="@+id/adViewInSmsFilter"
             layout="@layout/ad_smtp_banner"
-            android:visibility="visible"
             />
 
         <include

@@ -27,44 +27,45 @@
 
         />
 
-<!--    <RelativeLayout-->
-<!--        android:id="@+id/navDrawerHeaderAccountInfo"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/navDrawerHeaderTitle"-->
-<!--        android:layout_marginBottom="5dp"-->
-<!--        android:gravity="bottom"-->
-<!--        android:layout_alignParentTop="false"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:visibility="invisible"-->
-<!--        >-->
-<!--        <TextView-->
-<!--            android:id="@+id/navDrawerHeaderFullName"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="1dp"-->
-<!--            android:text="Khalid Alamoudi"-->
-<!--            android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
-<!--            android:textColor="?attr/textHeaderColorPrimary"-->
-<!--            android:textSize="15dp"-->
+    <RelativeLayout
+        android:id="@+id/navDrawerHeaderAccountInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navDrawerHeaderTitle"
+        android:layout_marginBottom="5dp"
+        android:gravity="bottom"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible"
+        >
+        <TextView
+            android:id="@+id/navDrawerHeaderFullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:text="John Doe"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="?attr/textHeaderColorPrimary"
+            android:textSize="15dp"
 
-<!--            />-->
 
-<!--        <TextView-->
-<!--            android:id="@+id/navDrawerHeaderEmail"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="1dp"-->
-<!--            android:layout_marginTop="1dp"-->
-<!--            android:text="kala@gmail.com"-->
-<!--            android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
-<!--            android:textColor="?attr/textHeaderColorPrimary"-->
-<!--            android:textSize="14dp"-->
-<!--            android:layout_below="@+id/navDrawerHeaderFullName"-->
+            />
 
-<!--            />-->
+        <TextView
+            android:id="@+id/navDrawerHeaderEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:text="johndoe@gmail.com"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="?attr/textHeaderColorPrimary"
+            android:textSize="14dp"
+            android:layout_below="@+id/navDrawerHeaderFullName"
 
-<!--    </RelativeLayout>-->
+            />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

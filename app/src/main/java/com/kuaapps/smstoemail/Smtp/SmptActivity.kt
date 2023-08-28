@@ -3,6 +3,7 @@ package com.kuaapps.smstoemail.Smtp
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import com.kuaapps.smstoemail.MainActivityUtils
@@ -46,6 +47,9 @@ class SmtpActivity : AppCompatActivity(){
 
         handleSMTPViews = HandleSmtpViews()
         handleSMTPViews.handleViews(this)
+
+        Utils.addBottomMarginForAd(this, findViewById<NestedScrollView>(R.id.smtpPage),
+            R.dimen.viewMessagesPageRelativeLayoutMarginBottom)
 
     }
 
