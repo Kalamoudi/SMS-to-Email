@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
+import androidx.security.crypto.EncryptedSharedPreferences
 import com.kuaapps.smstoemail.Entity.SmtpData
 import com.kuaapps.smstoemail.GoogleSignIn.SignInWithGmail
 import com.kuaapps.smstoemail.Interfaces.BaseDao

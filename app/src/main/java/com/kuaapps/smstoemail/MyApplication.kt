@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.util.Base64
 import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.appopen.AppOpenAd
@@ -37,15 +38,29 @@ class MyApplication : Application() {
 
         MainActivityUtils.updateTheme(this)
 
-        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+      //  val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+
+//        encryptedSharedPrefs = EncryptedSharedPreferences.create(
+//            "encrypted_preferences",
+//            masterKeyAlias,
+//            applicationContext,
+//            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+//            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+//        )
+
+        val masterKeyAlias = MasterKey.Builder(applicationContext)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
 
         encryptedSharedPrefs = EncryptedSharedPreferences.create(
+            applicationContext,
             "encrypted_preferences",
             masterKeyAlias,
-            applicationContext,
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
+
+
 
         val encryptionKey = generateEncryptionKey()
         val encryptionKeyString = Base64.encodeToString(encryptionKey.encoded, Base64.DEFAULT)
@@ -57,7 +72,7 @@ class MyApplication : Application() {
 
         sharedPrefs.edit().putBoolean("advertisementOff", false).apply()
         sharedPrefs.edit().putBoolean("openAppOpenAd", true).apply()
-     //   Utils.premium()
+      // Utils.premium()
 
         smsFilterAdapter = SmsFiltersAdapter(smsFilterCapacity)
         initializeSmsFilterRecyclerMessagesDao(this)

@@ -2,6 +2,7 @@ package com.kuaapps.smstoemail.Email
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException
@@ -39,7 +40,7 @@ object SendWithGoogleMail {
             val jsonFactory = JacksonFactory.getDefaultInstance()
 
             val service = Gmail.Builder(httpTransport, jsonFactory, credentials)
-                .setApplicationName("SMS To Email").build()
+                .setApplicationName("SMS to Email").build()
 
             val emailContent = createEmail(userGmail!!, recipientEmail, mailSubject, mailBody)
 
@@ -51,7 +52,6 @@ object SendWithGoogleMail {
             // Handle user recoverable auth exception by launching the intent
             (context as Activity).startActivityForResult(e.intent, REQUEST_AUTHORIZATION)
         }
-
 
 
     }
