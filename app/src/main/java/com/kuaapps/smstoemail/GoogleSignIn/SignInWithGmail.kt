@@ -147,7 +147,7 @@ class SignInWithGmail {
 
     private fun readClientIdFromAssets(context: Context): String? {
         val jsonFileName =
-            "client_secret_615818751861-6rlvc6tm5libfni0khc2qqkpsorb0qlo.apps.googleusercontent.com.json" // Replace with your JSON file name
+            "debug.json" // Replace with your JSON file name
         return try {
             val inputStream = context.assets.open(jsonFileName)
             val size = inputStream.available()

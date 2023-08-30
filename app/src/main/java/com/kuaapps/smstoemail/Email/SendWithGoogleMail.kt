@@ -8,8 +8,10 @@ import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccoun
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
 import com.google.api.client.json.jackson2.JacksonFactory
+import com.google.api.client.util.Base64
 
 import com.google.api.services.gmail.Gmail
+import com.google.api.services.gmail.model.Message
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,7 +21,6 @@ import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
 import java.util.Properties
 import javax.mail.Session
-import org.apache.commons.codec.binary.Base64
 
 
 object SendWithGoogleMail {
@@ -75,6 +76,21 @@ object SendWithGoogleMail {
         message.raw = encodedEmail
         service.users().messages().send(userId, message).execute()
     }
+
+//    private fun sendMessage(service: Gmail, userId: String, email: MimeMessage) {
+//        val message = createMessageWithEmail(email)
+//        service.users().messages().send(userId, message).execute()
+//    }
+//
+//    private fun createMessageWithEmail(email: MimeMessage): Message {
+//        val buffer = ByteArrayOutputStream()
+//        email.writeTo(buffer)
+//        val encodedEmail = Base64.encodeToString(buffer.toByteArray(), Base64.URL_SAFE)
+//
+//        return Message().apply {
+//            raw = encodedEmail
+//        }
+//    }
 
 
 
