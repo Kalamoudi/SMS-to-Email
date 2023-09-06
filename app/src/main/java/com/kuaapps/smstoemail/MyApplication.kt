@@ -36,7 +36,13 @@ class MyApplication : Application() {
         sharedPrefs = getSharedPreferences("preferences", MODE_PRIVATE)
         MainActivityUtils.handleSharedPreferencesOnInitialization(this)
 
+        sharedPrefs.edit().putBoolean("advertisementOff", false).apply()
+        sharedPrefs.edit().putBoolean("openAppOpenAd", true).apply()
+        // Utils.premium()
+
         MainActivityUtils.updateTheme(this)
+
+
 
       //  val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 
@@ -70,9 +76,6 @@ class MyApplication : Application() {
 
         // initialize filter Adapter
 
-        sharedPrefs.edit().putBoolean("advertisementOff", false).apply()
-        sharedPrefs.edit().putBoolean("openAppOpenAd", true).apply()
-      // Utils.premium()
 
         smsFilterAdapter = SmsFiltersAdapter(smsFilterCapacity)
         initializeSmsFilterRecyclerMessagesDao(this)

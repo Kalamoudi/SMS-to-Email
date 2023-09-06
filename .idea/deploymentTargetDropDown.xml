@@ -6,13 +6,25 @@
         <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
+            <type value="SERIAL_NUMBER" />
+            <value value="adb-R5CRB22QA5M-veVcfe._adb-tls-connect._tcp" />
+          </Key>
+        </deviceKey>
+      </Target>
+    </runningDeviceTargetSelectedWithDropDown>
+    <timeTargetWasSelectedWithDropDown value="2023-09-06T09:46:56.199914400Z" />
+    <multipleDevicesSelectedInDropDown value="true" />
+    <runningDeviceTargetsSelectedWithDialog>
+      <Target>
+        <type value="RUNNING_DEVICE_TARGET" />
+        <deviceKey>
+          <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
             <value value="C:\Users\Khalid\.android\avd\5.4_FWVGA_API_34.avd" />
           </Key>
         </deviceKey>
       </Target>
-    </runningDeviceTargetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2023-08-30T14:18:27.167130700Z" />
+    </runningDeviceTargetsSelectedWithDialog>
     <targetsSelectedWithDialog>
       <Target>
         <type value="QUICK_BOOT_TARGET" />

@@ -23,6 +23,7 @@ import java.util.Properties
 import javax.mail.Session
 
 
+
 object SendWithGoogleMail {
 
     private const val REQUEST_AUTHORIZATION = 1001

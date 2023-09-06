@@ -4,11 +4,15 @@ package com.kuaapps.smstoemail
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.net.ConnectivityManager
+import android.net.Uri
+import android.os.PowerManager
+import android.provider.Settings
 import android.util.Base64
 import android.util.Log
 import android.util.TypedValue
@@ -19,6 +23,7 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.security.crypto.EncryptedSharedPreferences
@@ -376,5 +381,54 @@ object Utils {
 
         val dialog = dialogBuilder.create()
         dialog.show()
+    }
+
+    fun batteryOptimizationDialog(context: Context){
+
+        val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
+        if(powerManager.isIgnoringBatteryOptimizations(context.packageName)){
+            return
+        }
+
+
+        var themeInt = R.style.CustomAlertDialogThemeDark
+        if(!sharedPrefs.getBoolean("isNightMode", true)){
+            themeInt = R.style.CustomAlertDialogThemeLight
+        }
+
+        val title = "Battery Optimization"
+//        val message = "To ensure uninterrupted background operation and prevent automatic closure due " +
+//                "to default battery optimization settings, consider performing the following optional action." +
+//                " While not mandatory, this step can help maintain the app's continuous functionality." +
+//                "\n\n" +
+//                "Go to:\n\n" +
+//                "App Info -> Battery -> set to \"Unrestricted\""
+
+        val message = context.getString(R.string.batteryOptimizationDialogueMessage) +
+                "\n\n" +
+
+                "App Info -> uncheck \"Remove permissions if app is unused\"\n\n" +
+
+                "App Info -> Battery -> set to \"Unrestricted\""
+
+        val dialogBuilder = AlertDialog.Builder(context, themeInt)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("Go to App Info"){ _, _ ->
+                openBatterySettings(context)
+            }
+            .setNegativeButton("Cancel", null)
+
+
+        val dialog = dialogBuilder.create()
+        dialog.show()
+    }
+
+    private fun openBatterySettings(context: Context) {
+     //   val intent = Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = Uri.fromParts("package", "com.kuaapps.smstoemail", null)
+        intent.data = uri
+        context.startActivity(intent)
     }
 }

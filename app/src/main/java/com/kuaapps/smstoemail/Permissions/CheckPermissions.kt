@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat
 import com.kuaapps.smstoemail.R
 import com.kuaapps.smstoemail.Utils
+import com.kuaapps.smstoemail.sharedPrefs
 
 
 class CheckPermissions {
@@ -74,7 +75,7 @@ class CheckPermissions {
 
     private fun openAppSettings(context: Context) {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        val uri = Uri.fromParts("package", "com.example.smstoemail", null)
+        val uri = Uri.fromParts("package", "com.kuaapps.smstoemail", null)
         intent.data = uri
         try {
             startActivityForResult(context as Activity, intent, Utils.PERMISSION_SETTINGS_REQUEST_CODE, null)
@@ -85,8 +86,13 @@ class CheckPermissions {
     }
 
     private fun showPermissionRationale(context: Context) {
+        var themeInt = R.style.CustomAlertDialogThemeDark
+        if(!sharedPrefs.getBoolean("isNightMode", true)){
+            themeInt = R.style.CustomAlertDialogThemeLight
+        }
+
         // Show a dialog explaining the need for the permission
-        val dialogBuilder = AlertDialog.Builder(context, R.style.CustomAlertDialogThemeDark)
+        val dialogBuilder = AlertDialog.Builder(context, themeInt)
         dialogBuilder.setTitle("Permissions Required")
         dialogBuilder.setMessage("Permissions required:\n -"
                 + permissionsMap[Utils.permissionsList[0]]?.get(0) +"\n -"
