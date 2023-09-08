@@ -99,21 +99,9 @@ open class MainActivity : AppCompatActivity() {
         else{
 
             checkPermissions.handlePermissions(utilsContext)
-         //   Utils.batteryOptimizationDialog(this)
         }
 
 
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            val intent = Intent()
-//            val packageName = packageName
-//            val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
-//            if (!pm.isIgnoringBatteryOptimizations(packageName)) {
-//              //  intent.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
-//                intent.action = Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS
-//             //   intent.data = Uri.parse("package:$packageName")
-//                startActivity(intent)
-//            }
-//        }
 
 
 

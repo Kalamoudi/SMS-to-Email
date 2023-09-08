@@ -3,6 +3,7 @@ package com.kuaapps.smstoemail.NavigationDrawer
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.View
 import android.widget.ListView
 import android.widget.RelativeLayout
@@ -106,7 +107,8 @@ class HandleNavDrawer (private val context: Context) {
             when(selectedItem){
                // "Contact Us" -> Utils.showToast(context, "email: smstoemail.smssender@gmail.com")
                 "Contact Us" -> NavDrawerUtils.showDialog(context, "contact_us.txt", "Contact Us")
-                "Privacy Policy" -> NavDrawerUtils.showDialog(context, "privacy_policy.txt", "Privacy Policy")
+             //   "Privacy Policy" -> NavDrawerUtils.showDialog(context, "privacy_policy.txt", "Privacy Policy")
+                "Privacy Policy" -> openPrivacyPolicyPage(context)
                // "Privacy Policy" -> openPrivacyPolicyPage(context)
                 "License" -> NavDrawerUtils.showDialog(
                     context,
@@ -183,15 +185,13 @@ class HandleNavDrawer (private val context: Context) {
     }
 
     private fun openPrivacyPolicyPage(context: Context){
-        val intent = Intent(context, PrivacyPolicyActivity::class.java)
         if(context::class.java == PrivacyPolicyActivity::class.java){
             return
         }
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-        MainActivityUtils.closeNavigationDrawer(context)
+        val url = "http://sms2email.kuaapps.com/"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         context.startActivity(intent)
-       // (context as AppCompatActivity).overridePendingTransition(R.anim.slide_in_left, R.anim.slide_none)
+
 
     }
 

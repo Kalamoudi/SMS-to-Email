@@ -1,6 +1,6 @@
 Privacy Policy
 
-Last Updated: August 22, 2023
+Last Updated: September 08, 2023
 
 Introduction:
 Welcome to "SMS to Email," developed by Khalid Alamoudi ("the Developer"). This privacy policy outlines how the app "SMS to Email" ("the App") collects, uses, and safeguards user data. By using the App, you consent to the practices described below.
@@ -41,7 +41,7 @@ The App requires the following permissions:
 - Gmail Account Access: Required to access your Gmail account for sending emails via the Gmail API. This includes the permission to manage drafts and send emails.
 
 Data Retention:
-The App temporarily stores SMS message data in local cached storage for user viewing purposes. The data is not retained by the Developer and is deleted after use. The Developer does not have access to or retain the data once the email is sent.
+The App temporarily stores SMS message data in local cached storage for user viewing purposes. The Developers do not have access to nor do they retain the data.
 
 Security Measures:
 The Developer implements robust security measures to protect user data. The App uses encryption to safeguard the data processed and stored within the local database.

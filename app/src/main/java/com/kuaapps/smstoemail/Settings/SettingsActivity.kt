@@ -64,6 +64,7 @@ class SettingsActivity : AppCompatActivity() {
         SettingsOptions.processGmailCheckbox(this)
         SettingsOptions.processWifiOnlyCheckbox(this)
         SettingsOptions.processSettingsThemeSwitch(this)
+        SettingsOptions.processBatteryOptimizationCheckbox(this)
 
 
     }

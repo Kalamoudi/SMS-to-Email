@@ -27,7 +27,8 @@
     <string name="settingsOnlyWifiCheckbox">WiFi Only</string>
     <string name="settingsOnlyWifiCheckboxSummary">If checked, it will only send emails when a WiFi internet connection is active.</string>
 
-
+    <string name="settingsBatteryOptimizationCheckBoxTitle">Battery Optimization Dialog</string>
+    <string name="settingsBatteryOptimizationCheckBoxSummary">If checked, it will display battery optimization dialog upon app start</string>
 
 
 

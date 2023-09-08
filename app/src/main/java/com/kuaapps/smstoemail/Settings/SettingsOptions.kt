@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SwitchCompat
 import com.kuaapps.smstoemail.MainActivityUtils
 import com.kuaapps.smstoemail.R
 import com.kuaapps.smstoemail.Services.BackgroundService
+import com.kuaapps.smstoemail.Utils
 import com.kuaapps.smstoemail.sharedPrefs
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -171,6 +172,21 @@ object SettingsOptions {
         SettingsUtils.processClickWithHighlight(context, wifiOnlyCheckboxLayout) {
             wifiOnlyCheckbox.isChecked = !wifiOnlyCheckbox.isChecked
             sharedPrefs.edit().putBoolean("wifiOnly", !sharedPrefs.getBoolean("wifiOnly", true))
+                .apply()
+        }
+
+    }
+
+    fun processBatteryOptimizationCheckbox(context: Context){
+        val contextAsAppCompatActivity = context as AppCompatActivity
+        val batteryOptimizationCheckboxLayout = contextAsAppCompatActivity.findViewById<RelativeLayout>(R.id.settingsBatteryOptimizationCheckBoxLayout)
+        val batteryOptimizationCheckbox = contextAsAppCompatActivity.findViewById<CheckBox>(R.id.settingsBatteryOptimizationCheckBox)
+
+        batteryOptimizationCheckbox.isChecked = sharedPrefs.getBoolean("notifyBatteryOptimization", true)
+
+        SettingsUtils.processClickWithHighlight(context, batteryOptimizationCheckboxLayout) {
+            batteryOptimizationCheckbox.isChecked = !batteryOptimizationCheckbox.isChecked
+            sharedPrefs.edit().putBoolean("notifyBatteryOptimization", !sharedPrefs.getBoolean("notifyBatteryOptimization", true))
                 .apply()
         }
 

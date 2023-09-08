@@ -158,6 +158,9 @@ object MainActivityUtils {
             sharedPrefs.edit().putBoolean("openAppOpenAd", true).apply()
         }
 
+        if(!sharedPrefs.contains("notifyBatteryOptimization")) {
+            sharedPrefs.edit().putBoolean("notifyBatteryOptimization", true).apply()
+        }
         if(sharedPrefs.getBoolean("firstVisit", true)) {
             GlobalScope.launch(Dispatchers.IO) {
                 val database = AppDatabase.getInstance(context)

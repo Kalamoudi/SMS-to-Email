@@ -386,9 +386,19 @@ object Utils {
     fun batteryOptimizationDialog(context: Context){
 
         val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
+
+        if(!sharedPrefs.getBoolean("firstVisit", true)){
+            return
+        }
+        if(!sharedPrefs.getBoolean("notifyBatteryOptimization", true)){
+            return
+        }
+
         if(powerManager.isIgnoringBatteryOptimizations(context.packageName)){
             return
         }
+
+
 
 
         var themeInt = R.style.CustomAlertDialogThemeDark
@@ -397,12 +407,6 @@ object Utils {
         }
 
         val title = "Battery Optimization"
-//        val message = "To ensure uninterrupted background operation and prevent automatic closure due " +
-//                "to default battery optimization settings, consider performing the following optional action." +
-//                " While not mandatory, this step can help maintain the app's continuous functionality." +
-//                "\n\n" +
-//                "Go to:\n\n" +
-//                "App Info -> Battery -> set to \"Unrestricted\""
 
         val message = context.getString(R.string.batteryOptimizationDialogueMessage) +
                 "\n\n" +
@@ -417,11 +421,15 @@ object Utils {
             .setPositiveButton("Go to App Info"){ _, _ ->
                 openBatterySettings(context)
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton("Ignore"){_, _ ->
+                sharedPrefs.edit().putBoolean("notifyBatteryOptimization", false).apply()
+            }
 
 
         val dialog = dialogBuilder.create()
         dialog.show()
+
+
     }
 
     private fun openBatterySettings(context: Context) {
